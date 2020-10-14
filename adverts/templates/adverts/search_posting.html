@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% block content %}
+    <nav class="breadcrumb bg-light">
+        <a class="breadcrumb-item" href="{% url 'adverts' %}">JOBS</a>
+        <span class="breadcrumb-item active">POSTINGS</span>
+    </nav>
+    <main>
+        <section class="section-9">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-md-11 col-12 mx-auto">
+                        <div class="panel">
+                            <div class="bg-white shadow rounded overflow-hidden">
+                                <div class="px-4 pt-0 pb-2 newbadge">
+                                    <div class="media align-items-end profile-header">
+                                        <div class="media-body mt-3 text-white">
+                                            <h4 class="text-center mt-0 mb-0">Search Postings</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-info text-center">
+                                    <div class="p-5">
+                                        <div class="overlay p-1">
+                                            <div class="search">
+                                                <form action="{% url 'search-postings' %}">
+                                                    <!-- Form Row 1 -->
+                                                    <div class="form-row">
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="sr-only">Keywords</label>
+                                                            <input type="text" name="keywords" class="form-control" placeholder="Keyword (ballet, jazz, teacher)">
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="sr-only">City</label>
+                                                            <select name="city" class="form-control">
+                                                                <option selected="true" disabled="disabled">Location (All)</option>
+                                                                {% for key, value in location_choices %}
+                                                                    <option value="{{ key }}"
+                                                                    {% if key == values.city %}
+                                                                            selected
+                                                                    {% endif %}>{{ value }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Form Row 2 -->
+                                                    <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-1">
+            <div id="content" class="">
+                <div class="container">
+                    <div class="row">
+                        <!-- Products grid -->
+                        <div class="col-md-12">
+                            <!-- Products filters -->
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    <a class="btn btn-outline-info float-right " href="{% url 'create-posting' %}">Create Posting</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                {% for posting in postings %}
+                                    <div class="col-lg-12">
+                                        <!-- Product 2 -->
+                                        <div class="card mb-4">
+                                            <!-- Content -->
+                                            <div class="row">
+                                                <div class="col-8 mt-1">
+                                                    <a class="btn btn-light disabled btn-sm"><i class="fa fa-clock"></i> Posted : {{ posting.created | timesince}} ago</a>
+                                                </div>
+                                                <div class="col-4 mt-1">
+                                                    <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-map-pin mr-2"></i> {{ posting.location}}</a >
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h4 class="card-title my-2 text-center">
+                                                        <a href="{% url 'posting-detail' posting.pk posting.slug %}" class="text-info text-sm ">{{ posting.title }}</a>
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <img class="m-2 rounded img-fluid float-left" src="{{ posting.author.profile_image.url }}" alt="Card image cap" style="max-height: 75px">
+                                                    <p class="text-muted text-xs m-1">{{ posting.body  | truncatechars:300 }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-8 mt-1">
+                                                    <a class="btn btn-light disabled btn-sm text-info"><i class="fa fa-clock"> </i>{{  posting.date | date:' l dS F Y' }}  {{ posting.start_time }}-{{ posting.finish_time }}</a>
+                                                </div>
+                                                <div class="col-4 mt-1">
+                                                    <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-money-bill-wave"></i> Fee : £{{ posting.fee}}</a >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+
+
+
+          <!-- Call to action -->
+          <div class="my-3" data-url="#">
+            <hr class="hr-lg mt-0 mb-1 w-100 mx-auto hr-warning" />
+            <div class="pos-relative">
+              <i class="fa fa-bullseye icon-bg op-1 icon-bg-l-ol icon-25x text-white"></i> <i class="fa fa-bullseye icon-bg op-1 icon-bg-r-ol icon-bg-b icon-25x text-white"></i>
+              <div class="p-4 text-center bg-danger">
+                <h2 class="display-4 font-weight-normal text-uppercase text-white my-0 text-slab">
+                  Clearance Sale
+                </h2>
+                <h4 class="text-white mb-0 text-slab">
+                  Price reductions on 1000s of items!
+                </h4>
+              </div>
+            </div>
+            <hr class="hr-lg mt-1 w-100 mx-auto hr-danger" />
+          </div>
+          <!-- Pagination -->
+          <nav aria-label="Page navigation">
+              {% if postings.has_other_pages %}
+            <ul class="pagination pagination-lg justify-content-center">
+            {% if postings.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ postings.previous_page_number }}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span> </a>
+                </li>
+            {% else %}
+
+                <li class="page-item disabled">
+                    <a class="page-link"  aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span> </a>
+                </li>
+
+            {% endif %}
+
+            {% for i in postings.paginator.page_range %}
+                {% if postings.number == i %}
+                    <li class="page-item active">
+                        <a class="page-link" >{{ i }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+
+                {% endif %}
+            {% endfor %}
+            {% if postings.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ postings.next_page_number }}" aria-label="Previous"> <span aria-hidden="true">&raquo;</span> <span class="sr-only">Previous</span> </a>
+                </li>
+            {% else %}
+
+                <li class="page-item disabled">
+                    <a class="page-link"  aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span> </a>
+                </li>
+
+            {% endif %}
+            </ul>
+              {% endif %}
+          </nav>
+        </div>
+
+
+
+
+
+
+          <!-- Sections Menu-->
+
+          <!-- Follow Widget -->
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+        </section>
+    </main>
+
+
+
+{% endblock %}

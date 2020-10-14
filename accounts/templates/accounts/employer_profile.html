@@ -1,0 +1,622 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+    <section class="section-profile">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md-3 col-12">
+            <div class="pray">
+              <img src="{{ user.employer.profile_image.url }}" alt="Pray" class="" />
+            </div>
+              <button class="mt-2 btn btn-outline-danger btn-sm "  data-toggle="modal" data-target="#profileImageModal" >Change Image</button>
+          </div>
+          <div class="col-md-9 col-12">
+            <div class="panel text-left">
+            <div class="row">
+              <div class="col-12 mb-1">
+                  <a class="float-right btn btn-sm btn-outline-info" data-toggle="modal" data-target="#employerProfileModal">Edit / Add Company Profile</a>
+              </div>
+          </div>
+              <h1>{{ user.first_name | capfirst}} {{ user.last_name | capfirst }}</h1>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <i class="fas fa-map-marker-alt"></i>
+
+                            {{ user.employer.company_name }}
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                         contact :  {{ user.employer.mobile }}
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                            {{ user.employer.company_email }}
+
+                    </div>
+
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                         Make Company Profile Visible
+                        {% if user.employer.is_company == True %}
+                            <button class="btn btn-success btn-sm py-0" >Profile Visible</button>
+                        {% else %}
+                            <button class="btn btn-danger btn-sm py-0 " >Profile Not Visible</button>
+                        {% endif %}
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+            <section class="section-2 container-fluid p-0">
+      <div class="cover">
+        <div class="overlay"></div>
+        <div class="content text-center">
+          <h1>Some Features That Made Us Unique</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, eum?
+          </p>
+        </div>
+      </div>
+      <div class="container-fluid text-center">
+        <div class="numbers d-flex flex-md-row flex-wrap justify-content-center">
+          <div class="rect">
+            <h1>{{ adverts_count }}</h1>
+            <p>Jobs</p>
+          </div>
+          <div class="rect">
+            <h1>{{ postings_count }}</h1>
+            <p>Job Postings</p>
+          </div>
+          <div class="rect">
+            <h1>1056</h1>
+            <p>Rating</p>
+          </div>
+          <div class="rect">
+            <h1>9152</h1>
+            <p>Total Projects</p>
+          </div></div></div>
+        <div class="container-fluid text-center">
+        <div class="mt-1 numbers d-flex flex-md-row flex-wrap justify-content-center">
+        <div class="rect-2">
+            <img src="{{ user.employer.profile_image.url }}" alt="Pray" style="height: 100px; width: 100px" />
+          </div>
+
+
+        </div>
+      </div>
+
+
+
+         <div class="container text-center">
+        <div class="row">
+          <div class="col-md-12 col-12">
+
+            <div class="panel text-left">
+              <h3>Company Info <i type="button" style="font-size: 22px;" class="text-danger fas fa-pen" data-toggle="modal" data-target="#companyModal"  > </i></h3>
+
+                <p>
+                    {{ user.employer.company_info | linebreaks }}
+                </p>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+      <div class="purchase text-center">
+        <h1>Your Jobs And Postings</h1>
+
+      <div class="row">
+
+            <div class="col-9 mx-auto">
+                <p>
+          Ps note Jobs are long term and postings are for a  specific day and time !!!!
+        </p>
+
+                <a class="btn btn-outline-info float-right py-1 " href="{% url 'create-posting' %}">Create Posting</a>
+                <a class="btn btn-outline-info float-left py-1 " href="{% url 'create-advert' %}">Create Job</a>
+            </div>
+        </div>
+
+
+          <div class="container text-center mt-2">
+        <div class="row">
+          <div class="col-md-12 col-12">
+
+            <div class="panel ">
+
+
+                <div class="col-lg-12">
+          <!-- Products filters -->
+
+
+
+
+
+                <div class="row">
+              {% for advert in adverts %}
+            <div class="col-lg-12">
+              <!-- Product 2 -->
+              <div class="card mb-4">
+                <!-- Content -->
+                  <div class="row">
+                      <div class="col-8 mt-1">
+                          <a class="btn btn-light disabled btn-sm"><i class="fa fa-clock"></i> Posted : {{ advert.created | timesince}} ago</a>
+                      </div>
+                      <div class="col-4 mt-1">
+                          <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-map-pin mr-2"></i> {{ advert.location}}</a >
+                      </div>
+
+                  </div>
+                  <div class="row">
+                      <div class="col-12">
+                          <h4 class="card-title my-2 text-center">
+                              <a href="{% url 'advert-detail' advert.pk advert.slug %}" class="text-info text-sm ">{{ advert.title }}</a>
+                          </h4>
+                      </div>
+                  </div>
+
+
+                  <div class="row">
+                      <div class="col-12">
+                          <img class="m-2 rounded img-fluid float-left" src="{{ advert.author.profile_image.url }}" alt="Card image cap" style="max-height: 75px">
+                          <p class="text-muted text-xs m-1">{{ advert.body  | truncatechars:200 }}</p>
+                      </div>
+
+                  </div>
+                  <div class="row">
+
+                      <div class="col-12 mt-1">
+                          <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-money-bill-wave"></i> Fee : £{{ advert.fee}}</a >
+                      </div>
+
+                  </div>
+
+
+
+              </div>
+            </div>
+
+              {% endfor %}
+
+          </div>
+
+
+          <!-- Call to action -->
+          <div class="my-3" data-url="#">
+            <hr class="hr-lg mt-0 mb-1 w-100 mx-auto hr-warning" />
+            <div class="pos-relative">
+              <i class="fa fa-bullseye icon-bg op-1 icon-bg-l-ol icon-25x text-white"></i> <i class="fa fa-bullseye icon-bg op-1 icon-bg-r-ol icon-bg-b icon-25x text-white"></i>
+              <div class="p-4 text-center bg-danger">
+                <h2 class="display-4 font-weight-normal text-uppercase text-white my-0 text-slab">
+                  Clearance Sale
+                </h2>
+                <h4 class="text-white mb-0 text-slab">
+                  Price reductions on 1000s of items!
+                </h4>
+              </div>
+            </div>
+            <hr class="hr-lg mt-1 w-100 mx-auto hr-danger" />
+          </div>
+          <!-- Pagination -->
+          <nav aria-label="Page navigation">
+              {% if adverts.has_other_pages %}
+            <ul class="pagination pagination-lg justify-content-center">
+            {% if adverts.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ adverts.previous_page_number }}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span> </a>
+                </li>
+            {% else %}
+
+                <li class="page-item disabled">
+                    <a class="page-link"  aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span> </a>
+                </li>
+
+            {% endif %}
+
+            {% for i in adverts.paginator.page_range %}
+                {% if adverts.number == i %}
+                    <li class="page-item active">
+                        <a class="page-link" >{{ i }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+
+                {% endif %}
+            {% endfor %}
+            {% if adverts.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ adverts.next_page_number }}" aria-label="Previous"> <span aria-hidden="true">&raquo;</span> <span class="sr-only">Previous</span> </a>
+                </li>
+            {% else %}
+
+                <li class="page-item disabled">
+                    <a class="page-link"  aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span> </a>
+                </li>
+
+            {% endif %}
+            </ul>
+              {% endif %}
+          </nav>
+        </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+                <div class="container text-center mt-2">
+        <div class="row">
+          <div class="col-md-12 col-12">
+
+            <div class="panel ">
+
+
+                <div class="col-lg-12">
+          <!-- Products filters -->
+
+
+
+
+
+                 <div class="row">
+              {% for posting in postings %}
+            <div class="col-lg-12">
+              <!-- Product 2 -->
+              <div class="card mb-4">
+                <!-- Content -->
+                  <div class="row">
+                      <div class="col-8 mt-1">
+                          <a class="btn btn-light disabled btn-sm"><i class="fa fa-clock"></i> Posted : {{ posting.created | timesince}} ago</a>
+                      </div>
+                      <div class="col-4 mt-1">
+                          <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-map-pin mr-2"></i> {{ posting.location}}</a >
+                      </div>
+
+                  </div>
+                  <div class="row">
+                      <div class="col-12 mx-auto">
+                          <h4 class="card-title my-2 text-center">
+                              <a href="{% url 'posting-detail' posting.pk posting.slug %}" class="text-info text-sm ">{{ posting.title }}</a>
+                          </h4>
+                      </div>
+                  </div>
+
+
+                  <div class="row">
+                      <div class="col-12">
+                          <img class="m-2 rounded img-fluid float-left" src="{{ posting.author.profile_image.url }}" alt="Card image cap" style="max-height: 75px">
+                          <p class="text-muted text-xs m-1">{{ posting.body  | truncatechars:300 }}</p>
+                      </div>
+
+                  </div>
+                  <div class="row">
+                      <div class="col-8 mt-1">
+                          <a class="btn btn-light disabled btn-sm text-info"><i class="fa fa-clock"> </i>{{  posting.date | date:' l dS F Y' }}  {{ posting.start_time }}-{{ posting.finish_time }}</a>
+                      </div>
+                      <div class="col-4 mt-1">
+                          <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-money-bill-wave"></i> Fee : £{{ posting.fee}}</a >
+                      </div>
+
+                  </div>
+
+
+
+              </div>
+            </div>
+
+              {% endfor %}
+
+          </div>
+
+
+
+
+          <!-- Call to action -->
+          <div class="my-3" data-url="#">
+            <hr class="hr-lg mt-0 mb-1 w-100 mx-auto hr-warning" />
+            <div class="pos-relative">
+              <i class="fa fa-bullseye icon-bg op-1 icon-bg-l-ol icon-25x text-white"></i> <i class="fa fa-bullseye icon-bg op-1 icon-bg-r-ol icon-bg-b icon-25x text-white"></i>
+              <div class="p-4 text-center bg-danger">
+                <h2 class="display-4 font-weight-normal text-uppercase text-white my-0 text-slab">
+                  Clearance Sale
+                </h2>
+                <h4 class="text-white mb-0 text-slab">
+                  Price reductions on 1000s of items!
+                </h4>
+              </div>
+            </div>
+            <hr class="hr-lg mt-1 w-100 mx-auto hr-danger" />
+          </div>
+          <!-- Pagination -->
+          <nav aria-label="Page navigation">
+              {% if postings.has_other_pages %}
+            <ul class="pagination pagination-lg justify-content-center">
+            {% if postings.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ postings.previous_page_number }}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span> </a>
+                </li>
+            {% else %}
+
+                <li class="page-item disabled">
+                    <a class="page-link"  aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span> </a>
+                </li>
+
+            {% endif %}
+
+            {% for i in postings.paginator.page_range %}
+                {% if postings.number == i %}
+                    <li class="page-item active">
+                        <a class="page-link" >{{ i }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+
+                {% endif %}
+            {% endfor %}
+            {% if postings.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ postings.next_page_number }}" aria-label="Previous"> <span aria-hidden="true">&raquo;</span> <span class="sr-only">Previous</span> </a>
+                </li>
+            {% else %}
+
+                <li class="page-item disabled">
+                    <a class="page-link"  aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span> </a>
+                </li>
+
+            {% endif %}
+            </ul>
+              {% endif %}
+          </nav>
+        </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      </div>
+    </section>
+
+
+
+
+         <!-- Modal Profile-->
+<div class="modal fade" id="profileImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Change Profile Image</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form action="{% url 'update-company-photo' employer.id %}" method="POST"  enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ employer_image_form | crispy }}
+
+              <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-sm btn-outline-primary">Save</button>
+      </div>
+          </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+        <!-- Modal Date of Birth -->
+<div class="modal fade" id="employerProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Update Company Profile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <form action="{% url 'update-company-profile' employer.id %}" method="POST" >
+              {% csrf_token %}
+              {{ employer_update_form | crispy }}
+              <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-sm btn-outline-success">Update</button>
+      </div>
+          </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+{#    <!-- Modal Experience-->#}
+{#<div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">#}
+{#  <div class="modal-dialog modal-dialog-centered" role="document">#}
+{#    <div class="modal-content">#}
+{#      <div class="modal-header">#}
+{#        <h5 class="modal-title" id="exampleModalLongTitle">Edit Location</h5>#}
+{#        <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#          <span aria-hidden="true">&times;</span>#}
+{#        </button>#}
+{#      </div>#}
+{#      <div class="modal-body">#}
+{#          <form action="{% url 'update-location' candidate.id %}" method="POST" >#}
+{#              {% csrf_token %}#}
+{#              <select name="candidate_location" class="form-control">#}
+{#                <option> Location</option>#}
+{#                {% for key, value in location_choices %}#}
+{#                    <option value="{{ key }}">{{ value }}</option>#}
+{#                {% endfor %}#}
+{#              </select>#}
+{#              <div class="modal-footer">#}
+{#        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Close</button>#}
+{#        <button type="submit" class="btn btn-sm btn-outline-primary">Save</button>#}
+{#      </div>#}
+{#          </form>#}
+{#      </div>#}
+{##}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+
+
+    <!-- Modal -->
+<div class="modal fade" id="companyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Company Info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form action="{% url 'update-company-info' employer.pk %}" method="POST" >
+              {% csrf_token %}
+              <textarea name="company_info" id="" cols="40" rows="10">{{ employer.company_info }}</textarea>
+              <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-sm btn-outline-primary">Save</button>
+      </div>
+          </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+{#    <!-- Modal Experience-->#}
+{#<div class="modal fade" id="experienceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">#}
+{#  <div class="modal-dialog modal-dialog-centered" role="document">#}
+{#    <div class="modal-content">#}
+{#      <div class="modal-header">#}
+{#        <h5 class="modal-title" id="exampleModalLongTitle">Edit Experience</h5>#}
+{#        <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#          <span aria-hidden="true">&times;</span>#}
+{#        </button>#}
+{#      </div>#}
+{#      <div class="modal-body">#}
+{#          <form action="{% url 'candidate-experience' candidate.id %}" method="POST" >#}
+{#              {% csrf_token %}#}
+{#              <textarea name="experience" id="" cols="55" rows="10">{{ candidate.experience }}</textarea>#}
+{#              <div class="modal-footer">#}
+{#        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Close</button>#}
+{#        <button type="submit" class="btn btn-sm btn-outline-primary">Save</button>#}
+{#      </div>#}
+{#          </form>#}
+{#      </div>#}
+{##}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+
+
+{#       <!-- Modal Experience-->#}
+{#<div class="modal fade" id="photosModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">#}
+{#  <div class="modal-dialog modal-dialog-centered" role="document">#}
+{#    <div class="modal-content">#}
+{#      <div class="modal-header">#}
+{#        <h5 class="modal-title" id="exampleModalLongTitle">Edit Photos</h5>#}
+{#        <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#          <span aria-hidden="true">&times;</span>#}
+{#        </button>#}
+{#      </div>#}
+{#      <div class="modal-body">#}
+{#          {% for photo in photos %}#}
+{#              <div class="row">#}
+{#              <div class="col-6 mb-2"> <img src="{{ photo.profile_image.url }}"  style="height: 100px; width: 100px" alt=""></div>#}
+{#              <div class="col-6 mb-2"> <a href="{% url 'delete-photos' photo.pk %}" class="btn btn-outline-danger">Delete</a></div>#}
+{##}
+{#              </div>#}
+{##}
+{##}
+{##}
+{#          {% endfor %}#}
+{##}
+{##}
+{#      </div>#}
+{##}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+
+
+
+
+{#    <div class="modal fade" id="addPhotoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">#}
+{#  <div class="modal-dialog modal-dialog-centered" role="document">#}
+{#    <div class="modal-content">#}
+{#      <div class="modal-header">#}
+{#        <h5 class="modal-title" id="exampleModalLongTitle">Add Photo</h5>#}
+{#        <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#          <span aria-hidden="true">&times;</span>#}
+{#        </button>#}
+{#      </div>#}
+{#      <div class="modal-body">#}
+{#          <form action="{% url 'add-photos' %}" method="POST" enctype="multipart/form-data">#}
+{#              {% csrf_token %}#}
+{#              {{ form | crispy }}#}
+{#              <input type="submit" value="Add Photo" class="btn btn-sm btn-outline-info">#}
+{#          </form>#}
+{#      </div>#}
+{##}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+{##}
+{##}
+{##}
+
+
+
+
+{% endblock %}

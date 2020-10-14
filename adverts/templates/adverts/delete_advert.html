@@ -1,0 +1,12 @@
+{% extends 'base.html' %}>
+
+{% block content %}
+    <h3>Are you sure you want top delete {{ advert }}</h3>
+    <div class="form-group">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <strong>ARE YOU SURE</strong>
+            <button class="btn btn-danger">Delete POST</button>
+        </form>
+    </div>
+{% endblock %}

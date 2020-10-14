@@ -1,0 +1,380 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+    <section class="section-profile">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md-3 col-12">
+            <div class="pray">
+              <img src="{{ user.candidate.profile_image.url }}" alt="Pray" class="" />
+            </div>
+              <button class="mt-2 btn btn-outline-danger btn-sm "  data-toggle="modal" data-target="#profileImageModal" >Change Image</button>
+          </div>
+          <div class="col-md-9 col-12">
+            <div class="panel text-left">
+              <h1>{{ user.first_name | capfirst}} {{ user.last_name | capfirst }}</h1>
+
+                <div class="row">
+                    <div class="col-6">
+                        <i class="fas fa-map-marker-alt"></i>
+
+                            {{ user.candidate.candidate_location }}<i type="button" style="font-size: 15px;" class="ml-2 text-danger fas fa-pen" data-toggle="modal" data-target="#locationModal"  > </i>
+
+                    </div>
+
+
+                    <div class="col-6">
+
+                         DOB :   {{ user.candidate.date_of_birth }}<i type="button" style="font-size: 15px;" class="ml-2 text-danger fas fa-pen" data-toggle="modal" data-target="#dateOfBirthModal"  > </i>
+
+                    </div>
+                </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+            <section class="section-2 container-fluid p-0">
+      <div class="cover">
+        <div class="overlay"></div>
+        <div class="content text-center">
+          <h1>Some Features That Made Us Unique</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, eum?
+          </p>
+        </div>
+      </div>
+      <div class="container-fluid text-center">
+        <div class="numbers d-flex flex-md-row flex-wrap justify-content-center">
+          <div class="rect">
+            <h1>{{ photos.count }}</h1>
+            <p>Photos</p>
+          </div>
+          <div class="rect">
+            <h1>6784</h1>
+            <p>Jobs listings</p>
+          </div>
+          <div class="rect">
+            <h1>1056</h1>
+            <p>Post listings</p>
+          </div>
+          <div class="rect">
+            <h1>9152</h1>
+            <p>Total Projects</p>
+          </div></div></div>
+        <div class="container-fluid text-center">
+        <div class="mt-1 numbers d-flex flex-md-row flex-wrap justify-content-center">
+        <div class="rect-2">
+            <img src="{{ user.candidate.profile_image.url }}" alt="Pray" style="height: 100px; width: 100px" />
+          </div>
+            {% for image in photos %}
+                <div class="rect-2">
+                    <img src="{{ image.profile_image.url }}" alt="Pray" style="height: 100px; width: 100px" />
+                  </div>
+            {% endfor %}
+
+        </div>
+      </div>
+
+
+
+         <div class="container text-center">
+        <div class="row">
+          <div class="col-md-12 col-12">
+              <div class="row">
+                  <div class="col-12 mb-3">
+                      <button class="mx-1 btn btn-outline-info btn-sm" data-toggle="modal" data-target="#addPhotoModal" >Add photo</button>
+                      <button class="mx-1 btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#photosModal" >Delete photo</button>
+                  </div>
+              </div>
+            <div class="panel text-left">
+              <h3>Bio <i type="button" style="font-size: 22px;" class="text-danger fas fa-pen" data-toggle="modal" data-target="#bioModal"  > </i></h3>
+
+                <p>
+                    {{ user.candidate.bio | linebreaks }}
+                </p>
+
+                <h3>Experience <i type="button" style="font-size: 22px;" class="text-danger fas fa-pen" data-toggle="modal" data-target="#experienceModal"  ></i></h3>
+                <p>
+                    {{ user.candidate.experience |linebreaks }}
+                </p>
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+      <div class="purchase text-center">
+        <h1>Upgrade Your Membership</h1>
+        <p>
+          Your current membership is  : Bronze
+        </p>
+        <div class="cards">
+          <div class="d-flex flex-row justify-content-center flex-wrap">
+            <div class="card">
+              <div class="card-body">
+                <div class="title">
+                  <h5 class="card-title">Bronze</h5>
+                </div>
+                <p class="card-text">
+                  With supporting text below as a natural lead-in.
+                </p>
+                <div class="pricing">
+                  <h1>free</h1>
+                  <a href="#" class="btn btn-dark px-5 py-2 primary-btn mb-5">Purchase Now</a>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="title">
+                  <h5 class="card-title">Silver</h5>
+                </div>
+                <p class="card-text">
+                  With supporting text below as a natural lead-in.
+                </p>
+                <div class="pricing">
+                  <h1>£3 pm</h1>
+                  <a href="#" class="btn btn-dark px-5 py-2 primary-btn mb-5">Purchase Now</a>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="title">
+                  <h5 class="card-title">Gold</h5>
+                </div>
+                <p class="card-text">
+                  With supporting text below as a natural lead-in.
+                </p>
+                <div class="pricing">
+                  <h1>£5/pm</h1>
+                  <a href="#" class="btn btn-dark px-5 py-2 primary-btn mb-5">Purchase Now</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+         <!-- Modal Profile-->
+<div class="modal fade" id="profileImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Change Profile Image</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form action="{% url 'update-candidate-profile-picture' candidate.id %}" method="POST"  enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ image_form | crispy }}
+
+              <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-sm btn-outline-primary">Save</button>
+      </div>
+          </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+        <!-- Modal Date of Birth -->
+<div class="modal fade" id="dateOfBirthModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Date Of Birth</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          {{ candidate_date_of_birth | date:"D d M Y" }}
+          <form action="{% url 'update-birthday' candidate.id %}" method="POST" >
+              {% csrf_token %}
+            <input class="form-control" type="date" name="date_of_birth" value="{{ candidate.date_of_birth | date:"Y-m-d"}}"  id="example-datetime-local-input">
+              <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-sm btn-outline-primary">Save</button>
+      </div>
+          </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Modal Experience-->
+<div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Location</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form action="{% url 'update-location' candidate.id %}" method="POST" >
+              {% csrf_token %}
+              <select name="candidate_location" class="form-control">
+                <option> Location</option>
+                {% for key, value in location_choices %}
+                    <option value="{{ key }}">{{ value }}</option>
+                {% endfor %}
+              </select>
+              <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-sm btn-outline-primary">Save</button>
+      </div>
+          </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="bioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Bio</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form action="{% url 'candidate-bio' candidate.id %}" method="POST" >
+              {% csrf_token %}
+              <textarea name="bio" id="" cols="55" rows="10">{{ candidate.bio }}</textarea>
+              <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-sm btn-outline-primary">Save</button>
+      </div>
+          </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+    <!-- Modal Experience-->
+<div class="modal fade" id="experienceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Experience</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form action="{% url 'candidate-experience' candidate.id %}" method="POST" >
+              {% csrf_token %}
+              <textarea name="experience" id="" cols="55" rows="10">{{ candidate.experience }}</textarea>
+              <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-sm btn-outline-primary">Save</button>
+      </div>
+          </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+       <!-- Modal Experience-->
+<div class="modal fade" id="photosModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Photos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          {% for photo in photos %}
+              <div class="row">
+              <div class="col-6 mb-2"> <img src="{{ photo.profile_image.url }}"  style="height: 100px; width: 100px" alt=""></div>
+              <div class="col-6 mb-2"> <a href="{% url 'delete-photos' photo.pk %}" class="btn btn-outline-danger">Delete</a></div>
+
+              </div>
+
+
+
+          {% endfor %}
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+    <div class="modal fade" id="addPhotoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Add Photo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form action="{% url 'add-photos' %}" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form | crispy }}
+              <input type="submit" value="Add Photo" class="btn btn-sm btn-outline-info">
+          </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

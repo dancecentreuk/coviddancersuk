@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="row my_row_class">
+            <div class="mx-auto">
+              <p><a href="{% url 'adverts' %}"><i class="fas fa-angle-double-left"></i> Back to Jobs</a> </p>
+            </div>
+        </div>
+     <main>
+        <section class="section-1">
+            <div class="container">
+
+
+               <div class="row">
+                   <div class="col-md-12 my-2">
+                       {% if  advert.author == request.user %}
+                           <a href=" " class="float-right btn btn-outline-danger btn-sm mr-2" data-toggle="modal" data-target="#exampleModalCenter">Delete Advert</a>
+                           <a href="{% url 'edit-advert' advert.pk advert.slug %}  " class="float-right btn btn-outline-warning btn-sm mr-2">Edit Advert</a>
+                       {% endif %}
+                   </div>
+               </div>
+
+               <div class="card">
+                   <div class="card-body">
+                       <h3 class="card-title text-info">{{ advert.title}}</h3>
+                       <div class="row">
+                           <div class="col-6">
+                               <a  class="float-left btn btn-light disabled btn-sm  "><i class="fas fa-clock"></i>{{ advert.created | timesince}}</a >
+                           </div>
+                           <div class="col-6">
+                               <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-map-pin mr-2"></i> {{ advert.location}}</a >
+                           </div>
+                       </div>
+                       <hr>
+                       <div class="row">
+                           <div class="col-12">
+                               {% if advert.author.is_employer %}
+                                   <img src="{{ advert.author.employer.profile_image.url }}" style="max-height: 100px" class="m-2 rounded img-fluid  float-left p-2 mr-2" >
+                               {% else %}
+                                   <img src="{{ advert.author.candidate.profile_image.url }}" style="max-height: 100px" class="m-2 rounded img-fluid  float-left p-2 mr-2" >
+                               {% endif %}
+                               <p class="m-2">{{ advert.body  | truncatechars:300 }}</p>
+
+                           </div>
+
+                       </div>
+                       {% if request.user != advert.author %}
+                       <div class="row">
+                           <div class="col-12 mt-2">
+                               <a href="#" class="float-right btn btn-outline-info btn-sm" data-toggle="modal" data-target="#inquiryModal">Apply</a>
+                           </div>
+
+                       </div>
+                       {% endif %}
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+     <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Delete Advert</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Are you sure you want to delete <br>
+            <span class="text-danger card-text">{{ advert }} ?</span></h5>
+        <div class="form-group">
+            <form action="" method="POST">
+                {% csrf_token %}
+            </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+          <a href="{% url 'delete-advert-button' advert.pk advert.slug %}" class="btn btn-outline-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+     <div class="modal fade" id="inquiryModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="inquiryModalLabel">Make An Inquiry</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{% url 'mail:new-message' %}" method="POST">
+              {% csrf_token %}
+            <div class="form-group">
+              <label for="property_name" class="col-form-label">Title</label>
+              <input type="text" name="title" class="form-control" value="{{ advert.title }}" >
+            </div>
+
+            <div class="form-group">
+              <label for="name" class="col-form-label">Sender:</label>
+              <input type="text" name="name" class="form-control" value="{{ request.user }}" >
+            </div>
+            <div class="form-group">
+              <label for="name" class="col-form-label">Recipient:</label>
+              <input type="text" name="recipient" class="form-control" value="{{ advert.author.user.id }}" >
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="col-form-label">Message:</label>
+              <textarea name="content" class="form-control"></textarea>
+            </div>
+            <hr>
+            <input type="submit" value="Send" class="btn btn-block btn-secondary">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+     </main>
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+<main>
+        <section class="section-1">
+            <div class="container">
+<div class="row">
+	<!-- BEGIN INBOX -->
+	<div class="col-md-12 mt-5">
+		<div class="grid email">
+			<div class="grid-body">
+				<div class="row">
+					<!-- BEGIN INBOX MENU -->
+					<div class="col-md-3">
+						<h2 class="grid-title"><i class="fa fa-inbox"></i> Inbox</h2>
+						<a class="btn btn-block btn-sm btn-outline-primary" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i>&nbsp;REPLY TO {{ communication.sender }}</a>
+
+						<hr>
+
+						<div>
+							<ul class="">
+								<li class="header">Folders</li>
+								<li class="active "><a href="{% url 'mail:inbox' %}"><i class="fa fa-inbox"></i> Inbox </a></li>
+
+								<li><a href="#"><i class="fa fa-mail-forward"></i> Sent</a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- END INBOX MENU -->
+
+					<!-- BEGIN INBOX CONTENT -->
+					<div class="col-md-9">
+
+
+						<div class="padding"></div>
+
+						<div class="table-responsive">
+							<table class="table">
+								<tbody>
+                                <h5 class="text-center">  {{ communication.title }}</h5>
+
+
+{#
+
+
+                                {% for communication in all_convo %}
+                                    <tr>
+
+									<td class="name"><a href="#">{{ communication.sender }}</a></td>
+									<td class="subject">{{ communication.content }}</td>
+									<td class="time">{{ communication.timestamp }}</td>
+								</tr>
+                                {% endfor %}
+
+
+
+
+
+
+							</tbody></table>
+						</div>
+
+
+					</div>
+					<!-- END INBOX CONTENT -->
+
+					<!-- BEGIN COMPOSE MESSAGE -->
+					<div class="modal fade" id="compose-modal" tabindex="-1" role="dialog" aria-hidden="true">
+						<div class="modal-wrapper">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header bg-blue">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+										<h4 class="modal-title"><i class="fa fa-envelope"></i> Compose New Message</h4>
+									</div>
+									<form action="" method="POST">
+                                        {% csrf_token %}
+										<div class="modal-body">
+											<div class="form-group">
+												<input name="recipient" type="text" class="form-control" placeholder="To {{ communication.sender}}" value="{{ communication.sender.id}}">
+											</div>
+											<div class="form-group">
+												<input name="sender" type="text" class="form-control" placeholder="From : {{ request.user }}" value="{{ request.user }}">
+											</div>
+											<div class="form-group">
+												<input name="conversation" type="text" class="form-control" placeholder="conversation {{ communication.conversation }}" value="{{ communication.conversation }}">
+											</div>
+											<div class="form-group">
+                                                <label for="title" class="col-form-label">Title:</label>
+												<input name="title" type="text" class="form-control" value="{{ communication.title }}">
+											</div>
+											<div class="form-group">
+												<textarea name="content" id="email_message" class="form-control" placeholder="Message" style="height: 120px;"></textarea>
+											</div>
+
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Discard</button>
+											<button type="submit" class="btn btn-primary pull-right"><i class="fa fa-envelope"></i> Send Message</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+{#					<!-- END COMPOSE MESSAGE -->#}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END INBOX -->
+</div>
+</div>
+        </section>
+</main>
+{% endblock %}

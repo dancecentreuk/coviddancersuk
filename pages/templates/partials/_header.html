@@ -1,0 +1,80 @@
+{% load static %}
+<header>
+    <div class="container-fluid p-0">
+      <nav class="navbar  navbar-expand-lg ">
+        <a class="navbar-brand ml-0" href="{% url 'index' %}">DancersUK</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="fas fa-align-right text-light"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'index' %}">HOME
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+
+              <li class="nav-item dropdown">
+                  <div class="dropdown">
+                      <a href="#" class="nav-link">JOBS & AUDITIONS<i class="ml-1 fas fa-caret-down"> </i></a>
+                      <div class="dropdown-content">
+                          <a href="{% url 'postings' %}">Postings</a>
+                          <a href="{% url 'adverts' %}">Jobs</a>
+                      </div>
+                  </div>
+              </li>
+
+
+
+
+            <li class="nav-item dropdown">
+              <div class="dropdown">
+                <a href="#" class="nav-link">DIRECTORY</a>
+                <div class="dropdown-content">
+                  <a href="{% url 'talents' %}">Talent</a>
+                  <a href="{% url 'employers' %}">Employers</a>
+                </div>
+              </div>
+            </li>
+
+
+          </ul>
+
+
+              {% if request.user.is_authenticated %}
+                  <ul class="navbar-nav ml-auto mr-4">
+
+                  <li class="nav-item dropdown">
+                      <div class="dropdown">
+                          <a href="#" class="nav-link">{{ request.user | capfirst }}'s PROFILE<i class="ml-1 fas fa-caret-down"></i></a>
+                          <div class="dropdown-content">
+                              <a href="{% url 'profile' %}">View Profile</a>
+                              <a href="{% url 'mail:inbox' %}">Messages</a>
+                          </div>
+                      </div>
+                    </li>
+                      <li class="nav-item active">
+                          <a class="nav-link" href="{% url 'mail:inbox' %}"><i class="fas fa-envelope"></i><span class=" badge bg-orange badge-rounded ">{{ uni_mail_count }}</span> </a>
+                      </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">LOGOUT</a>
+                </li>
+                  </ul>
+              {% else %}
+                   <ul class="navbar-nav">
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'signup' %}">REGISTER</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'sign-in' %}">LOGIN</a>
+                  </li>
+                   </ul>
+              {% endif %}
+
+
+
+        </div>
+      </nav>
+    </div>
+  </header>

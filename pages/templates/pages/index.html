@@ -1,0 +1,330 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <main>
+        <section class="section-9">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-md-11 col-12 mx-auto">
+                        <div class="panel">
+                            <div class="bg-white shadow rounded overflow-hidden">
+                                <div class="px-4 pt-0 pb-2 newbadge">
+                                    <div class="media align-items-end profile-header">
+                                        <div class="media-body mt-3 text-white">
+                                            <h4 class="text-center mt-0 mb-0">Find Work</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-info text-center">
+                                    <div class="p-5">
+                                        <div class="overlay p-1">
+                                            <div class="search">
+                                                <form action="{% url 'search' %}">
+                                                    <!-- Form Row 1 -->
+                                                    <div class="form-row">
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="sr-only">Keywords</label>
+                                                            <input type="text" name="keywords" class="form-control" placeholder="Keyword (ballet, jazz, teacher)">
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="sr-only">City</label>
+                                                            <select name="city" class="form-control">
+                                                                <option selected="true" disabled="disabled">Location (All)</option>
+                                                                {% for key, value in location_choices %}
+                                                                    <option value="{{ key }}">{{ value }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Form Row 2 -->
+                                                    <div class="form-row">
+                                                        <div class="col-md-12 mb-3">
+                                                            <label class="sr-only">Work</label>
+                                                            <select name="work" class="form-control">
+                                                                <option selected="true" disabled="disabled">Work Type (Pick One !! )</option>
+                                                                {% for key, value  in work_choices %}
+                                                                    <option value="{{ key }}">{{ value }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-2 container-fluid p-0">
+            <div class="cover">
+                <div class="overlay"></div>
+                <div class="content text-center">
+                    <h1>Some Features That Made Us Unique</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, eum?</p>
+                </div>
+            </div>
+            <div class="container-fluid text-center">
+                <div class="numbers d-flex flex-md-row flex-wrap justify-content-center">
+                    <div class="rect">
+                        <h1>{{ postings.count }}</h1>
+                        <p>Postings</p>
+                    </div>
+                    <div class="rect">
+                        <h1>{{ jobs.count }}</h1>
+                        <p>Jobs</p>
+                    </div>
+                    <div class="rect">
+                        <h1>{{ talents.count }}</h1>
+                        <p>Talent</p>
+                    </div>
+                    <div class="rect">
+                        <h1>9152</h1>
+                        <p>Total Projects</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container text-center mt-2">
+                <div class="row">
+                    <div class="col-md-12 col-12">
+                        <div class="panel ">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3 class="my_title">Latest Jobs</h3>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <!-- Products filters -->
+                                <div class="row">
+                                    {% for advert in jobs %}
+                                        <div class="col-lg-12">
+                                            <!-- Product 2 -->
+                                            <div class="card mb-4">
+                                                <!-- Content -->
+                                                <div class="row">
+                                                    <div class="col-8 mt-1">
+                                                        <a class="btn btn-light disabled btn-sm"><i class="fa fa-clock"></i> Posted : {{ advert.created | timesince}} ago</a>
+                                                    </div>
+                                                    <div class="col-4 mt-1">
+                                                        <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-map-pin mr-2"></i> {{ advert.location}}</a >
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h4 class="card-title my-2 text-center">
+                                                            <a href="{% url 'advert-detail' advert.pk advert.slug %}" class="text-info text-sm ">{{ advert.title }}</a>
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        {% if advert.author.is_candidate %}
+                                                            <img class="m-2 rounded img-fluid float-left" src="{{ advert.author.candidate.profile_image.url }}" alt="Card image cap" style="max-height: 75px">
+                                                        {% else %}
+                                                            <img class="m-2 rounded img-fluid float-left" src="{{ advert.author.employer.profile_image.url }}" alt="Card image cap" style="max-height: 75px">
+                                                        {% endif %}
+                                                        <p class="text-muted text-xs m-1">{{ advert.body  | truncatechars:200 }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 mt-1">
+                                                        <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-money-bill-wave"></i> Fee : £{{ advert.fee}}</a >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <!-- Call to action -->
+                                <div class="my-3" data-url="#">
+                                    <hr class="hr-lg mt-0 mb-1 w-100 mx-auto hr-warning" />
+                                    <div class="pos-relative">
+                                        <i class="fa fa-bullseye icon-bg op-1 icon-bg-l-ol icon-25x text-white"></i> <i class="fa fa-bullseye icon-bg op-1 icon-bg-r-ol icon-bg-b icon-25x text-white"></i>
+                                        <div class="p-4 text-center bg-danger">
+                                            <h2 class="display-4 font-weight-normal text-uppercase text-white my-0 text-slab">
+                                                Clearance Sale
+                                            </h2>
+                                            <h4 class="text-white mb-0 text-slab">
+                                                Price reductions on 1000s of items!
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    <hr class="hr-lg mt-1 w-100 mx-auto hr-danger" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container text-center mt-3">
+                <div class="row">
+                    <div class="col-md-12 col-12">
+                        <div class="panel ">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3 class="my_title">Latest Postings</h3>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <!-- Products filters -->
+                                <div class="row">
+                                    {% for posting in postings %}
+                                        <div class="col-lg-12">
+                                            <!-- Product 2 -->
+                                            <div class="card mb-4">
+                                                <!-- Content -->
+                                                <div class="row">
+                                                    <div class="col-8 mt-1">
+                                                        <a class="btn btn-light disabled btn-sm"><i class="fa fa-clock"></i> Posted : {{ posting.created | timesince}} ago</a>
+                                                    </div>
+                                                    <div class="col-4 mt-1">
+                                                        <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-map-pin mr-2"></i> {{ posting.location}}</a >
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 mx-auto">
+                                                        <h4 class="card-title my-2 text-center">
+                                                            <a href="{% url 'posting-detail' posting.pk posting.slug %}" class="text-info text-sm ">{{ posting.title }}</a>
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        {% if posting.author.is_candidate %}
+                                                            <img class="m-2 rounded img-fluid float-left" src="{{ posting.author.candidate.profile_image.url }}" alt="Card image cap" style="max-height: 75px">
+                                                        {% else %}
+                                                            <img class="m-2 rounded img-fluid float-left" src="{{ posting.author.employer.profile_image.url }}" alt="Card image cap" style="max-height: 75px">
+                                                        {% endif %}
+                                                        <p class="text-muted text-xs m-1">{{ posting.body  | truncatechars:300 }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-8 mt-1">
+                                                        <a class="btn btn-light disabled btn-sm text-info"><i class="fa fa-clock"> </i>{{  posting.date | date:' l dS F Y' }}  {{ posting.start_time }}-{{ posting.finish_time }}</a>
+                                                    </div>
+                                                    <div class="col-4 mt-1">
+                                                        <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-money-bill-wave"></i> Fee : £{{ posting.fee}}</a >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <!-- Call to action -->
+                                <div class="my-3" data-url="#">
+                                    <hr class="hr-lg mt-0 mb-1 w-100 mx-auto hr-warning" />
+                                    <div class="pos-relative">
+                                        <i class="fa fa-bullseye icon-bg op-1 icon-bg-l-ol icon-25x text-white"></i> <i class="fa fa-bullseye icon-bg op-1 icon-bg-r-ol icon-bg-b icon-25x text-white"></i>
+                                        <div class="p-4 text-center bg-danger">
+                                            <h2 class="display-4 font-weight-normal text-uppercase text-white my-0 text-slab">
+                                                Clearance Sale
+                                            </h2>
+                                            <h4 class="text-white mb-0 text-slab">
+                                                Price reductions on 1000s of items!
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    <hr class="hr-lg mt-1 w-100 mx-auto hr-danger" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </section>
+
+
+        <section class="section-3 container-fluid p-0 text-center">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <h1>Like us on Facebook</h1>
+                    <p>Be sure to like us on Facebook and spread the word</p>
+                </div>
+            </div>
+{#            <div class="platform row">#}
+{#                <div class="col-md-6 col-sm-12 text-right">#}
+{#                    <div class="desktop shadow-lg">#}
+{#                        <div class="d-flex flex-row justify-content-center">#}
+{#                            <i class="fas fa-desktop fa-3x py-2 pr-3"></i>#}
+{#                            <div class="text text-left">#}
+{#                                <h3 class="pt-1 m-0">Desktop</h3>#}
+{#                                <p class="p-0 m-0">On website</p>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-md-6 col-sm-12 text-left">#}
+{#                    <div class="desktop shadow-lg">#}
+{#                        <div class="d-flex flex-row justify-content-center">#}
+{#                            <i class="fas fa-mobile-alt fa-3x py-2 pr-3"></i>#}
+{#                            <div class="text text-left">#}
+{#                                <h3 class="pt-1 m-0">On Mobile</h3>#}
+{#                                <p class="p-0 m-0">On Play Store</p>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+        </section>
+
+
+
+
+
+
+
+
+    <section class="section-7 container-fluid my-4">
+        <div class="container text-center">
+                <div class="row">
+                    <div class="col-md-12 col-12">
+                        <div class="panel">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3 class="my_title">Latest Talent</h3>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <!-- Products filters -->
+
+                                <div class="row mt-3">
+                                    {% for talent in talents %}
+                                        <div class="col-auto mb-3">
+                                            <div class="card" style="width: 10rem;">
+                                                <img class="card-img-top" style="height: 160px" src="{{ talent.user.candidate.profile_image.url }}" alt="Card image cap">
+                                                <div class="card-body pb-0">
+                                                    <a href="{% url 'talent-detail' talent.pk talent.user.first_name talent.user.last_name %}">
+                                                  <h5 class="text-center img_title ">{{ talent.user.first_name |capfirst }} </h5></a>
+                                                  <p class="tiny text-muted text-center mb-0 py-1">{{ talent.candidate_location }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+
+    </main>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <main>
+    <section class="section-1">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="pray">
+              <img src="{% static 'assets/candidate_signup_2.jpg' %}" alt="Pray" class="" />
+
+            </div>
+          </div>
+          <div class="col-md-6 col-12">
+            <div class="panel text-left py-1 mb-3">
+
+                <h1>Register an account <br> <span class="h6 text-info">I'm Looking For Work </span> </h1>
+
+
+                <form method="POST" action=".">
+                {% csrf_token %}
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                         </div>
+                        {{form.username}}
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                         </div>
+                        {{form.first_name}}
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                     </div>
+                        {{form.last_name}}
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                         </div>
+                        {{ form.email }}
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                        </div>
+                        {{ form.mobile }}
+                    </div> <!-- form-group// -->
+
+                     <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                        </div>
+                        <select name="gender" class="form-control">
+                            <option> Gender </option>
+                            {% for key,value in gender_choices %}
+                                <option value="{{ key }}">{{ value }}</option>
+                            {% endfor %}
+
+                        </select>
+                    </div> <!-- form-group end.// -->
+
+                      <label for="example-date-input" class="col-form-label">Date Of Birth</label>
+                    <div class="form-group  input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fas fa-calendar-alt"></i> </span>
+                        </div>
+                        {{form.date_of_birth}}
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                        </div>
+                        <select name="candidate_location" class="form-control">
+                            <option> Location</option>
+                            {% for key, value in location_choices %}
+                                <option value="{{ key }}">{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                    </div> <!-- form-group end.// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        {{ form.password1 }}
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        {{ form.password2 }}
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
+                    </div> <!-- form-group// -->
+                    <p class="text-center">Have an account? <a href="">Log In</a> </p>
+                </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    </main>
+{% endblock %}
