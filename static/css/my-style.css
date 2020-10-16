@@ -31,3 +31,46 @@
   font-size: 45%;
   padding: .5em;
 }
+
+
+.badge{
+  font-weight: 400;
+  background-color: darkorange;
+
+
+}
+
+.badge-rounded{
+  border-radius: 100px;
+}
+
+
+.newbadge{
+  font-weight: 400;
+  background-color: darkorange;
+
+
+}
+
+
+.custom_button{
+  font-size: 11px;
+  color: darkorange;
+  text-decoration: none;
+  letter-spacing: .2em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+
+.listings_img{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+a.navbar-brand.ml-0:hover{
+  color: antiquewhite;
+}
+
