@@ -11,11 +11,15 @@ def candidate_signup(request):
     form = CandidateSignUpForm
     if request.method == 'POST':
         form = CandidateSignUpForm(request.POST or None)
-        print(form)
+
+
+
 
         if form.is_valid():
             form.save()
-            return redirect('/')
+            messages.success(request, 'You are now registered and can log in')
+            return redirect('sign-in')
+
 
     else:
         form = CandidateSignUpForm()

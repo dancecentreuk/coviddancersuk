@@ -123,6 +123,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+AUTHENTICATION_BACKENDS = [
+    'accounts.backends.EmailBackend',
+]
+
 AUTH_USER_MODEL = 'accounts.User'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -139,9 +144,42 @@ STATICFILES_DIRS = [
     BASE_DIR / "dance_core/static"
 ]
 
+#
+# from pathlib import Path
+#
+# # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+#
+# AWS_ACCESS_KEY_ID = '64F2QWLRQ3UQXNZXPSDL'
+# AWS_SECRET_ACCESS_KEY = 'kGXOY5Wk889aG2RllP7Svl8KBeeQXGlIM3iI4NxkR+4'
+# AWS_STORAGE_BUCKET_NAME = 'dancersuk-space'
+# AWS_S3_ENDPOINT_URL = 'https://dancersuk-space.fra1.digitaloceanspaces.com '
+# AWS_S3_OBJECT_PARAMETERS = {
+#     'CacheControl': 'max-age=86400',
+# }
+# AWS_LOCATION = 'dancersuk-static'
+#
+# STATICFILES_DIRS = [
+#     BASE_DIR / "dance_core/static"
+# ]
+#
+#
+# STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+
+# Messages
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
+
 
 
 

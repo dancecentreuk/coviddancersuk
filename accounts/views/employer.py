@@ -4,6 +4,7 @@ from pages.choices import gender_choices, location_choices
 from ..models import Employer
 from adverts.models import Advert
 from django.http import HttpResponse
+from django.contrib import messages
 
 
 
@@ -11,11 +12,13 @@ def employer_signup(request):
     form = EmployerSignUpForm
     if request.method == 'POST':
         form = EmployerSignUpForm(request.POST or None)
-        print(form)
 
         if form.is_valid():
             form.save()
-            return redirect('/')
+            messages.success(request, 'You are now registered and can log in')
+            return redirect('sign-in')
+
+
 
     else:
         form = EmployerSignUpForm()

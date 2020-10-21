@@ -8,6 +8,7 @@ from pages.choices import (gender_choices, location_choices, height_in, height_f
 class User(AbstractUser):
     is_candidate = models.BooleanField(default=False)
     is_employer = models.BooleanField(default=False)
+    email = models.EmailField(unique=True)
 
 class Candidate(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

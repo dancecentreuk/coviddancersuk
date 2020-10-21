@@ -33,6 +33,12 @@ class CandidateSignUpForm(UserCreationForm):
 
         }
 
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("This email address is already in use. Ps supply  a different email address")
+        return self.cleaned_data
+
     @transaction.atomic
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -68,6 +74,13 @@ class EmployerSignUpForm(UserCreationForm):
             'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}),
 
         }
+
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError(
+                "This email address is already in use. Ps supply  a different email address")
+        return self.cleaned_data
 
     @transaction.atomic
     def save(self, commit=True):
