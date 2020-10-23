@@ -5,7 +5,25 @@ from ..models import CandidateImage, Candidate
 from django.contrib import messages
 from django.http import HttpResponse
 from pages.choices import location_choices
+from django.core.mail import EmailMessage
+from django.views import View
+from django.urls import reverse
+from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from django.utils.http import  urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.sites.shortcuts import get_current_site
+from ..utils import token_generator
+from accounts.models import User
+import threading
 
+
+class EmailThread(threading.Thread):
+
+    def __init__(self, email):
+        self.email = email
+        threading.Thread.__init__(self)
+
+    def run(self):
+        self.email.send(fail_silently=False)
 
 def candidate_signup(request):
     form = CandidateSignUpForm
@@ -17,7 +35,48 @@ def candidate_signup(request):
 
         if form.is_valid():
             form.save()
-            messages.success(request, 'You are now registered and can log in')
+
+            email = form.cleaned_data.get('email')
+
+
+            user = User.objects.get(email=email)
+
+            print(user.pk)
+
+
+            uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+
+
+
+            domain = get_current_site(request).domain
+            link = reverse('candidate-activate', kwargs={
+                'uidb64':uidb64, 'token':token_generator.make_token(user)})
+
+            activate_url = 'http://'+domain+link
+
+            email_subject = 'Activate your account'
+            email_body = 'Hi '+ user.first_name+ ' Ps use the link below to activate your account\n' + activate_url
+            email_address = form.cleaned_data.get('email')
+            email = EmailMessage(
+                email_subject,
+                email_body,
+                'noreply@dance.com',
+                [email_address]
+
+            )
+            EmailThread(email).start()
+
+
+
+            # # Send email
+            # send_mail(
+            #   'Property Listing Inquiry',
+            #   'There has been an inquiry for  Sign into the admin panel for more info',
+            #   'traversy.brad@gmail.com',
+            #   [realtor_email, 'techguyinfo@gmail.com'],
+            #   fail_silently=False
+            # )
+            messages.success(request, 'You are now registered ps check your email to activate your account')
             return redirect('sign-in')
 
 
@@ -31,6 +90,33 @@ def candidate_signup(request):
 
     }
     return render(request, 'registration/candidate-signup.html', context)
+
+
+class CandidateVerificationView(View):
+    def get(self, request, uidb64, token):
+
+        try:
+            id = force_text(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=id)
+
+            if not token_generator.check_token(user, token):
+                return redirect('sign-in'+'?message='+'User allreaedy activated' )
+
+            if user.is_active:
+                return redirect('sign-in')
+            user.is_active = True
+            user.save()
+
+            messages.success(request, 'Account Activated sucessfully')
+            return redirect('sign-in')
+
+        except Exception as e:
+            pass
+
+
+        return redirect('sign-in')
+
+
 
 def candidate_profile(request):
 

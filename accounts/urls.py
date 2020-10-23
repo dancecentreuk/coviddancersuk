@@ -1,8 +1,8 @@
 from django.urls import path
 from .views.candidate import candidate_signup, candidate_profile, candidate_bio_update,\
     candidate_experience_update, candidate_delete_photos, add_photo, add_photo_2, \
-    candidate_location_update, candidate_birthday_update, update_candidate_profile_picture
-from .views.individual import register, sign_in, logout_user, profile
+    candidate_location_update, candidate_birthday_update, update_candidate_profile_picture, CandidateVerificationView
+from .views.individual import register, sign_in, logout_user, profile, RequestPassword, CompletePasswordReset
 from .views.employer import employer_signup, employer_profile, update_company_profile, \
     update_company_bio, update_profile_picture
 
@@ -17,6 +17,9 @@ urlpatterns = [
     path('profile/', profile, name='profile'),
     path('candidate/profile/', candidate_profile, name='candidate-profile'),
     path('employer/profile/', employer_profile, name='employer-profile'),
+    path('activate/<uidb64>/<token>/', CandidateVerificationView.as_view(), name='candidate-activate'),
+    path('request-reset-link', RequestPassword.as_view(), name='password-reset-link'),
+    path('set-new-password/<uidb64>/<token>/', CompletePasswordReset.as_view(), name='reset-password'),
 
 
     path('candidate/bio/<pk>', candidate_bio_update, name='candidate-bio'),

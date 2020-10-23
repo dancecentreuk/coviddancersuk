@@ -43,6 +43,7 @@ class CandidateSignUpForm(UserCreationForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_candidate = True
+        user.is_active = False
         user.save()
         candidate = Candidate.objects.create(user=user,
                                              mobile=self.cleaned_data.get('mobile'),
