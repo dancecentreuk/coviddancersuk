@@ -78,7 +78,8 @@
         <div class="container-fluid text-center">
         <div class="mt-1 numbers d-flex flex-md-row flex-wrap justify-content-center">
         <div class="rect-2">
-            <img src="{{ talent.profile_image.url }}" alt="Pray" style="height: 100px; width: 100px" />
+            <a href="{{ talent.profile_image.url }}" data-lightbox="profile-images">
+                <img src="{{ talent.profile_image.url }}" alt="Pray" style="height: 100px; width: 100px" /></a>
           </div>
             {% for image in candidate_photos %}
                 <div class="rect-2">
