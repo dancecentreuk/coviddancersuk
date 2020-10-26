@@ -82,7 +82,8 @@
           </div>
             {% for image in candidate_photos %}
                 <div class="rect-2">
-                    <img src="{{ image.profile_image.url }}" alt="Pray" style="height: 100px; width: 100px" />
+                <a href="{{ image.profile_image.url }}" data-lightbox="profile-images">
+                    <img src="{{ image.profile_image.url }}" alt="Pray" style="height: 100px; width: 100px" /></a>
                   </div>
             {% endfor %}
 
