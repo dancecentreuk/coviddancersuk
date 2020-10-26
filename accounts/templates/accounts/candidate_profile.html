@@ -75,7 +75,8 @@
           </div>
             {% for image in photos %}
                 <div class="rect-2">
-                    <img src="{{ image.profile_image.url }}" alt="Pray" style="height: 100px; width: 100px" />
+                <a href="{{ image.profile_image.url }}" data-lightbox="profile-images">
+                    <img src="{{ image.profile_image.url }}"  alt="Pray" style="height: 100px; width: 100px" /></a>
                   </div>
             {% endfor %}
 
@@ -372,6 +373,12 @@
 </div>
 
 
+<script>
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });
+</script>
 
 
 
