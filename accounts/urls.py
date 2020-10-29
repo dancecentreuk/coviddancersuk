@@ -32,6 +32,7 @@ urlpatterns = [
     path('update-profile_image/<int:pk>/', update_candidate_profile_picture, name='update-candidate-profile-picture'),
 
 
+
     path('employer/update-company-profile/<pk>/', update_company_profile, name='update-company-profile'),
     path('employer/update-company-info/<int:pk>', update_company_bio, name='update-company-info' ),
     path('employer/update-profile_image/<int:pk>', update_profile_picture, name='update-company-photo' ),

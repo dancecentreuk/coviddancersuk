@@ -123,3 +123,5 @@ class EmployerImageUpdateForm(forms.ModelForm):
     class Meta:
         model = Employer
         fields = ('profile_image', )
+
+

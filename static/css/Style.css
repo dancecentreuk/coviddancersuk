@@ -726,3 +726,29 @@ footer .column i + i {
   text-decoration: none;
 }
 
+
+/********** section 5 **************/
+
+
+
+.section-5 .row .col-md-12 .panel {
+  top: 15vmin;
+  background: white;
+  border-radius: 3px;
+  text-align: left;
+  padding: 13vmin 5vmin 20vmin 10vmin;
+  box-shadow: 0px 25px 42px rgba(0, 0, 0, 0.2);
+  font-family: var(--Rubik);
+  z-index: 1;
+}
+
+.section-5 .my_title {
+  font-size: 25px;
+  color: darkorange;
+  text-decoration: none;
+  letter-spacing: .2em;
+  font-weight: 400;
+  text-align: center;
+
+}
+

@@ -4,6 +4,8 @@
 
     <main>
 
+    {% include 'partials/_alerts.html' %}
+
 
     <section class="section-profile">
       <div class="container text-center">
@@ -58,12 +60,12 @@
       <div class="container-fluid text-center">
         <div class="numbers d-flex flex-md-row flex-wrap justify-content-center">
           <div class="rect">
-            <h1>2345</h1>
-            <p>Happy Client</p>
+            <h1>{{ average_reviews }}</h1>
+            <p>Rating / 10</p>
           </div>
           <div class="rect">
-            <h1>6784</h1>
-            <p>Cups Coffee</p>
+            <h1>{{ candidate_reviews.count }}</h1>
+            <p>Total Reviews</p>
           </div>
           <div class="rect">
             <h1>1056</h1>
@@ -117,6 +119,64 @@
     </section>
 
 
+    <section class="section-5">
+         <div class="container text-center">
+        <div class="row">
+          <div class="col-md-12 col-12">
+            <div class="panel text-left mb-3">
+              <h4 class="text-center lead">Add Review</h4>
+
+                <form action="{% url 'add-candidate-review' talent.pk %} " method="POST">
+                    {% csrf_token %}
+                    <label for="comment">Review</label>
+                    <textarea name="comment" id="comment" cols="30" rows="5" class="form-control" required ></textarea> <br>
+                    <label for="rating">Rating</label>
+                    <input type="range" id="rangeInput" name="rating"
+                           min="0" max="10" value="0" step="0.5" oninput="amount.value=rangeInput.value" required>
+                    <output name="amount" id="amount" for="rangeInput">0</output>
+
+                    <br>
+                    <input type="submit" class="btn btn-danger" value="Add Review">
+                </form>
+
+                <hr>
+
+
+
+                        {% for review in candidate_reviews %}
+                            <div class="card mb-2 p-0">
+                                <div class="card-body pt-2 pb-0" style="background-color: #fdf4f4">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h6 class="text-left">{{ review.author.username }}</h6>
+                                            <h6 class="text-danger">{{ review.rating }}</h6>
+                                            {% if request.user == review.author %}
+                                            <a class="mb-2 py-0 btn  btn-sm btn-outline-info text-info" href="{% url 'edit-candidate-review' review.candidate_id review.pk %}">Edit Review</a>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-9">
+                                            <p>{{ review.comment | linebreaks }}</p> <br>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+
+
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
     <!-- END INBOX CONTENT -->
 
 					<!-- BEGIN COMPOSE MESSAGE -->
@@ -158,6 +218,10 @@
             </div>
           </div>
 {#					<!-- END COMPOSE MESSAGE -->#}
+
+
+
+
 
 
 </main>

@@ -239,6 +239,7 @@ def update_candidate_profile_picture(request, pk):
 
 
 
+
 # def create_advert(request):
 #     if request.user.is_authenticated:
 #         if request.method == 'POST':
