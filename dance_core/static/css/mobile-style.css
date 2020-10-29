@@ -18,6 +18,15 @@
     font-size: 2rem;
   }
 
+  .numbers .rect-3 {
+    width: 10rem;
+    height: 8rem;
+  }
+
+  .numbers .rect-3 h1 {
+    font-size: 2rem;
+  }
+
   .section-3 {
     height: inherit;
     padding: 10vmin !important;

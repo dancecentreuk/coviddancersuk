@@ -5,7 +5,7 @@ let nCount = selector => {
         Counter: $(this).text()
       }, {
         // A string or number determining how long the animation will run.
-        duration: 4000,
+        duration: 3000,
         // A string indicating which easing function to use for the transition.
         easing: "swing",
         /**

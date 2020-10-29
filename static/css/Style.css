@@ -292,6 +292,27 @@ header .container .col-md-7 p {
   font-family: var(--Patua);
 }
 
+.numbers .rect-3 {
+  position: relative;
+  z-index: 1;
+  background: white;
+  width: 17rem;
+  height: 12rem;
+  padding-top: 3.5vmin;
+  margin: 1rem;
+  border-radius: 0.5em;
+  box-shadow: 1px 2px 50px 0px rgba(255, 0, 0, 0.349);
+}
+
+.numbers .rect-3 h1 {
+  font-size: 5rem;
+  color: tomato;
+}
+
+.numbers .rect-3 > p {
+  font-family: var(--Patua);
+}
+
 .purchase > h1 {
   padding-top: 15vmin;
   padding-bottom: 0.1em;
