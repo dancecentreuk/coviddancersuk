@@ -40,7 +40,8 @@ def talent_detail(request, pk, first_name, last_name):
     candidate_photos = CandidateImage.objects.filter(owner=pk)
     reviews = CandidateReview.objects.filter(candidate=pk).order_by('-created')
     average_reviews = reviews.aggregate(Avg('rating'))['rating__avg']
-    average_reviews = round(average_reviews, 1)
+    if average_reviews is not None:
+        average_reviews = round(average_reviews, 1)
     form = CandidateReviewForm(request.POST or None)
     context = {
 

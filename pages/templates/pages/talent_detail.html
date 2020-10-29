@@ -18,6 +18,7 @@
           <div class="col-md-9 col-12">
             <div class="panel text-left">
               <h1>{{ talent.user.first_name | capfirst}} {{ talent.user.last_name | capfirst }}</h1>
+                <p>{{ average_reviews }}</p>
 
                 <div class="row">
                     <div class="col-6">
@@ -59,7 +60,7 @@
       </div>
       <div class="container-fluid text-center">
         <div class="numbers d-flex flex-md-row flex-wrap justify-content-center">
-          <div class="rect">
+          <div class="rect-3">
             <h1>{{ average_reviews }}</h1>
             <p>Rating / 10</p>
           </div>
