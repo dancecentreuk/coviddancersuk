@@ -127,12 +127,14 @@ def add_candidate_review(request, id):
                 data.rating = request.POST['rating']
                 data.author = request.user
                 data.candidate = candidate
-                data.save()
+                if data.candidate.user == request.user:
+                    messages.error(request, 'You cant give your self a  review clever clogs')
+                    return redirect('talent-detail', id, candidate.user.first_name, candidate.user.last_name)
+                else:
+                    data.save()
 
-                messages.success(request, 'Your review has now been posted')
-
-
-                return redirect('talent-detail', id, candidate.user.first_name, candidate.user.last_name)
+                    messages.success(request, 'Your review has now been posted')
+                    return redirect('talent-detail', id, candidate.user.first_name, candidate.user.last_name)
             else:
 
                 messages.error(request, 'There is a error in your review and it has not been posted')

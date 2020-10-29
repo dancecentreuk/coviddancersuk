@@ -136,6 +136,10 @@
                     <output name="amount" id="amount" for="rangeInput">0</output>
 
                     <br>
+                    {% if error %}
+                   <p class="text-danger">{{ error }}</p>
+                {% endif %}
+
                     <input type="submit" class="btn btn-danger" value="Add Review">
                 </form>
 
