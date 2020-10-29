@@ -17,7 +17,14 @@
           </div>
           <div class="col-md-9 col-12">
             <div class="panel text-left">
-              <h1>{{ talent.user.first_name | capfirst}} {{ talent.user.last_name | capfirst }}</h1>
+                <h1 class="triple-striped-heading">
+                    <span class="heading">{{ talent.user.first_name | capfirst}} {{ talent.user.last_name | capfirst }}</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
+
+
 
                 <div class="row">
                     <div class="col-6">
@@ -59,10 +66,13 @@
       </div>
       <div class="container-fluid text-center">
         <div class="numbers d-flex flex-md-row flex-wrap justify-content-center">
-          <div class="rect-3">
+            {% if average_reviews != None %}
+                <div class="rect-3">
             <h1>{{ average_reviews }}</h1>
             <p>Rating / 10</p>
           </div>
+            {% endif %}
+
           <div class="rect">
             <h1>{{ candidate_reviews.count }}</h1>
             <p>Total Reviews</p>
@@ -98,12 +108,21 @@
         <div class="row">
           <div class="col-md-12 col-12">
             <div class="panel text-left mb-3">
-              <h3>Bio</h3>
+                <h1 class="triple-striped-heading">
+                    <span class="heading">Bio</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
                 <p>
                     {{ talent.bio | linebreaks }}
                 </p>
-
-                <h3>Experience</h3>
+                <h1 class="triple-striped-heading">
+                    <span class="heading">Experience</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
                 <p>
                     {{ talent.experience |linebreaks }}
                 </p>
