@@ -113,7 +113,7 @@
   background: white;
   border-radius: 3px;
   text-align: left;
-  padding: 5vmin 5vmin 5vmin 5vmin;
+  padding: 2vmin 5vmin 2vmin 5vmin;
   box-shadow: 0px 25px 42px rgba(0, 0, 0, 0.2);
   font-family: var(--Rubik);
   z-index: 1;
