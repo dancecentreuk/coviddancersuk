@@ -52,6 +52,13 @@
 
   }
 
+
+   .section-profile .row .col-md-6 .panel {
+    position: initial;
+    width: initial;
+    height: initial;
+  }
+
     .section-mail .row .col-md-9 .panel {
     position: initial;
     width: initial;
@@ -60,6 +67,8 @@
     margin-top: 3vmin;
 
   }
+
+
 
   footer .row .col-md-2 {
     margin-top: 8vmin;

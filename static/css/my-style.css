@@ -102,7 +102,7 @@ a.navbar-brand.ml-0:hover{
 .triple-striped-heading .title {
   display: inline-block;
   position: relative;
-  font-size: 2em;
+  font-size: 1.125em;
   color: #4d4d4d;
   text-transform: uppercase;
   letter-spacing: .063em;
@@ -129,6 +129,38 @@ a.navbar-brand.ml-0:hover{
   top: 4px;
   position: absolute;
 }
+
+
+@media (min-width:768px) {
+  .triple-striped-heading .heading {
+    font-size: 1.25em;
+    padding-right: 5px;
+  }
+
+  .triple-striped-heading .outer-stripes {
+    height: 15px;
+  }
+
+  .triple-striped-heading .inner-stripe {
+    top: 6px;
+  }
+}
+
+.heading-centred {
+  text-align: center;
+}
+
+.heading-centred .heading {
+  padding-left: 7px;
+}
+
+.heading-centred-no-bg {
+  top: 0;
+  width: 250px;
+  text-align: center;
+  margin: 0 auto;
+}
+
 
 
 /* triple-striped-big  */

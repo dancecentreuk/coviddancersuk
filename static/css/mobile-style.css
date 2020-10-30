@@ -43,7 +43,7 @@
   .section-4 .carousel-item {
     padding-left: 0.6rem;
   }
-  .section-profile .row .col-md-9 .panel {
+  .section-profile .row .col-md-9 .col-sm-12 .panel {
     position: initial;
     width: initial;
     height: initial;
