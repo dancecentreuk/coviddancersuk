@@ -53,10 +53,18 @@
   }
 
 
-   .section-profile .row .col-md-6 .panel {
-    position: initial;
-    width: initial;
-    height: initial;
+  .section-profile .row .col-md-9 .panel {
+    position: absolute;
+    top: 7vmin;
+    left: -10vmin;
+    width: 80vmin;
+    background: white;
+    border-radius: 3px;
+    text-align: left;
+    padding: 5vmin 5vmin 10vmin 10vmin;
+    box-shadow: 0px 25px 42px rgba(0, 0, 0, 0.2);
+    font-family: var(--Rubik);
+    z-index: 1;
   }
 
     .section-mail .row .col-md-9 .panel {
