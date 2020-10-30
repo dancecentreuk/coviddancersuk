@@ -99,11 +99,23 @@ a.navbar-brand.ml-0:hover{
   z-index: 1;
 }
 
+.triple-striped-heading .title {
+  display: inline-block;
+  position: relative;
+  font-size: 2em;
+  color: #4d4d4d;
+  text-transform: uppercase;
+  letter-spacing: .063em;
+  background-color: #fff;
+  padding-right: 5px;
+  z-index: 1;
+}
+
 .triple-striped-heading .outer-stripes {
   display: block;
   width: 100%;
-  border-top: solid 1px #999;
-  border-bottom: solid 1px #999;
+  border-top: solid 1px #db0046;
+  border-bottom: solid 1px #db0046;
   position: absolute;
   height: 11px;
   top: 4px;
@@ -113,7 +125,49 @@ a.navbar-brand.ml-0:hover{
   display: block;
   height: 1px;
   width: 100%;
-  border-top: solid 1px #999;
+  border-top: solid 1px #db0046;
   top: 4px;
   position: absolute;
 }
+
+
+/* triple-striped-big  */
+
+/*.triple-striped-heading {*/
+  /*position: relative;*/
+  /*font-size: 1em;*/
+  /*margin-top: 2.813em;*/
+  /*margin-bottom: 1.875em;*/
+/*}*/
+
+/*.triple-striped-heading .heading {*/
+  /*display: inline-block;*/
+  /*position: relative;*/
+  /*font-size: 1.125em;*/
+  /*color: #4d4d4d;*/
+  /*text-transform: uppercase;*/
+  /*letter-spacing: .063em;*/
+  /*background-color: #fff;*/
+  /*padding-right: 5px;*/
+  /*z-index: 1;*/
+/*}*/
+
+/*.triple-striped-heading .outer-stripes {*/
+  /*display: block;*/
+  /*width: 100%;*/
+  /*border-top: solid 1px #db0046;*/
+  /*border-bottom: solid 1px #db0046;*/
+  /*position: absolute;*/
+  /*height: 11px;*/
+  /*top: 4px;*/
+/*}*/
+
+/*.triple-striped-heading .inner-stripe {*/
+  /*display: block;*/
+  /*height: 1px;*/
+  /*width: 100%;*/
+  /*border-top: solid 1px #db0046;*/
+  /*top: 4px;*/
+  /*position: absolute;*/
+/*}*/
+

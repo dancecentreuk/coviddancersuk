@@ -74,3 +74,28 @@ primary_job = [
     ('dance teacher', 'dance teacher'),
     ('dancer', 'dancer')
 ]
+
+
+day = [
+    ('Sunday', 'Sunday'),
+    ('Monday', 'Monday'),
+    ('Tuesday', 'Tuesday'),
+    ('Wednesday', 'Wednesday'),
+    ('Thursday', 'Thursday'),
+    ('Friday', 'Friday'),
+    ('Saturday', 'Saturday'),
+]
+
+level = [
+    ('Beginners', 'Beginners'),
+    ('General', 'General'),
+    ('Intermediate', 'Intermediate'),
+    ('Advanced', 'Advanced'),
+]
+
+age_choices = [
+    ('Toddlers', 'Toddlers'),
+    ('Children', 'Children'),
+    ('Teens', 'Teens'),
+    ('Adults', 'Adults'),
+]
