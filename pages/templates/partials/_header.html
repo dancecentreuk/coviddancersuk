@@ -30,13 +30,19 @@
 
             <li class="nav-item dropdown">
               <div class="dropdown">
-                <a href="#" class="nav-link">DIRECTORY</a>
+                <a href="#" class="nav-link">DIRECTORY<i class="ml-1 fas fa-caret-down"> </i></a>
                 <div class="dropdown-content">
                   <a href="{% url 'talents' %}">Talent</a>
                   <a href="{% url 'employers' %}">Employers</a>
                 </div>
               </div>
             </li>
+
+          <li class="nav-item active">
+              <a class="nav-link" href="{% url 'dance-classes' %}">DANCE CLASSES
+                <span class="sr-only">(current)</span>
+              </a>
+           </li>
 
 
           </ul>

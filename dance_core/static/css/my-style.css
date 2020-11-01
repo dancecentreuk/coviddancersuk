@@ -131,6 +131,102 @@ a.navbar-brand.ml-0:hover{
 }
 
 
+
+/* triple-striped-black  */
+
+.triple-striped-black-heading {
+  position: relative;
+  font-size: 1em;
+  margin-top: 1.813em;
+  margin-bottom: 1.875em;
+}
+
+.triple-striped-black-heading .heading {
+  display: inline-block;
+  position: relative;
+  font-size: 1em;
+  color: #4d4d4d;
+  text-transform: uppercase;
+  letter-spacing: .063em;
+  background-color: #fff;
+  padding-right: 5px;
+  z-index: 1;
+}
+
+.triple-striped-black-heading .title {
+  display: inline-block;
+  position: relative;
+  font-size: 1em;
+  color: #4d4d4d;
+  text-transform: uppercase;
+  letter-spacing: .063em;
+  background-color: #fff;
+  padding-right: 5px;
+  z-index: 1;
+}
+
+.triple-striped-black-heading .outer-stripes {
+  display: block;
+  width: 100%;
+  border-top: solid 1px #4d4d4d;
+  border-bottom: solid 1px #4d4d4d;
+  position: absolute;
+  height: 11px;
+  top: 4px;
+}
+
+.triple-striped-black-heading .inner-stripe {
+  display: block;
+  height: 1px;
+  width: 100%;
+  border-top: solid 1px #4d4d4d;
+  top: 4px;
+  position: absolute;
+}
+
+
+
+/* tabs */
+
+
+
+/*.nav-tabs .nav-link {*/
+    /*border: 1px solid transparent;*/
+    /*border-top-left-radius: .25rem;*/
+    /*border-top-right-radius: .25rem;*/
+/*}*/
+
+.timetable {
+
+
+  border-color: #222222;
+
+}
+
+.timetable a {
+  text-decoration: none;
+  color: darkorange;
+  font-size: .8em;
+  letter-spacing: .063em;
+  text-transform: uppercase;
+}
+
+.timetable li {
+  background-color: #fff0f7;
+  border-color: #222222;
+  /*border-radius: 5px;*/
+
+}
+
+
+
+/*#navbar-poop > a:hover, a:visited, a:link, a:active {*/
+    /*text-decoration: none;*/
+    /*color: darkorange;*/
+/*}*/
+
+
+
 @media (min-width:768px) {
   .triple-striped-heading .heading {
     font-size: 1.25em;
@@ -160,6 +256,9 @@ a.navbar-brand.ml-0:hover{
   text-align: center;
   margin: 0 auto;
 }
+
+
+
 
 
 

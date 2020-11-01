@@ -1,0 +1,495 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+       <section class="section-9">
+
+
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md-11 col-12 mx-auto">
+            <div class="panel">
+
+             <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-2 newbadge">
+                <div class="media align-items-end profile-header">
+                    <div class="media-body mt-3 text-white">
+                        <h4 class="text-center mt-0 mb-0 main_title">Search Dance Classes</h4>
+                    </div>
+                </div>
+            </div>
+                <div class="bg-info text-center">
+      <div class="p-5">
+        <div class="overlay p-1">
+
+          <div class="search">
+            <form action="{% url 'search' %}">
+             <div class="form-row">
+                <div class="col-md-12 mb-3">
+                  <label class="sr-only">Keywords</label>
+                  <input type="text" name="keywords" class="form-control" placeholder="Keyword (ballet, jazz, teacher)">
+                </div>
+             </div>
+
+              <!-- Form Row 1 -->
+              <div class="form-row">
+
+
+              <div class="col-md-4 mb-3">
+                  <label class="sr-only">City</label>
+                  <select name="style" class="form-control">
+                    <option selected="true" disabled="disabled">Dance Styles (All)</option>
+                      {% for key, value in dance_styles %}
+                          <option value="{{ key }}">{{ value }}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+
+
+
+                <div class="col-md-4 mb-3">
+                  <label class="sr-only">Level</label>
+                  <select name="level" class="form-control">
+                    <option selected="true" disabled="disabled">Level (All)</option>
+                      {% for key, value in level %}
+                          <option value="{{ key }}">{{ value }}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+
+
+              <div class="col-md-4 mb-3">
+                  <label class="sr-only">Day</label>
+                  <select day="level" class="form-control">
+                    <option selected="true" disabled="disabled">Day (All)</option>
+                      {% for key, value in day %}
+                          <option value="{{ key }}">{{ value }}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+
+              </div>
+              <!-- Form Row 2 -->
+
+             <div class="form-row">
+
+
+              <div class="col-md-6 mb-3">
+                  <label class="sr-only">Age</label>
+                  <select name="age" class="form-control">
+                    <option selected="true" disabled="disabled">Age Group (All)</option>
+                      {% for key, value in age_choices %}
+                          <option value="{{ key }}">{{ value }}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+
+
+
+
+
+                <div class="col-md-6 mb-3">
+                  <label class="sr-only">City</label>
+                  <select name="city" class="form-control">
+                    <option selected="true" disabled="disabled">Location (All)</option>
+                      {% for key, value in location_choices %}
+                          <option value="{{ key }}">{{ value }}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <button class="btn btn-secondary btn-block mt-4 custom_button" type="submit">Submit form</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+
+
+
+
+
+    <section class="section-2 container-fluid p-0">
+    <div class="container text-center mt-2">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="panel ">
+
+                <h1 class="triple-striped-heading heading-centred">
+                    <span class="title pl-1"> Dance Classes</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
+
+
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th class="table_h" scope="col">Style</th>
+                          <th class="table_h" scope="col">Level</th>
+                          <th class="table_h" scope="col">Age</th>
+                          <th class="table_h" scope="col">Day</th>
+                          <th class="table_h" scope="col">City</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for course in dance_classes %}
+                            <tr>
+                              <th class="table_p" scope="row">{{ course.dance_style_choice }}</th>
+                                <td class="table_p">{{ course.level }} </td>
+                                <td class="table_p">{{ course.age_group }} </td>
+                              <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
+                              <td class="table_p">{{ course.location }}</td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    <section class="section-2 container-fluid p-0 mb-3">
+        <div class="container text-center mt-2">
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <div class="panel ">
+                        <h1 class="triple-striped-heading heading-centred">
+                            <span class="title pl-1"> Dance Classes Timetable</span>
+                            <span class="outer-stripes">
+                                <span class="inner-stripe"></span>
+                            </span>
+                        </h1>
+
+                        <div id="navbar-example">
+                            <!-- Nav tabs -->
+                            <ul class="timetable nav nav-tabs" role="tablist">
+                                <li class="nav-item ">
+                                    <a class="nav-link active  " data-toggle="tab" href="#sunday" role="tab">Sunday</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " data-toggle="tab" href="#monday" role="tab">Monday</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " data-toggle="tab" href="#tuesday" role="tab">Tuesday</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " data-toggle="tab" href="#wednesday" role="tab">Wednesday</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " data-toggle="tab" href="#thursday" role="tab">Thursday</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " data-toggle="tab" href="#friday" role="tab">Friday</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " data-toggle="tab" href="#saturday" role="tab">Saturday</a>
+                                </li>
+                            </ul>
+
+                            <!-- Tab panes {Fade}  -->
+                            <div class="tab-content">
+{#
+                                <div class="tab-pane active" id="sunday" name="sunday" role="tabpanel">
+                                  <div class="bs-callout bs-callout-danger">
+                                        <h4 class="triple-striped-black-heading">
+                                            <span class="title">Sunday</span>
+                                            <span class="outer-stripes">
+                                                <span class="inner-stripe"></span>
+                                            </span>
+                                        </h4>
+
+
+                                     <table class="table table-striped">
+                                              <thead>
+                                                <tr>
+                                                  <th class="table_h" scope="col">Style</th>
+                                                  <th class="table_h" scope="col">Level</th>
+                                                  <th class="table_h" scope="col">Age</th>
+                                                  <th class="table_h" scope="col">Day</th>
+                                                  <th class="table_h" scope="col">City</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                              {% for course in dance_classes_monday %}
+                                                    <tr>
+                                                      <th class="table_p" scope="row">{{ course.dance_style_choice }}</th>
+                                                        <td class="table_p">{{ course.level }} </td>
+                                                        <td class="table_p">{{ course.age_group }} </td>
+                                                      <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
+                                                      <td class="table_p">{{ course.location }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                              </tbody>
+                                            </table>
+
+                                    </div>
+
+                              </div>
+                                <div class="tab-pane fade" id="monday" name="monday" role="tabpanel">
+                                  <div class="bs-callout bs-callout-danger">
+                                        <h4 class="triple-striped-black-heading">
+                                            <span class="title">Monday</span>
+                                            <span class="outer-stripes">
+                                                <span class="inner-stripe"></span>
+                                            </span>
+                                        </h4>
+
+
+                                     <table class="table table-striped">
+                                              <thead>
+                                                <tr>
+                                                  <th class="table_h" scope="col">Style</th>
+                                                  <th class="table_h" scope="col">Level</th>
+                                                  <th class="table_h" scope="col">Age</th>
+                                                  <th class="table_h" scope="col">Day</th>
+                                                  <th class="table_h" scope="col">City</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                              {% for course in dance_classes_monday %}
+                                                    <tr>
+                                                      <th class="table_p" scope="row">{{ course.dance_style_choice }}</th>
+                                                        <td class="table_p">{{ course.level }} </td>
+                                                        <td class="table_p">{{ course.age_group }} </td>
+                                                      <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
+                                                      <td class="table_p">{{ course.location }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                              </tbody>
+                                            </table>
+
+                                    </div>
+
+                              </div>
+                                <div class="tab-pane fade" id="tuesday" name="tuesday" role="tabpanel">
+                                <div class="bs-callout bs-callout-danger">
+                                    <h4 class="triple-striped-black-heading">
+                                            <span class="title">Tuesday</span>
+                                            <span class="outer-stripes">
+                                                <span class="inner-stripe"></span>
+                                            </span>
+                                        </h4>
+
+
+                                     <table class="table table-striped">
+                                              <thead>
+                                                <tr>
+                                                  <th class="table_h" scope="col">Style</th>
+                                                  <th class="table_h" scope="col">Level</th>
+                                                  <th class="table_h" scope="col">Age</th>
+                                                  <th class="table_h" scope="col">Day</th>
+                                                  <th class="table_h" scope="col">City</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                              {% for course in dance_classes_tuesday %}
+                                                    <tr>
+                                                      <th class="table_p" scope="row">{{ course.dance_style_choice }}</th>
+                                                        <td class="table_p">{{ course.level }} </td>
+                                                        <td class="table_p">{{ course.age_group }} </td>
+                                                      <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
+                                                      <td class="table_p">{{ course.location }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                              </tbody>
+                                            </table>
+
+
+                                </div>
+                              </div>
+                                <div class="tab-pane fade" id="wednesday" name="wednesday" role="tabpanel">
+                                 <div class="bs-callout bs-callout-danger">
+                                    <h4 class="triple-striped-black-heading">
+                                            <span class="title">Wednesday</span>
+                                            <span class="outer-stripes">
+                                                <span class="inner-stripe"></span>
+                                            </span>
+                                        </h4>
+
+
+                                     <table class="table table-striped">
+                                              <thead>
+                                                <tr>
+                                                  <th class="table_h" scope="col">Style</th>
+                                                  <th class="table_h" scope="col">Level</th>
+                                                  <th class="table_h" scope="col">Age</th>
+                                                  <th class="table_h" scope="col">Day</th>
+                                                  <th class="table_h" scope="col">City</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                              {% for course in dance_classes_wednesday %}
+                                                    <tr>
+                                                      <th class="table_p" scope="row">{{ course.dance_style_choice }}</th>
+                                                        <td class="table_p">{{ course.level }} </td>
+                                                        <td class="table_p">{{ course.age_group }} </td>
+                                                      <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
+                                                      <td class="table_p">{{ course.location }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                              </tbody>
+                                            </table>
+
+
+                                </div>
+                                </div>
+                                <div class="tab-pane fade" id="thursday" name="thursday" role="tabpanel">
+                                 <div class="bs-callout bs-callout-danger">
+                                    <h4 class="triple-striped-black-heading">
+                                            <span class="title">Thursday</span>
+                                            <span class="outer-stripes">
+                                                <span class="inner-stripe"></span>
+                                            </span>
+                                        </h4>
+
+
+                                     <table class="table table-striped">
+                                              <thead>
+                                                <tr>
+                                                  <th class="table_h" scope="col">Style</th>
+                                                  <th class="table_h" scope="col">Level</th>
+                                                  <th class="table_h" scope="col">Age</th>
+                                                  <th class="table_h" scope="col">Day</th>
+                                                  <th class="table_h" scope="col">City</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                              {% for course in dance_classes_thursday %}
+                                                    <tr>
+                                                      <th class="table_p" scope="row">{{ course.dance_style_choice }}</th>
+                                                        <td class="table_p">{{ course.level }} </td>
+                                                        <td class="table_p">{{ course.age_group }} </td>
+                                                      <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
+                                                      <td class="table_p">{{ course.location }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                              </tbody>
+                                            </table>
+
+
+                                </div>
+                                </div>
+                                <div class="tab-pane fade" id="friday" name="friday" role="tabpanel">
+                                 <div class="bs-callout bs-callout-danger">
+                                    <h4 class="triple-striped-black-heading">
+                                            <span class="title">Friday</span>
+                                            <span class="outer-stripes">
+                                                <span class="inner-stripe"></span>
+                                            </span>
+                                        </h4>
+
+
+                                     <table class="table table-striped">
+                                              <thead>
+                                                <tr>
+                                                  <th class="table_h" scope="col">Style</th>
+                                                  <th class="table_h" scope="col">Level</th>
+                                                  <th class="table_h" scope="col">Age</th>
+                                                  <th class="table_h" scope="col">Day</th>
+                                                  <th class="table_h" scope="col">City</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                              {% for course in dance_classes_friday %}
+                                                    <tr>
+                                                      <th class="table_p" scope="row">{{ course.dance_style_choice }}</th>
+                                                        <td class="table_p">{{ course.level }} </td>
+                                                        <td class="table_p">{{ course.age_group }} </td>
+                                                      <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
+                                                      <td class="table_p">{{ course.location }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                              </tbody>
+                                            </table>
+
+
+                                </div>
+                                </div>
+                                <div class="tab-pane fade" id="saturday" name="saturday" role="tabpanel">
+                                 <div class="bs-callout bs-callout-danger">
+                                    <h4 class="triple-striped-black-heading">
+                                            <span class="title">Saturday</span>
+                                            <span class="outer-stripes">
+                                                <span class="inner-stripe"></span>
+                                            </span>
+                                        </h4>
+
+
+                                     <table class="table table-striped">
+                                              <thead>
+                                                <tr>
+                                                  <th class="table_h" scope="col">Style</th>
+                                                  <th class="table_h" scope="col">Level</th>
+                                                  <th class="table_h" scope="col">Age</th>
+                                                  <th class="table_h" scope="col">Day</th>
+                                                  <th class="table_h" scope="col">City</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                              {% for course in dance_classes_saturday %}
+                                                    <tr>
+                                                      <th class="table_p" scope="row">{{ course.dance_style_choice }}</th>
+                                                        <td class="table_p">{{ course.level }} </td>
+                                                        <td class="table_p">{{ course.age_group }} </td>
+                                                      <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
+                                                      <td class="table_p">{{ course.location }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                              </tbody>
+                                            </table>
+
+
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

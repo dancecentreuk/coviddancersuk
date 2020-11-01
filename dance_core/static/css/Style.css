@@ -389,6 +389,23 @@ header .container .col-md-7 p {
 
 }
 
+.section-2 .table_p {
+  font-size: 12px;
+  letter-spacing: .15em;
+  font-weight: 400;
+  text-align: center;
+
+}
+
+
+.section-2 .table_h {
+  font-size: 13px;
+  letter-spacing: .15em;
+  font-weight: 800;
+  text-align: center;
+
+}
+
 /* Section 3 */
 
 .section-3 {

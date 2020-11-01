@@ -21,7 +21,7 @@ class WeeklyDanceClass(models.Model):
     )
     start_time = models.TimeField()
     end_time = models.TimeField()
-    cost = models.FloatField()
+    price = models.FloatField()
     level = models.CharField(
         choices=level,
         max_length=45,
@@ -38,6 +38,8 @@ class WeeklyDanceClass(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     teacher = models.CharField(max_length=90, blank=True, null=True)
     about_dance_class = models.TextField(blank=True)
+    is_published = models.BooleanField(default=False)
+    is_allowed = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.author
+        return self.author.user.username
