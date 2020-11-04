@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+     <section class="section-2 container-fluid p-0">
+    <div class="container text-center mt-2">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="panel my-2">
+
+                     <h3 class="triple-striped-black-heading heading-centred">
+                    <span class="title pl-1"> Create Dance Class</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h3>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <input type="submit" class="btn btn-outline-info" value="Add Dance Class">
+            </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+     </section>
+
+{% endblock %}

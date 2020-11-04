@@ -26,7 +26,7 @@ class WeeklyDanceClass(models.Model):
         choices=level,
         max_length=45,
     )
-    dance_class_image  =  models.ImageField(upload_to='dance_class_image/%Y/%m/%d', default='dance_class.jpg')
+    dance_class_image=models.ImageField(upload_to='dance-class-image/%Y/%m/%d', default='dance_class.jpg')
     faq = models.TextField(blank=True, null=True)
     address = models.CharField(max_length=250)
     postcode = models.CharField(max_length=10)

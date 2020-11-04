@@ -12,6 +12,8 @@ location_choices = [
 ]
 
 dance_styles = [
+
+    ('Select a dance', 'Select a dance'),
     ('Ballet', 'Ballet'),
     ('Jazz', 'Jazz'),
     ('Tap', 'Tap')
