@@ -149,8 +149,7 @@
                       <thead>
                         <tr>
                           <th class="table_h" scope="col">Style</th>
-                          <th class="table_h" scope="col">Level</th>
-                          <th class="table_h" scope="col">Age</th>
+                          <th class="table_h" scope="col">Level / Age</th>
                           <th class="table_h" scope="col">Day</th>
                           <th class="table_h" scope="col">City</th>
                         </tr>
@@ -160,8 +159,7 @@
 
                           <tr>
                               <th class="table_p" scope="row"><a href="{% url 'dance-class-detail' course.id %}" >{{ course.dance_style_choice }}</a></th>
-                                <td class="table_p">{{ course.level }} </td>
-                                <td class="table_p">{{ course.age_group }} </td>
+                                <td class="table_p">{{ course.level }} <br> {{ course.age_group }}</td>
                               <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
                               <td class="table_p">{{ course.location }}</td>
                             </tr>
