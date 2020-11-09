@@ -65,8 +65,8 @@
             <p>Post listings</p>
           </div>
           <div class="rect">
-            <h1>9152</h1>
-            <p>Total Projects</p>
+            <h1>{{ dance_classes.count }}</h1>
+            <p>Dance Classes</p>
           </div></div></div>
         <div class="container-fluid text-center">
         <div class="mt-1 numbers d-flex flex-md-row flex-wrap justify-content-center">
@@ -114,6 +114,116 @@
           </div>
         </div>
       </div>
+
+
+
+            <div class="container text-center mt-3">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="panel ">
+
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_candidate %}
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    <a class="btn btn-outline-info float-right custom_button" href="{% url 'add-dance-class' %}">Add Dance Class</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                <h1 class="triple-striped-heading heading-centred">
+                    <span class="title pl-1">Your Dance Classes</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
+
+
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th class="table_h" scope="col">Style</th>
+                          <th class="table_h" scope="col">Level</th>
+                          <th class="table_h" scope="col">Age</th>
+                          <th class="table_h" scope="col">Day</th>
+                          <th class="table_h" scope="col">City</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for course in dance_classes %}
+
+                          <tr>
+                              <th class="table_p" scope="row"><a href="{% url 'dance-class-detail' course.id %}" >{{ course.dance_style_choice }}</a></th>
+                                <td class="table_p">{{ course.level }} </td>
+                                <td class="table_p">{{ course.age_group }} </td>
+                              <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
+                              <td class="table_p">{{ course.location }}</td>
+                            </tr>
+                        {% endfor %}
+
+                      </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+     <div class="container text-center mt-3">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="panel ">
+
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_candidate %}
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    <a class="btn btn-outline-info float-right custom_button" href="{% url 'add-dance-class' %}">Add Dance Class</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                <h1 class="triple-striped-heading heading-centred">
+                    <span class="title pl-1">Your Dance Jobs</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
+
+
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th class="table_h" scope="col">Published</th>
+                          <th class="table_h" scope="col">Title</th>
+                          <th class="table_h" scope="col">City</th>
+                          <th class="table_h" scope="col"> </th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for advert in adverts %}
+
+                          <tr>
+                              <th class="table_p" scope="row"><a href="" >{{ advert.created | date:'d M ' }}</a></th>
+                                <td class="table_p">{{ advert.title }} </td>
+                                <td class="table_p">{{ advert.location }} </td>
+                                <td class="table_p"><a class="btn btn-outline-info  custom_button" href="{% url 'edit-advert' advert.pk advert.slug  %}">Edit</a> <a class="btn btn-outline-info  custom_button" href="{% url 'edit-advert' advert.pk advert.slug  %}">Edit</a> </td>
+                            </tr>
+                        {% endfor %}
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 

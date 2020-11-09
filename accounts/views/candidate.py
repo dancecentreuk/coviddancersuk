@@ -14,6 +14,8 @@ from django.contrib.sites.shortcuts import get_current_site
 from ..utils import token_generator
 from accounts.models import User
 import threading
+from dance_classes.models import WeeklyDanceClass
+from adverts.models import Advert
 
 
 class EmailThread(threading.Thread):
@@ -124,12 +126,17 @@ def candidate_profile(request):
     photos = CandidateImage.objects.filter(owner__user=request.user)
     form = PhotoForm(request.POST or None)
     image_form = ImageUpdateForm(request.POST or None)
+    dance_classes = WeeklyDanceClass.objects.filter(author=candidate)
+    adverts = Advert.objects.filter(is_posting=False).filter(is_published=True).order_by('-created').filter(author__candidate=candidate)
+    print(candidate)
     context = {
         'location_choices': location_choices,
         'photos': photos,
         'candidate': candidate,
         'form': form,
-        'image_form': image_form
+        'image_form': image_form,
+        'dance_classes': dance_classes,
+        'adverts': adverts
     }
 
     return render(request, 'accounts/candidate_profile.html', context)
