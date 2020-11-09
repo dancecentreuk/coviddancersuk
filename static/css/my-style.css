@@ -16,7 +16,15 @@
 }
 
 
+.author{
 
+  font-size: 12px;
+  color: darkgrey;
+  text-decoration: none;
+  letter-spacing: .15em;
+  font-weight: 400;
+
+}
 
 
 
@@ -196,12 +204,42 @@ a.navbar-brand.ml-0:hover{
     /*border-top-right-radius: .25rem;*/
 /*}*/
 
+.timetable {
 
 
-#navbar-poop > a:hover, a:visited, a:link, a:active {
-    text-decoration: none;
-    color: darkorange;
+  border-color: #222222;
+
 }
+
+.timetable a {
+  text-decoration: none;
+  color: darkorange;
+  font-size: .8em;
+  letter-spacing: .063em;
+  text-transform: uppercase;
+}
+
+.timetable li {
+  background-color: #fff0f7;
+  border-color: #222222;
+  /*border-radius: 5px;*/
+
+}
+
+
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+
+/*#navbar-poop > a:hover, a:visited, a:link, a:active {*/
+    /*text-decoration: none;*/
+    /*color: darkorange;*/
+/*}*/
 
 
 
@@ -279,4 +317,6 @@ a.navbar-brand.ml-0:hover{
   /*top: 4px;*/
   /*position: absolute;*/
 /*}*/
+
+
 

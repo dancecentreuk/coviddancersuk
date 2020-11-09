@@ -1,5 +1,5 @@
 from django import forms
-from .models import WeeklyDanceClass
+from .models import WeeklyDanceClass, ClassImage, DanceClassReview
 from pages.choices import dance_styles
 
 
@@ -27,8 +27,28 @@ class DanceClassForm(forms.ModelForm):
 
     class Meta:
         model = WeeklyDanceClass
-        fields = ('dance_style_choice', 'level', 'age_group', 'address', 'postcode',  'location', 'day', 'start_time', 'end_time', 'price',  'dance_class_image', 'faq',
+        fields = ('dance_style_choice', 'level', 'age_group', 'address', 'postcode',  'location', 'day', 'start_time', 'end_time', 'price',
+                  'dance_class_image', 'dance_class_image_1', 'dance_class_image_2', 'dance_class_image_3', 'faq',
                     'about_dance_class', 'teacher',)
+
+
+
+
+class DancePhotoForm(forms.ModelForm):
+    class Meta:
+        model = ClassImage
+        fields = ('title',  'profile_image')
+
+
+
+class DanceClassReviewForm(forms.ModelForm):
+
+
+
+    class Meta:
+        model = DanceClassReview
+        fields = ('comment', 'rating')
+
 
 
 

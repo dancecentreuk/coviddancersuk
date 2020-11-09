@@ -203,6 +203,8 @@ def postings_search(request):
         if keywords:
             queryset_list = queryset_list.filter(body__icontains=keywords)
 
+
+
     if 'city' in request.GET:
         city = request.GET['city']
         if city:

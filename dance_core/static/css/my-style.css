@@ -16,7 +16,15 @@
 }
 
 
+.author{
 
+  font-size: 12px;
+  color: darkgrey;
+  text-decoration: none;
+  letter-spacing: .15em;
+  font-weight: 400;
+
+}
 
 
 
@@ -220,6 +228,26 @@ a.navbar-brand.ml-0:hover{
 
 
 
+
+
+
+.pagination a {
+  color: darkorange;
+  float: left;
+  padding: 8px 10px;
+  text-decoration: none;
+  border: 1px solid darkorange;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+
+
 /*#navbar-poop > a:hover, a:visited, a:link, a:active {*/
     /*text-decoration: none;*/
     /*color: darkorange;*/
@@ -301,4 +329,6 @@ a.navbar-brand.ml-0:hover{
   /*top: 4px;*/
   /*position: absolute;*/
 /*}*/
+
+
 

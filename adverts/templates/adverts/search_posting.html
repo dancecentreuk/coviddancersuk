@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-    <nav class="breadcrumb bg-light">
-        <a class="breadcrumb-item" href="{% url 'adverts' %}">JOBS</a>
-        <span class="breadcrumb-item active">POSTINGS</span>
-    </nav>
+
+
     <main>
+    <div class="row my_row_class">
+        <div class="mx-auto">
+            <p><a href="{% url 'adverts' %}">JOBS </a> | POSTINGS</p>
+        </div>
+    </div>
         <section class="section-9">
             <div class="container text-center">
                 <div class="row">
@@ -44,6 +47,11 @@
                                                     </div>
                                                     <!-- Form Row 2 -->
                                                     <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
+                                                <div class="row">
+                                                    <div class="col-12 mt-4">
+                                                        <a href="{% url 'postings' %}" class="text-white float-right btn btn-outline-warning btn-sm">clear form</a>
+                                                    </div>
+                                                </div>
                                                 </form>
                                             </div>
                                         </div>

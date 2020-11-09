@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
+
 
     <main>
 
@@ -13,11 +15,42 @@
           <div class="col-md-3 col-sm-12">
             <div class="pray">
               <img src="{{ dance_class.dance_class_image.url }}" alt="Pray" class="" />
+                <div class="row">
+                    <div class="col-12 p-1 heading-centred">
+                         <a class="btn btn-outline-info center custom_button"
+                   href="{% url 'talent-detail' dance_class.author.pk dance_class.author.user.first_name dance_class.author.user.last_name %}">View Profile</a>
+
+                    </div>
+
+                </div>
+
             </div>
           </div>
+
           <div class="col-md-9 col-sm-12">
             <div class="panel text-left">
-                <h1 class="triple-striped-heading">
+                <div class="row my_row_class">
+                    <div class="mx-auto">
+                        <p><a href="{% url 'dance-classes' %}"><i class="fas fa-angle-double-left"></i> Back to Classes</a> </p>
+                    </div>
+                </div>
+
+
+
+                 {% if request.user.is_authenticated %}
+                    {% if request.user == dance_class.author.user %}
+
+                            <div class="row mt-3">
+                                <div class="col-12 mb-2">
+                                    <a class="btn btn-outline-info float-left custom_button" href="{% url 'edit-dance-class' dance_class.id %}">Edit Class</a>
+                                    <a href=" " class="float-right btn btn-outline-danger custom_button" data-toggle="modal" data-target="#exampleModalCenter">Delete Class</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                {% endif %}
+
+
+            <h1 class="triple-striped-heading">
                     <span class="title">{{ dance_class.dance_style_choice}} dance class in {{ dance_class.location }}</span>
                     <span class="outer-stripes">
                         <span class="inner-stripe"></span>
@@ -30,23 +63,23 @@
                     <div class="col-6">
                         <i class="fas fa-map-marker-alt"></i>
 
-                            {{ dance_class.location }}
-
+                            {{ dance_class.location }} <br>
+                        <span class="ml-3 author">{{ dance_class.author }}</span>
                     </div>
+
                     <div class="col-6">
 
                          Day :   {{ dance_class.day }} <br>  <i class="fas fa-clock"></i> {{ dance_class.start_time }}-{{ dance_class.end_time }}
                         <br>Age : {{ dance_class.age_group }}
-
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-12">
                         <a class="btn  btn-sm btn-info text-white" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i>Message {{ talent.user.first_name | capfirst }}</a>
-
-
                     </div>
                 </div>
+
+
 
 
             </div>
@@ -75,7 +108,7 @@
             {% endif %}
 
           <div class="rect">
-            <h1>{{ candidate_reviews.count }}</h1>
+            <h1>{{ reviews.count }}</h1>
             <p>Total Reviews</p>
           </div>
           <div class="rect">
@@ -91,15 +124,42 @@
         <div class="container-fluid text-center">
         <div class="mt-1 numbers d-flex flex-md-row flex-wrap justify-content-center">
         <div class="rect-2">
-            <a href="{{ talent.profile_image.url }}" data-lightbox="profile-images">
-                <img src="{{ talent.profile_image.url }}" alt="Pray" style="height: 100px; width: 100px" /></a>
+            <a href="{{ dance_class.dance_class_image.url }}" data-lightbox="profile-images">
+                <img src="{{ dance_class.dance_class_image.url }}" alt="Pray" style="height: 100px; width: 100px" /></a>
           </div>
-            {% for image in candidate_photos %}
+
+
+
+            {% if dance_class.dance_class_image_1 %}
                 <div class="rect-2">
-                <a href="{{ image.profile_image.url }}" data-lightbox="profile-images">
-                    <img src="{{ image.profile_image.url }}" alt="Pray" style="height: 100px; width: 100px" /></a>
-                  </div>
-            {% endfor %}
+                    <a href="{{ dance_class.dance_class_image_1.url }}" data-lightbox="profile-images">
+                        <img src="{{ dance_class.dance_class_image_1.url }}" alt="Pray" style="height: 100px; width: 100px" />
+                    </a>
+                </div>
+            {% endif %}
+
+            {% if dance_class.dance_class_image_2 %}
+                <div class="rect-2">
+                    <a href="{{ dance_class.dance_class_image_2.url }}" data-lightbox="profile-images">
+                        <img src="{{ dance_class.dance_class_image_2.url }}" alt="Pray" style="height: 100px; width: 100px" />
+                    </a>
+                </div>
+            {% endif %}
+
+            {% if dance_class.dance_class_image_3 %}
+                    <div class="rect-2">
+                        <a href="{{ dance_class.dance_class_image_3.url }}" data-lightbox="profile-images">
+                            <img src="{{ dance_class.dance_class_image_3.url }}" alt="Pray" style="height: 100px; width: 100px" />
+                        </a>
+                    </div>
+            {% endif %}
+
+{#            {% for image in dance_photos %}#}
+{#                <div class="rect-2">#}
+{#                <a href="{{ image.profile_image.url }}" data-lightbox="profile-images">#}
+{#                    <img src="{{ image.profile_image.url }}" alt="Pray" style="height: 100px; width: 100px" /></a>#}
+{#                  </div>#}
+{#            {% endfor %}#}
 
         </div>
       </div>
@@ -109,24 +169,61 @@
         <div class="row">
           <div class="col-md-12 col-12">
             <div class="panel text-left mb-3">
-                <h1 class="triple-striped-heading">
-                    <span class="heading">Bio</span>
+                <div class="row">
+                   <div class="col-md-8 mx-auto card text-center">
+                  <div class="card-header">
+                    {{ dance_class.dance_style_choice }} dance class in {{ dance_class.location }} <br>
+                      {{ dance_class.day }} {{ dance_class.start_time }} - {{ dance_class.end_time }}
+                  </div>
+                  <div class="card-body">
+
+                      <p class="pb-0 card-text">{{ dance_class.address }} <br>
+                          {{ dance_class.location }} <br>
+                          {{ dance_class.postcode }}
+                      </p>
+
+                      <p class="pt-1 card-text">Age Group : {{ dance_class.age_group }} <br>
+                          Cost : £ {{ dance_class.price }} <br>
+                          Teacher : {{ dance_class.teacher }}
+                      </p>
+
+
+
+
+                   </div>
+                  <div class="card-footer text-muted">
+                    <p class="text-muted mb-0"> posted : {{ dance_class.created  | timesince }} ago</p>
+                  </div>
+                </div>
+                </div>
+
+                <div class="container mx-1">
+                    <h1 class="triple-striped-black-heading ">
+                    <span class="heading">About Dance Class</span>
                     <span class="outer-stripes">
                         <span class="inner-stripe"></span>
                     </span>
                 </h1>
                 <p>
-                    {{ talent.bio | linebreaks }}
+                    {{ dance_class.about_dance_class | linebreaks }}
                 </p>
-                <h1 class="triple-striped-heading ">
-                    <span class="heading">Experience</span>
+
+
+                     <h1 class="triple-striped-black-heading ">
+                    <span class="heading">FAQ</span>
                     <span class="outer-stripes">
                         <span class="inner-stripe"></span>
                     </span>
                 </h1>
                 <p>
-                    {{ talent.experience |linebreaks }}
+                    {{ dance_class.faq |linebreaks }}
                 </p>
+
+
+
+                </div>
+
+
 
 
 
@@ -144,9 +241,9 @@
         <div class="row">
           <div class="col-md-12 col-12">
             <div class="panel text-left mb-3">
-              <h4 class="text-center lead">Add Review</h4>
+              <h4 class="text-center lead">Add Review For Dance Class</h4>
 
-                <form action=" " method="POST">
+                <form action="{% url 'add-dance-class-review' dance_class.id %} " method="POST">
                     {% csrf_token %}
                     <label for="comment">Review</label>
                     <textarea name="comment" id="comment" cols="30" rows="5" class="form-control" required ></textarea> <br>
@@ -167,7 +264,7 @@
 
 
 
-                        {% for review in candidate_reviews %}
+                        {% for review in reviews %}
                             <div class="card mb-2 p-0">
                                 <div class="card-body pt-2 pb-0" style="background-color: #fdf4f4">
                                     <div class="row">
@@ -175,7 +272,7 @@
                                             <h6 class="text-left">{{ review.author.username }}</h6>
                                             <h6 class="text-danger">{{ review.rating }}</h6>
                                             {% if request.user == review.author %}
-                                            <a class="mb-2 py-0 btn  btn-sm btn-outline-info text-info" href="{% url 'edit-candidate-review' review.candidate_id review.pk %}">Edit Review</a>
+                                            <a class="mb-2 py-0 btn  btn-sm btn-outline-info text-info" href="">Edit Review</a>
                                             {% endif %}
                                         </div>
                                         <div class="col-md-9">
@@ -202,6 +299,35 @@
 
 
     <!-- END INBOX CONTENT -->
+
+<!-- Delete dance class modal -->
+      <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Delete Dance Class</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Are you sure you want to delete <br>
+            <span class="text-danger card-text">{{ dance_class.dance_style_choice }} dance on {{ dance_class.day }} {{ dance_class.start_time }} - {{ dance_class.end_time }}?</span></h5>
+        <div class="form-group">
+            <form action="" method="POST">
+                {% csrf_token %}
+            </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+          <a href="{% url 'delete-dance-class' dance_class.pk %}" class="btn btn-outline-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 					<!-- BEGIN COMPOSE MESSAGE -->
         <div class="modal fade" id="compose-modal" role="dialog">

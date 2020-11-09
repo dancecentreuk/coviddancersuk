@@ -41,7 +41,10 @@
                   <select name="dance_style" class="form-control">
                     <option selected="true" disabled="disabled">Dance Styles (All)</option>
                       {% for key, value in dance_styles %}
-                          <option value="{{ key }}">{{ value }}</option>
+                          <option value="{{ key }}"
+                          {% if key == values.dance_style %}
+                                  selected
+                          {% endif %}>{{ value }}</option>
                       {% endfor %}
                   </select>
                 </div>
@@ -53,7 +56,10 @@
                   <select name="class_level" class="form-control">
                     <option selected="true" disabled="disabled">Level (All)</option>
                       {% for key, value in level %}
-                          <option value="{{ key }}">{{ value }}</option>
+                          <option value="{{ key }}"
+                          {% if key == values.class_level %}
+                                  selected
+                          {% endif %}>{{ value }}</option>
                       {% endfor %}
                   </select>
                 </div>
@@ -64,7 +70,10 @@
                   <select name="search_day" class="form-control">
                     <option selected="true" disabled="disabled">Day (All)</option>
                       {% for key, value in day %}
-                          <option value="{{ key }}">{{ value }}</option>
+                          <option value="{{ key }}"
+                          {% if key == values.search_day %}
+                                  selected
+                          {% endif %}>{{ value }}</option>
                       {% endfor %}
                   </select>
                 </div>
@@ -80,7 +89,10 @@
                   <select name="age" class="form-control">
                     <option selected="true" disabled="disabled">Age Group (All)</option>
                       {% for key, value in age_choices %}
-                          <option value="{{ key }}">{{ value }}</option>
+                          <option value="{{ key }}"
+                          {% if key == values.age %}
+                                  selected
+                          {% endif %}>{{ value }}</option>
                       {% endfor %}
                   </select>
                 </div>
@@ -94,13 +106,22 @@
                   <select name="city" class="form-control">
                     <option selected="true" disabled="disabled">Location (All)</option>
                       {% for key, value in location_choices %}
-                          <option value="{{ key }}">{{ value }}</option>
+                          <option value="{{ key }}"
+                          {% if key == values.city %}
+                                  selected
+                          {% endif %}>{{ value }}</option>
                       {% endfor %}
                   </select>
                 </div>
               </div>
 
               <button class="btn btn-secondary btn-block mt-4 custom_button" type="submit">Submit form</button>
+
+            <div class="row">
+                <div class="col-12 mt-4">
+                    <a href="{% url 'dance-classes' %}" class="text-white float-right btn btn-outline-warning btn-sm">clear form</a>
+                </div>
+            </div>
             </form>
           </div>
         </div>
