@@ -6,6 +6,7 @@ from .forms import CandidateReviewForm
 from .models import CandidateReview
 from django.contrib import messages
 from django.db.models import Avg
+from dance_classes.models import WeeklyDanceClass
 
 
 def index(request):
@@ -13,13 +14,15 @@ def index(request):
     talents = Candidate.objects.all()
     jobs = Advert.objects.filter(is_posting=False).order_by('-created')[:5]
     postings = Advert.objects.filter(is_posting=True)[:5]
+    dance_classes = WeeklyDanceClass.objects.filter(is_allowed=True).filter(is_published=True)
 
     context = {
         'talents': talents,
         'location_choices': location_choices,
         'work_choices': work_choices,
         'jobs': jobs,
-        'postings': postings
+        'postings': postings,
+        'dance_classes': dance_classes
 
     }
     return render(request, 'pages/index.html', context)

@@ -228,12 +228,24 @@ a.navbar-brand.ml-0:hover{
 
 
 
+
+
+
 .pagination a {
-  color: black;
+  color: darkorange;
   float: left;
-  padding: 8px 16px;
+  padding: 8px 10px;
   text-decoration: none;
+  border: 1px solid darkorange;
 }
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
 
 
 /*#navbar-poop > a:hover, a:visited, a:link, a:active {*/

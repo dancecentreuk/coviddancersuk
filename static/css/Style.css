@@ -379,13 +379,23 @@ header .container .col-md-7 p {
   z-index: 1;
 }
 
+/*.section-2 .my_title {*/
+  /*font-size: 25px;*/
+  /*color: darkorange;*/
+  /*text-decoration: none;*/
+  /*letter-spacing: .2em;*/
+  /*font-weight: 400;*/
+  /*text-align: center;*/
+
+/*}*/
+
 .section-2 .my_title {
-  font-size: 25px;
+  font-size: 15px;
   color: darkorange;
   text-decoration: none;
-  letter-spacing: .2em;
+  letter-spacing: .13em;
   font-weight: 400;
-  text-align: center;
+  text-transform: uppercase;
 
 }
 

@@ -214,8 +214,8 @@
                               <th class="table_p" scope="row"><a href="" >{{ advert.created | date:'d M ' }}</a></th>
                                 <td class="table_p">{{ advert.title }} </td>
                                 <td class="table_p">{{ advert.location }} </td>
-                                <td class="table_p"><a class="btn btn-outline-info  custom_button" href="{% url 'edit-advert' advert.pk advert.slug  %}">Edit</a>
-                                    <a class="btn btn-outline-info  custom_button" href="{% url 'delete2-advert-button' advert.pk advert.slug  %}">Delete</a>
+                                <td class="table_p"><a class="btn btn-outline-info  custom_button my-1" href="{% url 'edit-advert' advert.pk advert.slug  %}">Edit</a>
+                                    <a class="btn btn-outline-info  custom_button my-1" href="{% url 'delete2-advert-button' advert.pk advert.slug  %}">Delete</a>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -268,8 +268,8 @@
                               <th class="table_p" scope="row"><a href="" >{{ posting.title }}</a></th>
                                 <td class="table_p">{{ posting.location }} </td>
                                 <td class="table_p"> {{ posting.date | date:'D d M ' }} </td>
-                                <td class="table_p"><a class="btn btn-outline-info  custom_button" href="{% url 'edit-posting' posting.pk posting.slug  %}">Edit</a>
-                                    <a class="btn btn-outline-info  custom_button" href="{% url 'delete2-advert-button' posting.pk posting.slug  %}">Delete</a>
+                                <td class="table_p"><a class="btn btn-outline-info  custom_button my-1" href="{% url 'edit-posting' posting.pk posting.slug  %}">Edit</a>
+                                    <a class="btn btn-outline-info  custom_button my-1" href="{% url 'delete2-advert-button' posting.pk posting.slug  %}">Delete</a>
                                 </td>
                             </tr>
                         {% endfor %}
