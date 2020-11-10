@@ -128,6 +128,7 @@ def candidate_profile(request):
     image_form = ImageUpdateForm(request.POST or None)
     dance_classes = WeeklyDanceClass.objects.filter(author=candidate)
     adverts = Advert.objects.filter(is_posting=False).filter(is_published=True).order_by('-created').filter(author__candidate=candidate)
+    postings = Advert.objects.filter(is_posting=True).filter(is_published=True).order_by('-created').filter(author__candidate=candidate)
     print(candidate)
     context = {
         'location_choices': location_choices,
@@ -136,7 +137,8 @@ def candidate_profile(request):
         'form': form,
         'image_form': image_form,
         'dance_classes': dance_classes,
-        'adverts': adverts
+        'adverts': adverts,
+        'postings': postings
     }
 
     return render(request, 'accounts/candidate_profile.html', context)

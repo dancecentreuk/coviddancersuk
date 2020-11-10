@@ -57,12 +57,12 @@
             <p>Photos</p>
           </div>
           <div class="rect">
-            <h1>6784</h1>
+            <h1>{{ adverts.count }}</h1>
             <p>Jobs listings</p>
           </div>
           <div class="rect">
-            <h1>1056</h1>
-            <p>Post listings</p>
+            <h1>{{ postings.count }}</h1>
+            <p>Postings</p>
           </div>
           <div class="rect">
             <h1>{{ dance_classes.count }}</h1>
@@ -183,7 +183,7 @@
                         {% if request.user.is_candidate %}
                             <div class="row">
                                 <div class="col-12 mb-2">
-                                    <a class="btn btn-outline-info float-right custom_button" href="{% url 'add-dance-class' %}">Add Dance Class</a>
+                                    <a class="btn btn-outline-info float-right custom_button" href="{% url 'create-advert' %}">List Job</a>
                                 </div>
                             </div>
                         {% endif %}
@@ -214,7 +214,63 @@
                               <th class="table_p" scope="row"><a href="" >{{ advert.created | date:'d M ' }}</a></th>
                                 <td class="table_p">{{ advert.title }} </td>
                                 <td class="table_p">{{ advert.location }} </td>
-                                <td class="table_p"><a class="btn btn-outline-info  custom_button" href="{% url 'edit-advert' advert.pk advert.slug  %}">Edit</a> <a class="btn btn-outline-info  custom_button" href="{% url 'edit-advert' advert.pk advert.slug  %}">Edit</a> </td>
+                                <td class="table_p"><a class="btn btn-outline-info  custom_button" href="{% url 'edit-advert' advert.pk advert.slug  %}">Edit</a>
+                                    <a class="btn btn-outline-info  custom_button" href="{% url 'delete2-advert-button' advert.pk advert.slug  %}">Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+     <div class="container text-center mt-3">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="panel ">
+
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_candidate %}
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    <a class="btn btn-outline-info float-right custom_button" href="{% url 'create-posting' %}">List Posting</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                <h1 class="triple-striped-heading heading-centred">
+                    <span class="title pl-1">Your Dance Postings</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
+
+
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th class="table_h" scope="col">Title</th>
+                          <th class="table_h" scope="col">City</th>
+                          <th class="table_h" scope="col">Posting Date</th>
+                          <th class="table_h" scope="col"> </th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for posting in postings %}
+
+                          <tr>
+                              <th class="table_p" scope="row"><a href="" >{{ posting.title }}</a></th>
+                                <td class="table_p">{{ posting.location }} </td>
+                                <td class="table_p"> {{ posting.date | date:'D d M ' }} </td>
+                                <td class="table_p"><a class="btn btn-outline-info  custom_button" href="{% url 'edit-posting' posting.pk posting.slug  %}">Edit</a>
+                                    <a class="btn btn-outline-info  custom_button" href="{% url 'delete2-advert-button' posting.pk posting.slug  %}">Delete</a>
+                                </td>
                             </tr>
                         {% endfor %}
 
@@ -458,6 +514,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 
 

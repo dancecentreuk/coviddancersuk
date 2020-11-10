@@ -76,6 +76,18 @@ def delete_advert(request, pk, slug):
     return redirect('adverts')
 
 
+def delete_advert2(request, pk, slug):
+    advert = Advert.objects.get(id=pk, slug=slug)
+    if request.method == 'POST':
+        advert.delete()
+        messages.success(request, ('item has been deleted'))
+        return redirect('profile')
+
+    context = {
+        'advert': advert
+    }
+    return render(request, 'adverts/delete_advert.html', context)
+
 #
 # def delete_advert2(request, pk, slug):
 #     advert = Advert.objects.get(id=pk, slug=slug)
@@ -162,6 +174,14 @@ def delete_posting(request, pk, slug):
         return redirect('postings')
     else:
         return redirect('postings')
+
+#
+# def profile_delete_posting(request, pk,slug):
+#     p
+#     context = {
+#
+#     }
+#     return render(request, '', context)
 
 
 def search(request):

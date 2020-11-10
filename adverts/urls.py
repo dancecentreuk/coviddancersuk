@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import adverts, advert_detail, advert_create, edit_job, delete_advert, postings, \
-    posting_create, edit_posting, posting_detail, delete_posting, search, postings_search
+    posting_create, edit_posting, posting_detail, delete_posting, search, postings_search, delete_advert2
 
 
 
@@ -17,6 +17,7 @@ urlpatterns = [
     path('new-posting/<pk>/<slug>/', posting_detail, name='posting-detail'),
     path('delete/posting/<pk>/<slug>/', delete_posting, name='delete-posting-button'),
     path('search/adverts/', search, name='search'),
-    path('search/postings/', postings_search, name='search-postings')
+    path('search/postings/', postings_search, name='search-postings'),
+    path('delete2/<pk>/<slug>/', delete_advert2, name='delete2-advert-button'),
 
 ]
