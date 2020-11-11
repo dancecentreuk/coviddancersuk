@@ -5,65 +5,86 @@
 {% block content %}
 
     <main>
-        <section class="section-9">
-            <div class="container text-center">
-            {% include 'partials/_alerts.html' %}
-                <div class="row">
-                    <div class="col-md-11 col-12 mx-auto">
-                        <div class="panel">
-                            <div class="bg-white shadow rounded overflow-hidden">
-                                <div class="px-4 pt-0 pb-2 newbadge">
-                                    <div class="media align-items-end profile-header">
-                                        <div class="media-body mt-3 text-white">
-                                            <h4 class="text-center mt-0 mb-0">Find Work</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bg-info text-center">
-                                    <div class="p-5">
-                                        <div class="overlay p-1">
-                                            <div class="search">
-                                                <form action="{% url 'search' %}">
-                                                    <!-- Form Row 1 -->
-                                                    <div class="form-row">
-                                                        <div class="col-md-6 mb-3">
-                                                            <label class="sr-only">Keywords</label>
-                                                            <input type="text" name="keywords" class="form-control" placeholder="Keyword (ballet, jazz, teacher)">
-                                                        </div>
-                                                        <div class="col-md-6 mb-3">
-                                                            <label class="sr-only">City</label>
-                                                            <select name="city" class="form-control">
-                                                                <option selected="true" disabled="disabled">Location (All)</option>
-                                                                {% for key, value in location_choices %}
-                                                                    <option value="{{ key }}">{{ value }}</option>
-                                                                {% endfor %}
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Form Row 2 -->
-                                                    <div class="form-row">
-                                                        <div class="col-md-12 mb-3">
-                                                            <label class="sr-only">Work</label>
-                                                            <select name="work" class="form-control">
-                                                                <option selected="true" disabled="disabled">Work Type (Pick One !! )</option>
-                                                                {% for key, value  in work_choices %}
-                                                                    <option value="{{ key }}">{{ value }}</option>
-                                                                {% endfor %}
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+
+     <section class="mt-5 section-poop">
+        <div class="mt-2 container">
+            <div class="content">
+                <div class="content-img">
+                    <img src="https://images.unsplash.com/photo-1504364269860-8be73aabdff2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1068&q=80" alt="Body Building">
+                </div>
+                <div class="content-text">
+                    <h2 class="content-title">The Strength within</h2>
+                    <h4 class="content-subtitle">Unleash your inner beast</h4>
+                    <p class="content-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur esse aut deleniti magni. Quaerat unde non beatae hic veniam necessitatibus reiciendis reprehenderit tempore alias maxime delectus, ullam aut adipisci, aliquid velit dolores molestiae, eius nihil nam et ut fugiat iste perspiciatis quis? Veniam accusantium ut recusandae eaque quas laudantium nostrum?</p>
+                    <p class="content-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur esse aut deleniti magni. Quaerat unde non beatae hic veniam necessitatibus reiciendis reprehenderit tempore alias maxime delectus, ullam aut adipisci, aliquid velit dolores molestiae, eius nihil nam et ut fugiat iste perspiciatis quis? Veniam accusantium ut recusandae eaque quas laudantium nostrum?</p>
+                    <a href="#" class="btn">View More</a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+
+
+
+{#        <section class="section-9">#}
+{#            <div class="container text-center">#}
+{#            {% include 'partials/_alerts.html' %}#}
+{#                <div class="row">#}
+{#                    <div class="col-md-11 col-12 mx-auto">#}
+{#                        <div class="panel">#}
+{#                            <div class="bg-white shadow rounded overflow-hidden">#}
+{#                                <div class="px-4 pt-0 pb-2 newbadge">#}
+{#                                    <div class="media align-items-end profile-header">#}
+{#                                        <div class="media-body mt-3 text-white">#}
+{#                                            <h4 class="text-center mt-0 mb-0">Find Work</h4>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="bg-info text-center">#}
+{#                                    <div class="p-5">#}
+{#                                        <div class="overlay p-1">#}
+{#                                            <div class="search">#}
+{#                                                <form action="{% url 'search' %}">#}
+{#                                                    <!-- Form Row 1 -->#}
+{#                                                    <div class="form-row">#}
+{#                                                        <div class="col-md-6 mb-3">#}
+{#                                                            <label class="sr-only">Keywords</label>#}
+{#                                                            <input type="text" name="keywords" class="form-control" placeholder="Keyword (ballet, jazz, teacher)">#}
+{#                                                        </div>#}
+{#                                                        <div class="col-md-6 mb-3">#}
+{#                                                            <label class="sr-only">City</label>#}
+{#                                                            <select name="city" class="form-control">#}
+{#                                                                <option selected="true" disabled="disabled">Location (All)</option>#}
+{#                                                                {% for key, value in location_choices %}#}
+{#                                                                    <option value="{{ key }}">{{ value }}</option>#}
+{#                                                                {% endfor %}#}
+{#                                                            </select>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    <!-- Form Row 2 -->#}
+{#                                                    <div class="form-row">#}
+{#                                                        <div class="col-md-12 mb-3">#}
+{#                                                            <label class="sr-only">Work</label>#}
+{#                                                            <select name="work" class="form-control">#}
+{#                                                                <option selected="true" disabled="disabled">Work Type (Pick One !! )</option>#}
+{#                                                                {% for key, value  in work_choices %}#}
+{#                                                                    <option value="{{ key }}">{{ value }}</option>#}
+{#                                                                {% endfor %}#}
+{#                                                            </select>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button#}
+{#                                                </form>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </section>#}
         <section class="section-2 container-fluid p-0">
             <div class="cover">
                 <div class="overlay"></div>
@@ -331,6 +352,12 @@
                 </div>
             </div>
     </section>
+
+
+
+
+
+
 
 
 
