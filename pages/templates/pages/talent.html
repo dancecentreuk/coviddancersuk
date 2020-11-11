@@ -78,7 +78,7 @@
                 <div class="row">
                     {% for talent in talents %}
                      <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
-                        <div class="card" style="width: 12rem;">
+                        <div class="card" style="width: 10rem;">
                             <img class="card-img-top p-1" style="height: 200px" src="{{ talent.user.candidate.profile_image.url }}" alt="Card image cap">
                             <div class="card-body pb-0">
                                 <a href="{% url 'talent-detail' talent.pk talent.user.first_name talent.user.last_name %}">
