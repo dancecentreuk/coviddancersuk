@@ -312,8 +312,8 @@
                                 <div class="row mt-3">
                                     {% for talent in talents %}
                                         <div class="col-auto mb-3">
-                                            <div class="card" style="width: 10rem;">
-                                                <img class="card-img-top" style="height: 160px" src="{{ talent.user.candidate.profile_image.url }}" alt="Card image cap">
+                                            <div class="card" style="width: 9rem;">
+                                                <img class="card-img-top p-1" style="height: 160px" src="{{ talent.user.candidate.profile_image.url }}" alt="Card image cap">
                                                 <div class="card-body pb-0">
                                                     <a href="{% url 'talent-detail' talent.pk talent.user.first_name talent.user.last_name %}">
                                                   <h5 class="text-center img_title ">{{ talent.user.first_name |capfirst }} </h5></a>
