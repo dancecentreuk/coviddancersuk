@@ -465,7 +465,7 @@ header .container .col-md-7 p {
   padding: 10vmin 4vmin;
 }
 
-.section-4 .card {
+.section-7 .card {
   width: 22em;
   margin-top: 10vmin;
 }
@@ -567,6 +567,47 @@ footer .column i + i {
 
 
 }
+
+
+
+/* Section 7 */
+
+
+.section-11 .panel {
+  top: 10vmin;
+  background: white;
+  border-radius: 3px;
+  text-align: left;
+  margin: 2vmin 2vmin 2vmin 2vmin;
+  padding: 2vmin 2vmin 2vmin 7vmin;
+  box-shadow: 0px 25px 42px rgba(0, 0, 0, 0.2);
+  font-family: var(--Rubik);
+  z-index: 1;
+}
+
+.section-11 .my_title {
+  font-size: 25px;
+  color: darkorange;
+  text-decoration: none;
+  letter-spacing: .2em;
+  font-weight: 400;
+  text-align: center;
+
+}
+
+.section-11  .img_title {
+  font-size: 12px;
+  color: darkorange;
+  letter-spacing: .1em;
+  font-weight: 400;
+  text-transform: uppercase;
+
+
+
+
+
+}
+
 
 
 
