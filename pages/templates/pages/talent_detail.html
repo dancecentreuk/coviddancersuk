@@ -135,7 +135,83 @@
         </div>
       </div>
 
+
+
+
+
+
+
+
+
+            {% if dance_classes.exists %}
+
+                 <div class="container text-center mt-3">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="panel ">
+
+
+                <h1 class="triple-striped-heading heading-centred">
+                    <span class="title pl-1">{{ talent.user.first_name }}'s Dance Classes</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
+
+
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th class="table_h" scope="col">Style</th>
+                          <th class="table_h" scope="col">Level</th>
+                          <th class="table_h" scope="col">Age</th>
+                          <th class="table_h" scope="col">Day</th>
+                          <th class="table_h" scope="col">City</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for course in dance_classes %}
+
+                          <tr>
+                              <th class="table_p" scope="row"><a href="{% url 'dance-class-detail' course.id %}" >{{ course.dance_style_choice }}</a></th>
+                                <td class="table_p">{{ course.level }} </td>
+                                <td class="table_p">{{ course.age_group }} </td>
+                              <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
+                              <td class="table_p">{{ course.location }}</td>
+                            </tr>
+                        {% endfor %}
+
+                      </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+            {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </section>
+
+
+
+
+
 
 
     <section class="section-5">

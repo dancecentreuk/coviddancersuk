@@ -46,13 +46,15 @@ def talent_detail(request, pk, first_name, last_name):
     if average_reviews is not None:
         average_reviews = round(average_reviews, 1)
     form = CandidateReviewForm(request.POST or None)
+    dance_classes = WeeklyDanceClass.objects.filter(author=talent)
     context = {
 
         'form':form,
         'talent': talent,
         'candidate_reviews': reviews,
         'candidate_photos': candidate_photos,
-        'average_reviews': average_reviews
+        'average_reviews': average_reviews,
+        'dance_classes': dance_classes
 
     }
     return render(request, 'pages/talent_detail.html', context)
