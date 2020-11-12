@@ -251,16 +251,13 @@
                                             <div class="card mb-4">
                                                 <!-- Content -->
                                                 <div class="row">
-                                                    <div class="col-md-8 mt-1">
-                                                        <a class="btn btn-light disabled btn-sm"><i class="fa fa-clock"></i> Posted : {{ posting.created | timesince}} ago</a>
-                                                    </div>
-                                                    <div class="col-md-4 mt-1">
+                                                    <div class="col-12 mt-1">
                                                         <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-map-pin mr-2"></i> {{ posting.location}}</a >
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12 mx-auto">
-                                                        <h4 class="card-title my-2 text-center">
+                                                        <h4 class="card-title ml-4">
                                                             <a href="{% url 'posting-detail' posting.pk posting.slug %}" class="text-sm my_title">{{ posting.title }}</a>
                                                         </h4>
                                                     </div>
@@ -276,11 +273,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-8 mt-1">
+                                                    <div class="col-12 mt-1">
                                                         <a class="btn btn-light disabled btn-sm text-info"><i class="fa fa-clock"> </i>{{  posting.date | date:' l dS F Y' }}  {{ posting.start_time }}-{{ posting.finish_time }}</a>
                                                     </div>
-                                                    <div class="col-md-4 mt-1">
-                                                        <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-money-bill-wave"></i> Fee : £{{ posting.fee}}</a >
+                                                    <div class="col-12 mt-1">
+                                                        <a  class=" btn btn-light disabled btn-sm  "><i class="fas fa-money-bill-wave"></i> Fee : £{{ posting.fee}}</a >
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <a class="btn btn-light disabled btn-sm"><i class="fa fa-clock"></i> Posted : {{ posting.created | timesince}} ago</a>
                                                     </div>
                                                 </div>
                                             </div>
