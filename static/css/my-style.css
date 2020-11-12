@@ -74,6 +74,16 @@
 }
 
 
+.custom_button_new{
+  font-size: 7px;
+  color: darkorange;
+  text-decoration: none;
+  letter-spacing: .1em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+
 .listings_img{
   margin-top: 10px;
   margin-bottom: 10px;
