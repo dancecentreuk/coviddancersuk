@@ -53,7 +53,7 @@
 
 .content-text .content-paragraph{
     font-size: .9rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .content-text .btn{
@@ -76,7 +76,7 @@
     text-decoration: none;
     font-size: .7rem;
     text-transform: uppercase;
-    padding: .1rem .2rem;
+    padding: .2rem .2rem;
     border: 1px solid darkorange;
     color: #444;
 }
@@ -107,7 +107,7 @@
     }
 
     .content-new .btn{
-        padding: .1rem .1rem;
+        padding: .2rem .2rem;
     }
 }
 
@@ -139,5 +139,15 @@
 
     .content-text .content-title{
         font-size: 1.4rem;
+    }
+
+    .section-2 .my_title {
+        font-size: 18px;
+        color: blue;
+        text-decoration: none;
+        letter-spacing: .15em;
+        font-weight: 500;
+        text-transform: uppercase;
+
     }
 }

@@ -166,7 +166,6 @@
                                                 <!-- Content -->
                                                 <div class="row">
                                                     <div class="col-8 mt-1">
-                                                        <a class="btn btn-light disabled btn-sm"><i class="fa fa-clock"></i> Posted : {{ advert.created | timesince}} ago</a>
                                                     </div>
                                                     <div class="col-4 mt-1">
                                                         <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-map-pin mr-2"></i> {{ advert.location}}</a >
@@ -174,7 +173,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <h4 class="card-title my-2 text-center">
+                                                        <h4 class="card-title my-2 ml-4">
                                                             <a href="{% url 'advert-detail' advert.pk advert.slug %}" class="text-sm my_title">{{ advert.title }}</a>
                                                         </h4>
                                                     </div>
@@ -191,7 +190,10 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12 mt-1">
-                                                        <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-money-bill-wave"></i> Fee : £{{ advert.fee}}</a >
+                                                        <a  class="btn btn-light disabled btn-sm  "><i class="fas fa-money-bill-wave"></i> Fee : £{{ advert.fee}}</a >
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <a class="btn btn-light disabled btn-sm"><i class="fa fa-clock"></i> Posted : {{ advert.created | timesince}} ago</a>
                                                     </div>
                                                 </div>
                                             </div>
