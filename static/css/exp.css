@@ -126,6 +126,15 @@
         width: 100%;
     }
 
+    .section-2 .my_title {
+        font-size: 15px;
+        text-decoration: none;
+        letter-spacing: .1em;
+        font-weight: 400;
+        text-transform: uppercase;
+
+    }
+
 
 }
 
@@ -142,11 +151,10 @@
     }
 
     .section-2 .my_title {
-        font-size: 18px;
-        color: blue;
+        font-size: 15px;
         text-decoration: none;
-        letter-spacing: .15em;
-        font-weight: 500;
+
+        font-weight: 400;
         text-transform: uppercase;
 
     }

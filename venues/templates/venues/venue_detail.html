@@ -1,0 +1,349 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+
+    <main>
+
+    {% include 'partials/_alerts.html' %}
+
+
+    <section class="section-profile">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md-3 col-sm-12">
+            <div class="pray">
+              <img src="{{ venue.venue_image.url }}" alt="Pray" class="" />
+                <div class="row">
+                    <div class="col-12 p-1 heading-centred">
+                         <a class="btn btn-outline-info center custom_button"
+                   href="">View Profile</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+          </div>
+
+          <div class="col-md-9 col-sm-12">
+            <div class="panel text-left">
+                <div class="row my_row_class">
+                    <div class="mx-auto">
+                        <p><a href="{% url 'venues' %}"><i class="fas fa-angle-double-left"></i> Back to Venues</a> </p>
+                    </div>
+                </div>
+
+
+
+
+
+                 {% if request.user.is_authenticated %}
+                    {% if request.user == venue.author %}
+
+                            <div class="row mt-3">
+                                <div class="col-12 mb-2">
+                                    <a class="btn btn-outline-info float-left custom_button" href="{% url 'edit-venue' venue.id venue.slug %}">Edit Venue</a>
+                                    <a href=" " class="float-right btn btn-outline-danger custom_button" data-toggle="modal" data-target="#exampleModalCenter">Delete Venue</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                {% endif %}
+
+
+            <h1 class="triple-striped-heading">
+                    <span class="title">{{ venue.venue_name }}</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
+
+
+
+                <div class="row">
+                    <div class="col-6">
+                         {{ venue.address }} <br>
+
+                        <i class="fas fa-map-marker-alt"></i>
+
+                            {{ venue.location }} <br>
+                         {{ venue.postcode }} <br>
+                        <span class="ml-3 author">{{ dance_class.author }}</span>
+                    </div>
+
+                    <div class="col-6 text-secondary author">
+
+                           <i class="far fa-id-badge"></i> {{ venue.contact_person }}  <br>
+                        <i class="fas fa-phone"></i> {{ venue.contact_number }}  <br>
+                        <i class="fas fa-envelope"></i> info@manchesterdance.com
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <a class="btn  btn-sm btn-info text-white" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i>Message {{ talent.user.first_name | capfirst }}</a>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+            <section class="section-2 container-fluid p-0">
+      <div class="cover">
+        <div class="overlay"></div>
+        <div class="content text-center">
+          <h1>Some Features That Made Us Unique</h1>
+          <p>
+            Find Your Dance Instructor the easy way
+          </p>
+        </div>
+      </div>
+      <div class="container-fluid text-center">
+        <div class="numbers d-flex flex-md-row flex-wrap justify-content-center">
+
+                <div class="rect-3">
+            <h1>0</h1>
+            <p>Rating / 10</p>
+          </div>
+
+
+          <div class="rect">
+            <h1>{{ venue.size_length_ft}}</h1>
+            <p>Length Ft</p>
+          </div>
+          <div class="rect">
+            <h1>{{ venue.size_width_ft }}</h1>
+            <p>Width ft</p>
+          </div>
+          <div class="rect">
+            <h1>9152</h1>
+            <p>Total Projects</p>
+          </div>
+        </div>
+      </div>
+        <div class="container-fluid text-center">
+        <div class="mt-1 numbers d-flex flex-md-row flex-wrap justify-content-center">
+        <div class="rect-2">
+            <a href="{{ venue.venue_image.url }}" data-lightbox="profile-images">
+                <img src="{{ venue.venue_image.url }}" alt="Pray" style="height: 100px; width: 100px" /></a>
+          </div>
+
+
+
+            {% if venue.venue_image_1  %}
+                <div class="rect-2">
+                    <a href="{{ venue.venue_image_1.url }}" data-lightbox="profile-images">
+                        <img src="{{ venue.venue_image_1.url  }}" alt="Pray" style="height: 100px; width: 100px" />
+                    </a>
+                </div>
+            {% endif %}
+
+            {% if venue.venue_image_2  %}
+                <div class="rect-2">
+                    <a href="{{ venue.venue_image_2.url }}" data-lightbox="profile-images">
+                        <img src="{{ venue.venue_image_2.url }}" alt="Pray" style="height: 100px; width: 100px" />
+                    </a>
+                </div>
+            {% endif %}
+
+            {% if venue.venue_image_3 %}
+                    <div class="rect-2">
+                        <a href="{{ venue.venue_image_3.url }}" data-lightbox="profile-images">
+                            <img src="{{ venue.venue_image_3.url }}" alt="Pray" style="height: 100px; width: 100px" />
+                        </a>
+                    </div>
+            {% endif %}
+
+
+
+        </div>
+      </div>
+
+
+         <div class="container text-center">
+        <div class="row">
+          <div class="col-md-12 col-12">
+            <div class="panel text-left mb-3">
+
+
+                <div class="row mb-5 ">
+                <div class="col-12 text-center mb-3 venue_title">
+                    {{ venue.venue_name}}<br>
+                    {{ venue.address }}, {{ venue.location }}, {{ venue.postcode }}
+                </div>
+            <div class="col-md-6">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item ">
+                  <i class="fas fa-money-bill-alt "></i> Venue Cost:
+                  <span class="float-right text-secondary">£{{ venue.price | intcomma }} p/h</span>
+                </li>
+                <li class="list-group-item ">
+                  <i class="fas fa-columns"></i> Mirrors:
+                  <span class="float-right text-secondary">{% if venue.mirrors %}<i class="fas fa-check">{% endif %}</i></span>
+                </li>
+                <li class="list-group-item  ">
+                  <i class="fas fa-music"></i> Music System:
+                    <span class="float-right text-secondary">{% if venue.music_system %}<i class="fas fa-check"></i> {% endif %}</span>
+                </li>
+                <li class="list-group-item ">
+                  <i class="fas fa-car"></i> Flooring:
+                  <span class="float-right text-secondary">{{ venue.flooring}}
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item ">
+                  <i class="fas fa-square"></i> Length Feet:
+                  <span class="float-right text-secondary">{{ venue.size_length_ft}} ft</span>
+                </li>
+                <li class="list-group-item ">
+                  <i class="fas fa-square"></i> Width Feet:
+                  <span class="float-right text-secondary">{{ venue.size_width_ft }} ft
+                  </span>
+                </li>
+                <li class="list-group-item ">
+                  <i class="fas fa-calendar"></i> Listing Date:
+                  <span class="float-right text-secondary">{{ venue.created }}</span>
+                </li>
+                <li class="list-group-item ">
+                  <i class="fas fa-bed"></i> Contact:
+                  <span class="float-right text-secondary">{{ venue.contact_person }}
+                  </span>
+                </li>
+
+
+              </ul>
+            </div>
+          </div>
+
+
+                <div class="container mx-1">
+                    <h1 class="triple-striped-black-heading ">
+                    <span class="heading">About Venue</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
+                <p>
+                    {{ venue.about | linebreaks }}
+                </p>
+
+
+                     <h1 class="triple-striped-black-heading ">
+                    <span class="heading">FAQ</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
+                <p>
+                    {{ venue.faq|linebreaks }}
+                </p>
+
+
+
+                </div>
+
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+
+
+    <!-- END INBOX CONTENT -->
+
+<!-- Delete dance class modal -->
+      <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Delete Venue</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Are you sure you want to delete <br>
+            <span class="text-danger card-text">{{ venue.venue_name }} Venue Listing ?</span></h5>
+        <div class="form-group">
+            <form action="" method="POST">
+                {% csrf_token %}
+            </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+          <a href="{% url 'delete-venue' venue.id venue.slug %}" class="btn btn-outline-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+					<!-- BEGIN COMPOSE MESSAGE -->
+        <div class="modal fade" id="compose-modal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="inquiryModalLabel">Make An Inquiry</h5>
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="{% url 'mail:new-message' %}" method="POST">
+                      {% csrf_token %}
+                    <div class="form-group">
+                      <label for="property_name" class="col-form-label">Title</label>
+                      <input type="text" name="title" class="form-control" value="" >
+                    </div>
+
+                    <div class="form-group">
+                      <label for="name" class="col-form-label">Sender:</label>
+                      <input type="text" name="name" class="form-control" value="{{ request.user }}" >
+                    </div>
+                    <div class="form-group">
+                      <label for="name" class="col-form-label">Recipient:</label>
+                      <input type="text" name="recipient" class="form-control" value="{{ talent.user.id }}" >
+                    </div>
+
+                    <div class="form-group">
+                      <label for="message" class="col-form-label">Message:</label>
+                      <textarea name="content" class="form-control"></textarea>
+                    </div>
+                    <hr>
+                    <input type="submit" value="Send" class="btn btn-block btn-secondary">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+{#					<!-- END COMPOSE MESSAGE -->#}
+
+
+
+
+
+
+</main>
+
+
+
+{% endblock %}

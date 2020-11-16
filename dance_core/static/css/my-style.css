@@ -27,6 +27,17 @@
 }
 
 
+.venue-icons{
+
+  font-size: 14px;
+  color: darkorange;
+  text-decoration: none;
+  letter-spacing: .15em;
+  font-weight: 500;
+
+}
+
+
 
 
 .product-card .persist {

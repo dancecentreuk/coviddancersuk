@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'adverts.apps.AdvertsConfig',
     'pages.apps.PagesConfig',
+    'venues.apps.VenuesConfig',
     'dance_classes.apps.DanceClassesConfig',
     'mail.apps.MailConfig',
     'django.contrib.admin',

@@ -7,7 +7,7 @@ class DanceClassForm(forms.ModelForm):
 
 
     dance_style_choice = forms.ChoiceField(
-        label='Chooes Dance Style',
+        label='Choose Dance Style',
         choices =dance_styles,
         initial='Select a dance',
 

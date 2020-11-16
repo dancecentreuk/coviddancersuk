@@ -400,6 +400,16 @@ header .container .col-md-7 p {
 
 }
 
+.section-2 .venue_title {
+  font-size: 14px;
+  color: darkgray;
+  text-decoration: none;
+  letter-spacing: .1em;
+  font-weight: 500;
+
+
+}
+
 .section-2 .table_p {
   font-size: 12px;
   letter-spacing: .15em;
@@ -704,6 +714,16 @@ footer .column i + i {
   color: rgba(0, 0, 0, 0.5);
 }
 
+
+.section-2 .row .col-md-6 .list-group {
+
+  color: darkorange;
+  letter-spacing: .1em;
+  font-weight: 400;
+  font-size: 12px;
+
+
+}
 
 
 /********** section 1 **************/

@@ -173,7 +173,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <h4 class="card-title my-2 ml-4">
+                                                        <h4 class="card-title my-1 ml-4">
                                                             <a href="{% url 'advert-detail' advert.pk advert.slug %}" class="text-sm my_title">{{ advert.title }}</a>
                                                         </h4>
                                                     </div>
@@ -185,7 +185,7 @@
                                                         {% else %}
                                                             <img class="m-2 rounded img-fluid float-left" src="{{ advert.author.employer.profile_image.url }}" alt="Card image cap" style="max-height: 75px">
                                                         {% endif %}
-                                                        <p class="text-muted text-xs m-1">{{ advert.body  | truncatechars:200 }}</p>
+                                                        <p class="text-muted text-xs m-1 p-3">{{ advert.body  | truncatechars:200 }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -257,7 +257,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12 mx-auto">
-                                                        <h4 class="card-title ml-4">
+                                                        <h4 class="card-title mb-0 ml-4">
                                                             <a href="{% url 'posting-detail' posting.pk posting.slug %}" class="text-sm my_title">{{ posting.title }}</a>
                                                         </h4>
                                                     </div>
@@ -269,7 +269,7 @@
                                                         {% else %}
                                                             <img class="m-2 rounded img-fluid float-left" src="{{ posting.author.employer.profile_image.url }}" alt="Card image cap" style="max-height: 75px">
                                                         {% endif %}
-                                                        <p class="text-muted text-xs m-1">{{ posting.body  | truncatechars:300 }}</p>
+                                                        <p class="text-muted text-xs m-1 p-3">{{ posting.body  | truncatechars:300 }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="row">
