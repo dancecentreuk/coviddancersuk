@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import venues, add_venue, venue_detail, edit_venue, delete_venue, venue_search
+from .views import venues, add_venue, venue_detail, edit_venue, delete_venue, venue_search, add_venue_review
 
 
 urlpatterns = [
@@ -10,5 +10,7 @@ urlpatterns = [
     path('venue-edit/<int:pk>/<slug:slug>/', edit_venue, name='edit-venue'),
     path('venue-delete/<int:pk>/<slug:slug>/', delete_venue, name='delete-venue'),
     path('search/venue/', venue_search, name='search-venue'),
+    path('add-venue-review/<int:id>/<slug:slug>/', add_venue_review, name='add-venue-review'),
+
 
 ]

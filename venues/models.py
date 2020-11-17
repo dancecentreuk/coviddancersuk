@@ -45,3 +45,16 @@ class Venue(models.Model):
             self.slug = slugify(self.venue_name)
         return super().save(*args, **kwargs)
 
+
+class VenueReview(models.Model):
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.TextField(max_length=1000)
+    rating = models.FloatField(default=1)
+    created = models.DateTimeField(auto_now_add=True)
+    is_allowed = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'{self.id}-{self.venue} by {self.author.username}'
+
+

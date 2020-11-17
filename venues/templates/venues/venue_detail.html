@@ -108,22 +108,22 @@
         <div class="numbers d-flex flex-md-row flex-wrap justify-content-center">
 
                 <div class="rect-3">
-            <h1>0</h1>
+            <h1>{{ average_reviews }}</h1>
             <p>Rating / 10</p>
           </div>
 
 
           <div class="rect">
-            <h1>{{ venue.size_length_ft}}</h1>
-            <p>Length Ft</p>
+            <h1>{{ venue_review.count}}</h1>
+            <p>Reviews</p>
+          </div>
+          <div class="rect">
+            <h1>{{ venue.size_length_ft }}</h1>
+            <p>Length ft</p>
           </div>
           <div class="rect">
             <h1>{{ venue.size_width_ft }}</h1>
             <p>Width ft</p>
-          </div>
-          <div class="rect">
-            <h1>9152</h1>
-            <p>Total Projects</p>
           </div>
         </div>
       </div>
@@ -262,6 +262,69 @@
       </div>
 
     </section>
+
+
+     <section class="section-5">
+         <div class="container text-center">
+        <div class="row">
+          <div class="col-md-12 col-12">
+            <div class="panel text-left mb-3">
+              <h4 class="text-center lead">Add Review For Dance Class</h4>
+
+                <form action="{% url 'add-venue-review' venue.id venue.slug %}" method="POST">
+                    {% csrf_token %}
+                    <label for="comment">Review</label>
+                    <textarea name="comment" id="comment" cols="30" rows="5" class="form-control" required ></textarea> <br>
+                    <label for="rating">Rating</label>
+                    <input type="range" id="rangeInput" name="rating"
+                           min="0" max="10" value="0" step="0.5" oninput="amount.value=rangeInput.value" required>
+                    <output name="amount" id="amount" for="rangeInput">0</output>
+
+                    <br>
+                    {% if error %}
+                   <p class="text-danger">{{ error }}</p>
+                {% endif %}
+
+                    <input type="submit" class="btn btn-danger" value="Add Review">
+                </form>
+
+                <hr>
+
+
+
+                        {% for review in venue_review %}
+                            <div class="card mb-2 p-0">
+                                <div class="card-body pt-2 pb-0" style="background-color: #fdf4f4">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h6 class="text-left">{{ review.author.username }}</h6>
+                                            <h6 class="text-danger">{{ review.rating }}</h6>
+                                            {% if request.user == review.author %}
+                                            <a class="mb-2 py-0 btn  btn-sm btn-outline-info text-info" href="">Edit Review</a>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-9">
+                                            <p>{{ review.comment | linebreaks }}</p> <br>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+
+
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
 
 

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Venue
+from .models import Venue, VenueReview
 
 
 class venueForm(forms.ModelForm):
@@ -20,3 +20,9 @@ class venueForm(forms.ModelForm):
                   'music_system', 'price', 'contact_person', 'contact_number', 'contact_email', 'about', 'faq',  'venue_image',
                   'venue_image_1', 'venue_image_2', 'venue_image_3')
 
+
+class VenueReviewForm(forms.ModelForm):
+
+    class Meta:
+        model = VenueReview
+        fields = ('comment', 'rating')

@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Venue
+from .models import Venue, VenueReview
 from django.core.paginator import PageNotAnInteger, Paginator, Page, EmptyPage
-from .forms import venueForm
+from .forms import venueForm, VenueReviewForm
 from django.contrib import messages
 from pages.choices import location_choices, age_choices
+from django.db.models import Avg
 
 # Create your views here.
 
@@ -12,7 +13,7 @@ from pages.choices import location_choices, age_choices
 def venues(request):
     venues = Venue.objects.filter(is_published=True)
 
-    paginator = Paginator(venues, 1)
+    paginator = Paginator(venues, 20)
     page = request.GET.get('page')
     paged_dance_classes = paginator.get_page(page)
 
@@ -49,10 +50,16 @@ def add_venue(request):
 def venue_detail(request, pk, slug):
 
     venue = get_object_or_404(Venue, id=pk, slug=slug)
+    venue_review = VenueReview.objects.filter(venue=pk).order_by('-created')
+    average_reviews = venue_review.aggregate(Avg('rating'))['rating__avg']
+    if average_reviews is not None:
+        average_reviews = round(average_reviews, 1)
 
     context = {
 
-        'venue': venue
+        'venue': venue,
+        'venue_review': venue_review,
+        'average_reviews': average_reviews
     }
     return render(request, 'venues/venue_detail.html', context)
 
@@ -129,6 +136,43 @@ def venue_search(request):
 
     }
     return render(request, 'venues/search_venues.html', context)
+
+
+
+
+
+def add_venue_review(request, id, slug):
+    if request.user.is_authenticated:
+        venue = Venue.objects.get(id=id, slug=slug)
+
+        print(venue)
+
+        if request.method == 'POST':
+            form = VenueReviewForm(request.POST or None)
+            if form.is_valid():
+                data = form.save(commit=False)
+                data.comment = request.POST['comment']
+                data.rating = request.POST['rating']
+                data.author = request.user
+
+                print(request.user)
+
+                data.venue = venue
+                print(data.venue.author)
+                if data.venue.author == request.user:
+                    messages.error(request, 'You cant give your self a  review clever clogs')
+                    return redirect('venue-detail', id, slug)
+                else:
+                    data.save()
+
+                    messages.success(request, 'Your review has now been posted')
+                    return redirect('venue-detail', id, slug)
+            else:
+
+                messages.error(request, 'There is a error in your review and it has not been posted')
+                return redirect('venue-detail', id, slug)
+    else:
+        return redirect('sign-in')
 
 
 # def delete_advert(request, pk, slug):
