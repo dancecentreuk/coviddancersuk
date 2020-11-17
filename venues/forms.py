@@ -14,6 +14,10 @@ class venueForm(forms.ModelForm):
         attrs={
             'placeholder': 'There are aprox 15 people in a Class, Average age is 18, you dont need any experience for the beginners class etc .. '}))
 
+
+
+    price = forms.FloatField( widget=forms.NumberInput(attrs={'placeholder': 'Cost per Hour'}))
+
     class Meta:
         model = Venue
         fields = ('venue_name', 'address', 'location', 'postcode','size_width_ft', 'size_length_ft', 'flooring', 'mirrors',
