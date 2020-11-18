@@ -86,6 +86,15 @@
     .content-text{
         flex: 1;
     }
+
+    .section-2 .my_title {
+        font-size: 15px;
+        text-decoration: none;
+        letter-spacing: .1em;
+        font-weight: 400;
+        text-transform: uppercase;
+
+    }
 }
 
 @media screen and (max-width: 960px){
@@ -109,6 +118,15 @@
     .content-new .btn{
         padding: .2rem .2rem;
     }
+
+    .section-2 .my_title {
+        font-size: 14px;
+        text-decoration: none;
+        letter-spacing: .1em;
+        font-weight: 400;
+        text-transform: uppercase;
+
+    }
 }
 
 @media screen and (max-width: 756px){
@@ -127,8 +145,9 @@
     }
 
     .section-2 .my_title {
-        font-size: 15px;
+        font-size: 14px;
         text-decoration: none;
+        letter-spacing: .09em;
         font-weight: 400;
         text-transform: uppercase;
 
@@ -150,9 +169,9 @@
     }
 
     .section-2 .my_title {
-        font-size: 15px;
+        font-size: 14px;
         text-decoration: none;
-
+        letter-spacing: .09em;
         font-weight: 400;
         text-transform: uppercase;
 

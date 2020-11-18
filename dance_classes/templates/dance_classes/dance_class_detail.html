@@ -215,9 +215,39 @@
                         <span class="inner-stripe"></span>
                     </span>
                 </h1>
-                <p>
-                    {{ dance_class.faq |linebreaks }}
-                </p>
+
+                    {% if dance_class.drop_in %}
+                        <p class="faq">
+                            <span>Do I need to book in for this class or is it a  drop in class ? <br></span>
+                            {{ dance_class.drop_in }}
+                        </p>
+                    {% endif %}
+                {% if dance_class.average_age %}
+                        <p class="faq">
+                            <span>What is the average age of the class ? <br></span>
+                            {{ dance_class.average_age }}
+                        </p>
+                    {% endif %}
+                {% if dance_class.experience %}
+                    <p class="faq">
+                        <span>What level of experience is required to attend ?<br></span>
+                        {{ dance_class.experience }}
+                    </p>
+                {% endif %}
+                {% if dance_class.clothes %}
+                    <p class="faq">
+                        <span>What Clothes do i need to wear ?<br></span>
+                        {{ dance_class.clothes }}
+                    </p>
+                {% endif %}
+                {% if dance_class.faq %}
+                    <p class="faq">
+                        <span>More Usefull Info <br></span>
+                        {{ dance_class.faq | linebreaksbr }}
+                    </p>
+                {% endif %}
+
+
 
 
 

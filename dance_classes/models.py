@@ -34,6 +34,10 @@ class WeeklyDanceClass(models.Model):
     dance_class_image_2 =models.ImageField(upload_to='dance-class-image/%Y/%m/%d', blank=True)
     dance_class_image_3 =models.ImageField(upload_to='dance-class-image/%Y/%m/%d', blank=True)
     faq = models.TextField(blank=True, null=True)
+    clothes = models.CharField(max_length=250, blank=True)
+    experience = models.CharField(max_length=250, blank=True)
+    average_age = models.CharField(max_length=250, blank=True)
+    drop_in = models.CharField(max_length=250, blank=True)
     address = models.CharField(max_length=250)
     postcode = models.CharField(max_length=10)
     age_group = models.CharField(
@@ -52,6 +56,7 @@ class WeeklyDanceClass(models.Model):
 
     # def get_absolute_url(self):
     #     return reverse('dance-class-detail', kwargs={'id': self.id})
+
 
 
 class ClassImage(models.Model):
