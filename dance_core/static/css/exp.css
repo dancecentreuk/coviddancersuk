@@ -109,6 +109,15 @@
     .content-new .btn{
         padding: .2rem .2rem;
     }
+
+    .section-2 .my_title {
+        font-size: 14px;
+        text-decoration: none;
+        letter-spacing: .1em;
+        font-weight: 400;
+        text-transform: uppercase;
+
+    }
 }
 
 @media screen and (max-width: 756px){
