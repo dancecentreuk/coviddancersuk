@@ -1,3 +1,10 @@
+setTimeout(function() {
+  $('#mymessage').fadeOut('slow');
+}, 3000);
+
+
+
+
 let nCount = selector => {
   $(selector).each(function () {
     $(this)
@@ -68,6 +75,3 @@ $(window).scroll(function () {
 const date = new Date();
 document.querySelector('.year').innerHTML = date.getFullYear();
 
-setTimeout(function() {
-  $('#message').fadeOut('slow');
-}, 3000);
