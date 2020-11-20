@@ -316,7 +316,9 @@ header .container .col-md-7 p {
 .purchase > h1 {
   padding-top: 15vmin;
   padding-bottom: 0.1em;
-  font-family: var(--Lobster);
+  font-family: Rubik;
+ color: orangered;
+  font-size: 4.5vmin;
 }
 
 .purchase > p {

@@ -195,7 +195,7 @@
 
 
       <div class="purchase text-center">
-        <h1>Your Jobs And Postings</h1>
+        <h1>Your Jobs  Postings and Venues Listings</h1>
 
       <div class="row">
 
@@ -206,6 +206,7 @@
 
                 <a class="btn btn-outline-info float-right py-1 " href="{% url 'create-posting' %}">Create Posting</a>
                 <a class="btn btn-outline-info float-left py-1 " href="{% url 'create-advert' %}">Create Job</a>
+                <a class="btn btn-outline-info  py-1 " href="{% url 'add-venue' %}">Add Venue</a>
             </div>
         </div>
 
@@ -275,7 +276,7 @@
                 <div class="panel ">
 
                     {% if request.user.is_authenticated %}
-                        {% if request.user.is_candidate %}
+                        {% if request.user.is_employer %}
                             <div class="row">
                                 <div class="col-12 mb-2">
                                     <a class="btn btn-outline-info float-right custom_button" href="{% url 'create-posting' %}">List Posting</a>
