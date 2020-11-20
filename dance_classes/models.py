@@ -3,6 +3,7 @@ from accounts.models import User, Candidate
 from pages.choices import location_choices, dance_styles, day, level, age_choices
 from django.template.defaultfilters import slugify
 from django.urls import reverse
+from PIL import Image
 
 
 # Create your models here.
@@ -54,8 +55,41 @@ class WeeklyDanceClass(models.Model):
     def __str__(self):
         return f'{self.id}-{self.dance_style_choice} by {self.author.user}'
 
-    # def get_absolute_url(self):
-    #     return reverse('dance-class-detail', kwargs={'id': self.id})
+
+    def save(self, *args, **kwargs):
+        super().save()
+
+        img = Image.open(self.dance_class_image.path)
+
+        if img.height > 500 or img.width > 500:
+            output_size = (500, 500)
+            img.thumbnail(output_size)
+            img.save(self.dance_class_image.path)
+
+        img_1 = Image.open(self.dance_class_image_1.path)
+
+        if img_1.height > 500 or img_1.width > 500:
+            output_size = (500, 500)
+            img_1.thumbnail(output_size)
+            img_1.save(self.dance_class_image_1.path)
+
+        img_2 = Image.open(self.dance_class_image_2.path)
+
+
+        if img_2.height > 500 or img_2.width > 500:
+            output_size = (500, 500)
+            img_2.thumbnail(output_size)
+            img_2.save(self.dance_class_image_2.path)
+
+
+        img_3 = Image.open(self.dance_class_image_3.path)
+
+        if img_3.height > 500 or img_3.width > 500:
+            output_size = (500, 500)
+            img_3.thumbnail(output_size)
+            img_3.save(self.dance_class_image_3.path)
+
+
 
 
 

@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.template.defaultfilters import slugify
 from pages.choices import (gender_choices, location_choices, height_in, height_ft, weight_lb, weight_st,
                            waist, bust, hip, shoe_size, eye_color, hair_color, build, primary_job)
+from PIL import Image
 
 
 class User(AbstractUser):
@@ -123,6 +124,16 @@ class Candidate(models.Model):
     def __str__(self):
         return self.user.username
 
+    def save(self, *args, **kwargs):
+        super().save()
+
+        img = Image.open(self.profile_image.path)
+
+        if img.height > 500 or img.width > 500:
+            output_size = (500, 500)
+            img.thumbnail(output_size)
+            img.save(self.profile_image.path)
+
 class Employer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     mobile = models.CharField(max_length=20)
@@ -138,6 +149,17 @@ class Employer(models.Model):
         return self.user.username
 
 
+    def save(self, *args, **kwargs):
+        super().save()
+
+        img = Image.open(self.profile_image.path)
+
+        if img.height > 500 or img.width > 500:
+            output_size = (500, 500)
+            img.thumbnail(output_size)
+            img.save(self.profile_image.path)
+
+
 class CandidateImage(models.Model):
     title = models.CharField(max_length=180)
     profile_image = models.ImageField(upload_to='candidates-profiles/%Y/%m/%d')
@@ -148,9 +170,29 @@ class CandidateImage(models.Model):
     def __str__(self):
         return self.owner.user.username
 
+
+
+
+    # def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #         self.slug = slugify(self.title)
+    #     return super().save(*args, **kwargs)
+
+
+
     def save(self, *args, **kwargs):
+        super().save()
+
         if not self.slug:
             self.slug = slugify(self.title)
+
+        img = Image.open(self.profile_image.path)
+
+        if img.height > 500 or img.width > 500:
+            output_size = (500, 500)
+            img.thumbnail(output_size)
+            img.save(self.profile_image.path)
+
         return super().save(*args, **kwargs)
 
 

@@ -5,17 +5,80 @@ from ..models import Employer
 from adverts.models import Advert
 from django.http import HttpResponse
 from django.contrib import messages
+from django.core.mail import EmailMessage
+import threading
+from django.urls import reverse
+from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from django.utils.http import  urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.sites.shortcuts import get_current_site
+from ..utils import token_generator
+from accounts.models import User
 
 
+
+
+class EmailThread(threading.Thread):
+
+    def __init__(self, email):
+        self.email = email
+        threading.Thread.__init__(self)
+
+    def run(self):
+        self.email.send(fail_silently=False)
 
 def employer_signup(request):
     form = EmployerSignUpForm
     if request.method == 'POST':
         form = EmployerSignUpForm(request.POST or None)
 
+
+
+
+
         if form.is_valid():
             form.save()
-            messages.success(request, 'You are now registered and can log in')
+
+            email = form.cleaned_data.get('email')
+
+
+            user = User.objects.get(email=email)
+
+            print(user.pk)
+
+
+            uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+
+
+
+            domain = get_current_site(request).domain
+            link = reverse('candidate-activate', kwargs={
+                'uidb64':uidb64, 'token':token_generator.make_token(user)})
+
+            activate_url = 'http://'+domain+link
+
+            email_subject = 'Activate your account'
+            email_body = 'Hi '+ user.first_name+ ' Ps use the link below to activate your account\n' + activate_url
+            email_address = form.cleaned_data.get('email')
+            email = EmailMessage(
+                email_subject,
+                email_body,
+                'noreply@dance.com',
+                [email_address]
+
+            )
+            EmailThread(email).start()
+
+
+
+            # # Send email
+            # send_mail(
+            #   'Property Listing Inquiry',
+            #   'There has been an inquiry for  Sign into the admin panel for more info',
+            #   'traversy.brad@gmail.com',
+            #   [realtor_email, 'techguyinfo@gmail.com'],
+            #   fail_silently=False
+            # )
+            messages.success(request, 'You are now registered ps check your email to activate your account')
             return redirect('sign-in')
 
 

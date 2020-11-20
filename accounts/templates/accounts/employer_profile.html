@@ -22,13 +22,21 @@
           </div>
               <h1>{{ user.first_name | capfirst}} {{ user.last_name | capfirst }}</h1>
 
+
+
+
                 <div class="row">
+                {% if user.employer.is_company %}
                     <div class="col-md-6">
                         <i class="fas fa-map-marker-alt"></i>
-
+                        {% if user.employer.company_name == None %}
+                            Company Name
+                        {% else %}
                             {{ user.employer.company_name }}
+                        {% endif %}
 
                     </div>
+                {% endif %}
 
 
                     <div class="col-md-6">
@@ -37,9 +45,14 @@
 
                     </div>
                 </div>
+            {% if user.employer.is_company %}
                 <div class="row">
                     <div class="col-md-12">
+                        {% if user.employer.company_email == None %}
+                            Company Email
+                        {% else %}
                             {{ user.employer.company_email }}
+                        {% endif %}
 
                     </div>
 
@@ -48,7 +61,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                         Make Company Profile Visible
+                         Add profile to  Directory :
                         {% if user.employer.is_company == True %}
                             <button class="btn btn-success btn-sm py-0" >Profile Visible</button>
                         {% else %}
@@ -59,6 +72,8 @@
 
 
                 </div>
+
+            {% endif %}
 
 
             </div>
@@ -71,9 +86,9 @@
       <div class="cover">
         <div class="overlay"></div>
         <div class="content text-center">
-          <h1>Some Features That Made Us Unique</h1>
+          <h1>Some Features That Make Us Unique</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, eum?
+            Looking for a dance teacher or a dancer why not List your jobs below
           </p>
         </div>
       </div>
@@ -114,15 +129,64 @@
             <div class="panel text-left">
               <h3>Company Info <i type="button" style="font-size: 22px;" class="text-danger fas fa-pen" data-toggle="modal" data-target="#companyModal"  > </i></h3>
 
-                <p>
-                    {{ user.employer.company_info | linebreaks }}
-                </p>
+                {% if user.employer.company_info == None %}
+                   <p class="text-danger">
+                   If you are a dance company / casting agent and want your profile to be visible add some info about you !!!
+
+                   </p>
+                {% else %}
+                    <p>
+                        {{ user.employer.company_info | linebreaks }}
+                    </p>
+                {% endif %}
 
 
             </div>
           </div>
         </div>
       </div>
+
+
+
+
+
+
+
+            <div class="container text-center">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="panel ">
+
+
+<!-- Call to action -->
+          <div class="my-1" data-url="#">
+            <div class="pos-relative">
+              <i class="fas fa-bullseye icon-bg op-1 icon-bg-l-ol icon-25x text-white"></i> <i class="fa fa-bullseye icon-bg op-1 icon-bg-r-ol icon-bg-b icon-25x text-white"></i>
+              <div class="p-2 text-center bg-danger">
+                <h2 class="display-4 font-weight-normal text-uppercase text-white my-0 text-slab">
+                  Clearance Sale
+                </h2>
+                <h4 class="text-white mb-0 text-slab">
+                  Price reductions on 1000s of items!
+                </h4>
+              </div>
+            </div>
+          </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+            </div>
+
+
+
+
+
+
+
 
 
 
@@ -146,267 +210,139 @@
         </div>
 
 
-          <div class="container text-center mt-2">
+
+
+
+
+
+      <div class="container text-center mt-3">
         <div class="row">
-          <div class="col-md-12 col-12">
+            <div class="col-md-12 col-12">
+                <div class="panel ">
 
-            <div class="panel ">
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_employer %}
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    <a class="btn btn-outline-info float-right custom_button" href="{% url 'create-advert' %}">List Job</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
 
-
-                <div class="col-lg-12">
-          <!-- Products filters -->
-
-
-
-
-
-                <div class="row">
-              {% for advert in adverts %}
-            <div class="col-lg-12">
-              <!-- Product 2 -->
-              <div class="card mb-4">
-                <!-- Content -->
-                  <div class="row">
-                      <div class="col-8 mt-1">
-                          <a class="btn btn-light disabled btn-sm"><i class="fa fa-clock"></i> Posted : {{ advert.created | timesince}} ago</a>
-                      </div>
-                      <div class="col-4 mt-1">
-                          <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-map-pin mr-2"></i> {{ advert.location}}</a >
-                      </div>
-
-                  </div>
-                  <div class="row">
-                      <div class="col-12">
-                          <h4 class="card-title my-2 text-center">
-                              <a href="{% url 'advert-detail' advert.pk advert.slug %}" class="text-info text-sm ">{{ advert.title }}</a>
-                          </h4>
-                      </div>
-                  </div>
+                <h1 class="triple-striped-heading heading-centred">
+                    <span class="title pl-1">Your Dance Jobs</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
 
 
-                  <div class="row">
-                      <div class="col-12">
-                          <img class="m-2 rounded img-fluid float-left" src="{{ advert.author.profile_image.url }}" alt="Card image cap" style="max-height: 75px">
-                          <p class="text-muted text-xs m-1">{{ advert.body  | truncatechars:200 }}</p>
-                      </div>
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th class="table_h" scope="col">Published</th>
+                          <th class="table_h" scope="col">Title</th>
+                          <th class="table_h" scope="col">City</th>
+                          <th class="table_h" scope="col"> </th>
 
-                  </div>
-                  <div class="row">
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for advert in adverts %}
 
-                      <div class="col-12 mt-1">
-                          <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-money-bill-wave"></i> Fee : £{{ advert.fee}}</a >
-                      </div>
+                          <tr>
+                              <th class="table_p" scope="row"><a href="{% url 'advert-detail' advert.id advert.slug %}" >{{ advert.created | date:'d M ' }}</a></th>
+                                <td class="table_p">{{ advert.title }} </td>
+                                <td class="table_p">{{ advert.location }} </td>
+                                <td class="table_p"><a class="btn btn-outline-info  custom_button my-1" href="{% url 'edit-advert' advert.pk advert.slug  %}">Edit</a>
+                                    <a class="btn btn-outline-info  custom_button my-1" href="{% url 'delete2-advert-button' advert.pk advert.slug  %}">Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
 
-                  </div>
-
-
-
-              </div>
+                      </tbody>
+                    </table>
+                </div>
             </div>
-
-              {% endfor %}
-
-          </div>
-
-
-          <!-- Call to action -->
-          <div class="my-3" data-url="#">
-            <hr class="hr-lg mt-0 mb-1 w-100 mx-auto hr-warning" />
-            <div class="pos-relative">
-              <i class="fa fa-bullseye icon-bg op-1 icon-bg-l-ol icon-25x text-white"></i> <i class="fa fa-bullseye icon-bg op-1 icon-bg-r-ol icon-bg-b icon-25x text-white"></i>
-              <div class="p-4 text-center bg-danger">
-                <h2 class="display-4 font-weight-normal text-uppercase text-white my-0 text-slab">
-                  Clearance Sale
-                </h2>
-                <h4 class="text-white mb-0 text-slab">
-                  Price reductions on 1000s of items!
-                </h4>
-              </div>
-            </div>
-            <hr class="hr-lg mt-1 w-100 mx-auto hr-danger" />
-          </div>
-          <!-- Pagination -->
-          <nav aria-label="Page navigation">
-              {% if adverts.has_other_pages %}
-            <ul class="pagination pagination-lg justify-content-center">
-            {% if adverts.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ adverts.previous_page_number }}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span> </a>
-                </li>
-            {% else %}
-
-                <li class="page-item disabled">
-                    <a class="page-link"  aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span> </a>
-                </li>
-
-            {% endif %}
-
-            {% for i in adverts.paginator.page_range %}
-                {% if adverts.number == i %}
-                    <li class="page-item active">
-                        <a class="page-link" >{{ i }}</a>
-                    </li>
-                {% else %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-
-                {% endif %}
-            {% endfor %}
-            {% if adverts.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ adverts.next_page_number }}" aria-label="Previous"> <span aria-hidden="true">&raquo;</span> <span class="sr-only">Previous</span> </a>
-                </li>
-            {% else %}
-
-                <li class="page-item disabled">
-                    <a class="page-link"  aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span> </a>
-                </li>
-
-            {% endif %}
-            </ul>
-              {% endif %}
-          </nav>
         </div>
+    </div>
 
 
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-                <div class="container text-center mt-2">
+     <div class="container text-center mt-3">
         <div class="row">
-          <div class="col-md-12 col-12">
+            <div class="col-md-12 col-12">
+                <div class="panel ">
 
-            <div class="panel ">
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_candidate %}
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    <a class="btn btn-outline-info float-right custom_button" href="{% url 'create-posting' %}">List Posting</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
 
-
-                <div class="col-lg-12">
-          <!-- Products filters -->
-
-
-
-
-
-                 <div class="row">
-              {% for posting in postings %}
-            <div class="col-lg-12">
-              <!-- Product 2 -->
-              <div class="card mb-4">
-                <!-- Content -->
-                  <div class="row">
-                      <div class="col-8 mt-1">
-                          <a class="btn btn-light disabled btn-sm"><i class="fa fa-clock"></i> Posted : {{ posting.created | timesince}} ago</a>
-                      </div>
-                      <div class="col-4 mt-1">
-                          <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-map-pin mr-2"></i> {{ posting.location}}</a >
-                      </div>
-
-                  </div>
-                  <div class="row">
-                      <div class="col-12 mx-auto">
-                          <h4 class="card-title my-2 text-center">
-                              <a href="{% url 'posting-detail' posting.pk posting.slug %}" class="text-info text-sm ">{{ posting.title }}</a>
-                          </h4>
-                      </div>
-                  </div>
+                <h1 class="triple-striped-heading heading-centred">
+                    <span class="title pl-1">Your Dance Postings</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
 
 
-                  <div class="row">
-                      <div class="col-12">
-                          <img class="m-2 rounded img-fluid float-left" src="{{ posting.author.profile_image.url }}" alt="Card image cap" style="max-height: 75px">
-                          <p class="text-muted text-xs m-1">{{ posting.body  | truncatechars:300 }}</p>
-                      </div>
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th class="table_h" scope="col">Title</th>
+                          <th class="table_h" scope="col">City</th>
+                          <th class="table_h" scope="col">Posting Date</th>
+                          <th class="table_h" scope="col"> </th>
 
-                  </div>
-                  <div class="row">
-                      <div class="col-8 mt-1">
-                          <a class="btn btn-light disabled btn-sm text-info"><i class="fa fa-clock"> </i>{{  posting.date | date:' l dS F Y' }}  {{ posting.start_time }}-{{ posting.finish_time }}</a>
-                      </div>
-                      <div class="col-4 mt-1">
-                          <a  class="float-right btn btn-light disabled btn-sm  "><i class="fas fa-money-bill-wave"></i> Fee : £{{ posting.fee}}</a >
-                      </div>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for posting in postings %}
 
-                  </div>
+                          <tr>
+                              <th class="table_p" scope="row"><a href="{% url 'posting-detail' posting.id posting.slug %}" >{{ posting.title }}</a></th>
+                                <td class="table_p">{{ posting.location }} </td>
+                                <td class="table_p"> {{ posting.date | date:'D d M ' }} </td>
+                                <td class="table_p"><a class="btn btn-outline-info  custom_button my-1" href="{% url 'edit-posting' posting.pk posting.slug  %}">Edit</a>
+                                    <a class="btn btn-outline-info  custom_button my-1" href="{% url 'delete2-advert-button' posting.pk posting.slug  %}">Delete</a>
+                                </td>
+                            </tr>
 
+                        {% endfor %}
 
-
-              </div>
+                      </tbody>
+                    </table>
+                </div>
             </div>
-
-              {% endfor %}
-
-          </div>
-
-
-
-
-          <!-- Call to action -->
-          <div class="my-3" data-url="#">
-            <hr class="hr-lg mt-0 mb-1 w-100 mx-auto hr-warning" />
-            <div class="pos-relative">
-              <i class="fa fa-bullseye icon-bg op-1 icon-bg-l-ol icon-25x text-white"></i> <i class="fa fa-bullseye icon-bg op-1 icon-bg-r-ol icon-bg-b icon-25x text-white"></i>
-              <div class="p-4 text-center bg-danger">
-                <h2 class="display-4 font-weight-normal text-uppercase text-white my-0 text-slab">
-                  Clearance Sale
-                </h2>
-                <h4 class="text-white mb-0 text-slab">
-                  Price reductions on 1000s of items!
-                </h4>
-              </div>
-            </div>
-            <hr class="hr-lg mt-1 w-100 mx-auto hr-danger" />
-          </div>
-          <!-- Pagination -->
-          <nav aria-label="Page navigation">
-              {% if postings.has_other_pages %}
-            <ul class="pagination pagination-lg justify-content-center">
-            {% if postings.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ postings.previous_page_number }}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span> </a>
-                </li>
-            {% else %}
-
-                <li class="page-item disabled">
-                    <a class="page-link"  aria-label="Previous"> <span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span> </a>
-                </li>
-
-            {% endif %}
-
-            {% for i in postings.paginator.page_range %}
-                {% if postings.number == i %}
-                    <li class="page-item active">
-                        <a class="page-link" >{{ i }}</a>
-                    </li>
-                {% else %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-
-                {% endif %}
-            {% endfor %}
-            {% if postings.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ postings.next_page_number }}" aria-label="Previous"> <span aria-hidden="true">&raquo;</span> <span class="sr-only">Previous</span> </a>
-                </li>
-            {% else %}
-
-                <li class="page-item disabled">
-                    <a class="page-link"  aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span> </a>
-                </li>
-
-            {% endif %}
-            </ul>
-              {% endif %}
-          </nav>
         </div>
+    </div>
 
 
-            </div>
-          </div>
-        </div>
-      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
