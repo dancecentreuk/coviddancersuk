@@ -134,7 +134,7 @@ class Candidate(models.Model):
         if img.height > 500 or img.width > 500:
             output_size = (500, 500)
             img.thumbnail(output_size, Image.ANTIALIAS)
-            img.save(memfile,  quality=95)
+            img.save(memfile, 'jpeg', quality=95)
             default_storage.save(self.profile_image.name, memfile)
             memfile.close()
             img.close()
