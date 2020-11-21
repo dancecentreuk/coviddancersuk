@@ -130,14 +130,31 @@ class Candidate(models.Model):
         img = Image.open(self.profile_image.path)
         if img.height > 500 or img.width > 500:
             output_size = (500, 500)
-            storage_path = storage.open(output_size, "wb")
-            img.thumbnail = storage_path
-            storage_path.close()
+            fh = storage.open(self.profile_image.name)
+            picture_format = 'png'
+            output_size.save(fh, picture_format)
+            fh.close()
+            # return
 
-        return super().save(*args, **kwargs)
+        # return super().save(*args, **kwargs)
 
-
-
+        # def save(self):
+        #     user = super(UploadImageForm, self).save()
+        #     x = self.cleaned_data.get('x')
+        #     y = self.cleaned_data.get('y')
+        #     w = self.cleaned_data.get('width')
+        #     h = self.cleaned_data.get('height')
+        #
+        #     image = Image.open(user.primaryphoto)
+        #     cropped_image = image.crop((x, y, w + x, h + y))
+        #     resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
+        #
+        #     fh = storage.open(user.primaryphoto.name, "w")
+        #     picture_format = 'png'
+        #     resized_image.save(fh, picture_format)
+        #     fh.close()
+        #     resized_image.save(user.primaryphoto.path)
+            return user
 
 
         # img = Image.open(self.profile_image.path)
