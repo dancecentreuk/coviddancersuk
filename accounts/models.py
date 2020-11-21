@@ -130,8 +130,8 @@ class Candidate(models.Model):
         if self.profile_image:
             img = Image.open(self.profile_image)
             if img.height > 500 or img.width > 500:
-                output_size = ((500, 500), Image.ANTIALIAS)
-                storage_path = storage.open(self.profile_image.name, "wb")
+                output_size = (500, 500)
+                storage_path = storage.open(output_size, "wb")
                 resized_image = storage_path
                 storage_path.close()
                 return self.profile_image
