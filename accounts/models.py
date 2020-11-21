@@ -150,14 +150,27 @@ class Employer(models.Model):
 
 
     def save(self, *args, **kwargs):
-        super().save()
 
-        img = Image.open(self.profile_image.path)
+        super(Employer, self).save()
+        if self.profile_image:
+            image = Image.open(self.profile_image)
+            (width, height) = image.size
 
-        if img.height > 500 or img.width > 500:
-            output_size = (500, 500)
-            img.thumbnail(output_size)
-            img.save(self.profile_image.name)
+            image.thumbnail((200, 200), Image.ANTIALIAS)
+            image.save(self.profile_image.name)
+
+
+
+        # super().save()
+        #
+        # # img = Image.open(self.profile_image.path)
+        # #
+        # # if img.height > 500 or img.width > 500:
+        # #     output_size = (500, 500)
+        # #     img.thumbnail(output_size)
+        # #     img.save(self.profile_image.name)
+
+
 
 
 class CandidateImage(models.Model):
