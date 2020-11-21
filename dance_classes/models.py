@@ -72,13 +72,15 @@ class WeeklyDanceClass(models.Model):
             memfile.close()
             img.close()
 
+        memfile_1 = BytesIO()
+
         img_1 = Image.open(self.dance_class_image_1)
         if img_1.height > 500 or img_1.width > 500:
             output_size = (500, 500)
             img_1.thumbnail(output_size, Image.ANTIALIAS)
-            img_1.save(memfile, 'PNG', quality=95)
-            default_storage.save(self.dance_class_image_1.name, memfile)
-            memfile.close()
+            img_1.save(memfile_1, 'PNG', quality=95)
+            default_storage.save(self.dance_class_image_1.name, memfile_1)
+            memfile_1.close()
             img_1.close()
 
         img_2 = Image.open(self.dance_class_image_2)
