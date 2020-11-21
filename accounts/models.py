@@ -4,7 +4,8 @@ from django.template.defaultfilters import slugify
 from pages.choices import (gender_choices, location_choices, height_in, height_ft, weight_lb, weight_st,
                            waist, bust, hip, shoe_size, eye_color, hair_color, build, primary_job)
 from PIL import Image
-
+from django.conf import settings
+import os
 
 class User(AbstractUser):
     is_candidate = models.BooleanField(default=False)
@@ -132,7 +133,7 @@ class Candidate(models.Model):
             if img.height > 500 or img.width > 500:
                 output_size = (500, 500)
                 img.thumbnail(output_size, Image.LANCZOS)
-                img.save(self.profile_image.name)
+                img.save(self.profile_image)
 
 
 
