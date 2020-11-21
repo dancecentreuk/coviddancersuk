@@ -62,6 +62,8 @@ class WeeklyDanceClass(models.Model):
         super().save()
 
         memfile = BytesIO()
+        memfile_2 = BytesIO()
+        memfile_3 = BytesIO()
 
         img = Image.open(self.dance_class_image)
         if img.height > 500 or img.width > 500:
@@ -87,18 +89,18 @@ class WeeklyDanceClass(models.Model):
         if img_2.height > 500 or img_2.width > 500:
             output_size = (500, 500)
             img_2.thumbnail(output_size, Image.ANTIALIAS)
-            img_2.save(memfile, 'PNG', quality=95)
-            default_storage.save(self.dance_class_image_2.name, memfile)
-            memfile.close()
+            img_2.save(memfile_2, 'PNG', quality=95)
+            default_storage.save(self.dance_class_image_2.name, memfile_2)
+            memfile_2.close()
             img_2.close()
 
         img_3 = Image.open(self.dance_class_image_3)
         if img_3.height > 500 or img_3.width > 500:
             output_size = (500, 500)
             img_3.thumbnail(output_size, Image.ANTIALIAS)
-            img_3.save(memfile, 'PNG', quality=95)
-            default_storage.save(self.dance_class_image_3.name, memfile)
-            memfile.close()
+            img_3.save(memfile_3, 'PNG', quality=95)
+            default_storage.save(self.dance_class_image_3.name, memfile_3)
+            memfile_3.close()
             img_3.close()
 
 
