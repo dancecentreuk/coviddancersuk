@@ -127,18 +127,27 @@ class Candidate(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        if self.profile_image:
-            img = Image.open(self.profile_image)
-            if img.height > 500 or img.width > 500:
-                output_size = (500, 500)
-                storage_path = storage.open(output_size, "wb")
-                resized_image = storage_path
-                storage_path.close()
-                return self.profile_image
+        img = Image.open(self.profile_image.path)
+        if img.height > 500 or img.width > 500:
+            output_size = (500, 500)
+            storage_path = storage.open(output_size, "wb")
+            img.thumbnail = storage_path
+            storage_path.close()
+            img.save(self.profile_image.path)
+        return super().save(*args, **kwargs)
 
 
 
 
+
+        # img = Image.open(self.profile_image.path)
+        #
+        # if img.height > 500 or img.width > 500:
+        #     output_size = (500, 500)
+        #     img.thumbnail(output_size)
+        #     img.save(self.profile_image.path)
+        #
+        # return super().save(*args, **kwargs)
 
 
 
