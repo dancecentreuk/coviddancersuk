@@ -133,7 +133,7 @@ class Candidate(models.Model):
             storage_path = storage.open(output_size, "wb")
             img.thumbnail = storage_path
             storage_path.close()
-            img.save(self.profile_image.path)
+
         return super().save(*args, **kwargs)
 
 
