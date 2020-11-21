@@ -145,6 +145,7 @@ class Candidate(models.Model):
 
 
 
+
 class Employer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     mobile = models.CharField(max_length=20)
@@ -165,14 +166,18 @@ class Employer(models.Model):
 
         memfile = BytesIO()
 
-        img = Image.open(self.profile_image)
-        if img.height > 500 or img.width > 500:
-            output_size = (500, 500)
-            img.thumbnail(output_size, Image.ANTIALIAS)
-            img.save(memfile, 'PNG', quality=95)
-            default_storage.save(self.profile_image.name, memfile)
-            memfile.close()
-            img.close()
+        try:
+
+            img = Image.open(self.profile_image)
+            if img.height > 500 or img.width > 500:
+                output_size = (500, 500)
+                img.thumbnail(output_size, Image.ANTIALIAS)
+                img.save(memfile, 'PNG', quality=95)
+                default_storage.save(self.profile_image.name, memfile)
+                memfile.close()
+                img.close()
+        except FileExistsError:
+            pass
 
 
 
@@ -203,16 +208,12 @@ class CandidateImage(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
 
-        memfile = BytesIO()
+        img = Image.open(self.profile_image.path)
 
-        img = Image.open(self.profile_image)
         if img.height > 500 or img.width > 500:
             output_size = (500, 500)
-            img.thumbnail(output_size, Image.ANTIALIAS)
-            img.save(memfile, 'PNG', quality=95)
-            default_storage.save(self.profile_image.name, memfile)
-            memfile.close()
-            img.close()
+            img.thumbnail(output_size)
+            img.save(self.profile_image.path)
 
         return super().save(*args, **kwargs)
 
