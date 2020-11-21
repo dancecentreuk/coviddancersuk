@@ -140,7 +140,7 @@ class Candidate(models.Model):
                 default_storage.save(self.profile_image.name, memfile)
                 memfile.close()
                 img.close()
-        except Image.DoesNotExist:
+        except FileExistsError:
             pass
 
 
