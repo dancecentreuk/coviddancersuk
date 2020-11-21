@@ -31,10 +31,6 @@ def employer_signup(request):
     if request.method == 'POST':
         form = EmployerSignUpForm(request.POST or None)
 
-
-
-
-
         if form.is_valid():
             form.save()
 
