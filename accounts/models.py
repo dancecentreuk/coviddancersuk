@@ -158,26 +158,18 @@ class Employer(models.Model):
 
 
     def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
-        super(Employer, self).save()
-        if self.profile_image:
-            image = Image.open(self.profile_image)
-            (width, height) = image.size
+        memfile = BytesIO()
 
-            image.thumbnail((200, 200), Image.ANTIALIAS)
-            image.save(self.profile_image.name)
-
-
-
-
-        # super().save()
-        #
-        # # img = Image.open(self.profile_image.path)
-        # #
-        # # if img.height > 500 or img.width > 500:
-        # #     output_size = (500, 500)
-        # #     img.thumbnail(output_size)
-        # #     img.save(self.profile_image.name)
+        img = Image.open(self.profile_image)
+        if img.height > 500 or img.width > 500:
+            output_size = (500, 500)
+            img.thumbnail(output_size, Image.ANTIALIAS)
+            img.save(memfile, 'PNG', quality=95)
+            default_storage.save(self.profile_image.name, memfile)
+            memfile.close()
+            img.close()
 
 
 
@@ -208,12 +200,16 @@ class CandidateImage(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
 
-        img = Image.open(self.profile_image.path)
+        memfile = BytesIO()
 
+        img = Image.open(self.profile_image)
         if img.height > 500 or img.width > 500:
             output_size = (500, 500)
-            img.thumbnail(output_size)
-            img.save(self.profile_image.path)
+            img.thumbnail(output_size, Image.ANTIALIAS)
+            img.save(memfile, 'PNG', quality=95)
+            default_storage.save(self.profile_image.name, memfile)
+            memfile.close()
+            img.close())
 
         return super().save(*args, **kwargs)
 
