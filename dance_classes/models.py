@@ -4,6 +4,8 @@ from pages.choices import location_choices, dance_styles, day, level, age_choice
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from PIL import Image
+from django.core.files.storage import default_storage
+from io import BytesIO
 
 
 # Create your models here.
@@ -59,19 +61,25 @@ class WeeklyDanceClass(models.Model):
     def save(self, *args, **kwargs):
         super().save()
 
-        img = Image.open(self.dance_class_image.path)
+        memfile = BytesIO()
 
+        img = Image.open(self.dance_class_image)
         if img.height > 500 or img.width > 500:
             output_size = (500, 500)
-            img.thumbnail(output_size)
-            img.save(self.dance_class_image.path)
+            img.thumbnail(output_size, Image.ANTIALIAS)
+            img.save(memfile, 'PNG', quality=95)
+            default_storage.save(self.dance_class_image.name, memfile)
+            memfile.close()
+            img.close()
 
-        img_1 = Image.open(self.dance_class_image_1.path)
-
-        if img_1.height > 500 or img_1.width > 500:
+        img = Image.open(self.dance_class_image_1)
+        if img.height > 500 or img.width > 500:
             output_size = (500, 500)
-            img_1.thumbnail(output_size)
-            img_1.save(self.dance_class_image_1.path)
+            img.thumbnail(output_size, Image.ANTIALIAS)
+            img.save(memfile, 'PNG', quality=95)
+            default_storage.save(self.dance_class_image_1.name, memfile)
+            memfile.close()
+            img.close()
 
         img_2 = Image.open(self.dance_class_image_2.path)
 
