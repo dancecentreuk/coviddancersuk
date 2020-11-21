@@ -125,14 +125,28 @@ class Candidate(models.Model):
         return self.user.username
 
     def save(self, *args, **kwargs):
-        super().save()
+        super().save(*args, **kwargs)
 
-        img = Image.open(self.profile_image.path)
+        if self.profile_image:
+            img = Image.open(self.profile_image.path)
+            if img.height > 500 or img.width > 500:
+                output_size = (500, 500)
+                img.thumbnail(output_size, Image.LANCZOS)
+                img.save(self.profile_image.path)
 
-        if img.height > 500 or img.width > 500:
-            output_size = (500, 500)
-            img.thumbnail(output_size)
-            img.save(self.profile_image.path)
+
+
+
+
+
+
+
+        # img = Image.open(self.profile_image.path)
+        #
+        # if img.height > 500 or img.width > 500:
+        #     output_size = (500, 500)
+        #     img.thumbnail(output_size)
+        #     img.save(self.profile_image.path)
 
 class Employer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -158,6 +172,7 @@ class Employer(models.Model):
 
             image.thumbnail((200, 200), Image.ANTIALIAS)
             image.save(self.profile_image.name)
+
 
 
 
