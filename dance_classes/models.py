@@ -72,30 +72,32 @@ class WeeklyDanceClass(models.Model):
             memfile.close()
             img.close()
 
-        img = Image.open(self.dance_class_image_1)
-        if img.height > 500 or img.width > 500:
+        img_1 = Image.open(self.dance_class_image_1)
+        if img_1.height > 500 or img_1.width > 500:
             output_size = (500, 500)
-            img.thumbnail(output_size, Image.ANTIALIAS)
-            img.save(memfile, 'PNG', quality=95)
+            img_1.thumbnail(output_size, Image.ANTIALIAS)
+            img_1.save(memfile, 'PNG', quality=95)
             default_storage.save(self.dance_class_image_1.name, memfile)
             memfile.close()
-            img.close()
+            img_1.close()
 
-        img_2 = Image.open(self.dance_class_image_2.path)
-
-
+        img_2 = Image.open(self.dance_class_image_2)
         if img_2.height > 500 or img_2.width > 500:
             output_size = (500, 500)
-            img_2.thumbnail(output_size)
-            img_2.save(self.dance_class_image_2.path)
+            img_2.thumbnail(output_size, Image.ANTIALIAS)
+            img_2.save(memfile, 'PNG', quality=95)
+            default_storage.save(self.dance_class_image_2.name, memfile)
+            memfile.close()
+            img_2.close()
 
-
-        img_3 = Image.open(self.dance_class_image_3.path)
-
+        img_3 = Image.open(self.dance_class_image_3)
         if img_3.height > 500 or img_3.width > 500:
             output_size = (500, 500)
-            img_3.thumbnail(output_size)
-            img_3.save(self.dance_class_image_3.path)
+            img_3.thumbnail(output_size, Image.ANTIALIAS)
+            img_3.save(memfile, 'PNG', quality=95)
+            default_storage.save(self.dance_class_image_3.name, memfile)
+            memfile.close()
+            img_3.close()
 
 
 
