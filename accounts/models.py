@@ -209,7 +209,7 @@ class CandidateImage(models.Model):
             img.save(memfile, 'PNG', quality=95)
             default_storage.save(self.profile_image.name, memfile)
             memfile.close()
-            img.close())
+            img.close()
 
         return super().save(*args, **kwargs)
 
