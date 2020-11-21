@@ -127,7 +127,7 @@ class Candidate(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        img = Image.open(self.profile_image.path)
+        img = Image.open(self.profile_image)
         if img.height > 500 or img.width > 500:
             output_size = (500, 500)
             fh = storage.open(self.profile_image.name)
