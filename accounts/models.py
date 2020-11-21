@@ -4,8 +4,7 @@ from django.template.defaultfilters import slugify
 from pages.choices import (gender_choices, location_choices, height_in, height_ft, weight_lb, weight_st,
                            waist, bust, hip, shoe_size, eye_color, hair_color, build, primary_job)
 from PIL import Image
-from django.conf import settings
-import os
+from django.core.files.storage import default_storage as storage
 
 class User(AbstractUser):
     is_candidate = models.BooleanField(default=False)
@@ -129,11 +128,13 @@ class Candidate(models.Model):
         super().save(*args, **kwargs)
 
         if self.profile_image:
-            img = Image.open(self.profile_image.path)
+            img = Image.open(self.profile_image)
             if img.height > 500 or img.width > 500:
-                output_size = (500, 500)
-                img.thumbnail(output_size, Image.LANCZOS)
-                img.save(self.profile_image)
+                output_size = ((500, 500), Image.ANTIALIAS)
+                storage_path = storage.open(self.profile_image.name, "wb")
+                resized_image = storage_path
+                storage_path.close()
+                return self.profile_image
 
 
 
@@ -148,6 +149,16 @@ class Candidate(models.Model):
         #     output_size = (500, 500)
         #     img.thumbnail(output_size)
         #     img.save(self.profile_image.path)
+
+#
+# image = Image.open(photo.img)
+#     cropped_image = image.crop((x, y, w+x, h+y))
+#     resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
+#     storage_path = storage.open(photo.img.name, "wb")
+#     resized_image.save(storage_path, 'png')
+#     storage_path.close()
+#
+#     return photo
 
 class Employer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
