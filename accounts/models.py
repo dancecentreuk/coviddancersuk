@@ -4,7 +4,8 @@ from django.template.defaultfilters import slugify
 from pages.choices import (gender_choices, location_choices, height_in, height_ft, weight_lb, weight_st,
                            waist, bust, hip, shoe_size, eye_color, hair_color, build, primary_job)
 from PIL import Image
-from django.core.files.storage import default_storage as storage
+from django.core.files.storage import default_storage
+from io import BytesIO
 
 class User(AbstractUser):
     is_candidate = models.BooleanField(default=False)
@@ -127,14 +128,17 @@ class Candidate(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
+        memfile = BytesIO()
+
         img = Image.open(self.profile_image)
         if img.height > 500 or img.width > 500:
             output_size = (500, 500)
-            fh = storage.open(self.profile_image.name)
-            picture_format = 'png'
-            output_size.save(fh, picture_format)
-            fh.close()
-            # return
+            img.thumbnail(output_size, Image.ANTIALIAS)
+            img.save(memfile, 'JPEG', quality=95)
+            default_storage.save(self.profile_image.name, memfile)
+            memfile.close()
+            img.close()
+
 
         # return super().save(*args, **kwargs)
 
@@ -154,7 +158,7 @@ class Candidate(models.Model):
         #     resized_image.save(fh, picture_format)
         #     fh.close()
         #     resized_image.save(user.primaryphoto.path)
-            return user
+        #     return user
 
 
         # img = Image.open(self.profile_image.path)
