@@ -162,6 +162,9 @@
         text-transform: uppercase;
 
     }
+    .moveit{
+        float: left;
+    }
 
 
 }
@@ -185,5 +188,9 @@
         font-weight: 400;
         text-transform: uppercase;
 
+    }
+
+    .moveit{
+        float: left;
     }
 }

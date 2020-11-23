@@ -176,7 +176,9 @@ header .container .col-md-7 p {
 
 
 
-
+.moveit{
+  float: right;
+}
 
 
 .section-1  .img_title {

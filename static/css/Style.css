@@ -176,7 +176,9 @@ header .container .col-md-7 p {
 
 
 
-
+.moveit{
+  float: right;
+}
 
 
 .section-1  .img_title {
@@ -316,7 +318,9 @@ header .container .col-md-7 p {
 .purchase > h1 {
   padding-top: 15vmin;
   padding-bottom: 0.1em;
-  font-family: var(--Lobster);
+  font-family: Rubik;
+ color: orangered;
+  font-size: 4.5vmin;
 }
 
 .purchase > p {
@@ -369,7 +373,7 @@ header .container .col-md-7 p {
 }
 
 .section-2 .row .col-md-12 .panel {
-  top: 1vmin;
+  top: 15vmin;
   background: white;
   border-radius: 3px;
   text-align: left;

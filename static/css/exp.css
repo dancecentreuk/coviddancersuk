@@ -186,4 +186,8 @@
         text-transform: uppercase;
 
     }
+
+    .moveit{
+        float: left;
+    }
 }
