@@ -77,7 +77,7 @@
             <div class="card" style="width: 12rem;">
                 <img class="card-img-top" style="height: 200px" src="{{ employer.profile_image.url }}" alt="Card image cap">
                 <div class="card-body pb-0">
-{#                    <a href="{% url 'employer-profile' talent.pk talent.user.first_name talent.user.last_name %}">#}
+                    <a href="{% url 'employer-detail' employer.pk employer.user.username %}">
                     {% if employer.company_name is None %}
                         <h5 class="text-center img_title ">{{ employer.user.first_name |capfirst }} </h5></a>
                     {% else %}
@@ -90,6 +90,14 @@
         {% endfor %}
     </div>
 </div>
+
+
+
+
+
+
+
+
 
 
 

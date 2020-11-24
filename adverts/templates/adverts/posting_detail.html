@@ -21,7 +21,7 @@
 
                <div class="card">
                    <div class="card-body">
-                       <h4 class="card-title text-info">{{ posting.title}}</h4>
+                       <h4 class="card-title my_title">{{ posting.title}}</h4>
                        <div class="row">
                            <div class="col-8">
                                <a  class="float-left btn btn-light disabled btn-sm   "><i class="fas fa-clock"></i>
@@ -33,6 +33,21 @@
                        </div>
 
                        <hr>
+
+                   <div class="row">
+                       <div class="col-md-6  col-sm-12">
+                               <a  class="float-left btn btn-light disabled btn-sm  "><i class="fas fa-map-pin mr-2"></i> {{ advert.location}}</a >
+                           </div>
+
+                       <div class="col-md-6  col-sm-12">
+                          <a  class=" btn btn-light disabled btn-sm text-info  moveit"><i class="fas fa-money-bill-wave"></i> Fee : £{{ posting.fee}}</a >
+                      </div>
+                           <div class="col-12">
+                               <a  class="float-left btn btn-light disabled btn-sm  "><i class="fas fa-clock"></i> Posted : {{ posting.created | timesince}}</a >
+                           </div>
+
+
+                       </div>
 
                        <div class="row">
                            <div class="col-12">

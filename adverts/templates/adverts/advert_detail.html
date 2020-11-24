@@ -30,14 +30,30 @@
                                {% if advert.author.is_employer %}
                                    <img src="{{ advert.author.employer.profile_image.url }}" style="max-height: 100px" class="m-2 rounded img-fluid  float-left p-2 mr-2" >
                                {% else %}
-                                   <img src="{{ advert.author.candidate.profile_image.url }}" style="max-height: 100px" class="m-2 rounded img-fluid  float-left p-2 mr-2" >
+                                   <a href="{% url 'talent-detail' advert.author.candidate.id advert.author.first_name advert.author.last_name %}">
+                                       <img src="{{ advert.author.candidate.profile_image.url }}" style="max-height: 100px" class="m-2 rounded img-fluid  float-left p-2 mr-2" >
+                                   </a>
                                {% endif %}
                                <p class="m-2">{{ advert.body  | linebreaksbr }}</p>
+
+
+                           {% if advert.author.is_candidate %}
+                               <a href="{% url 'talent-detail' advert.author.candidate.id advert.author.first_name advert.author.last_name %}">{{ advert.author }}</a>
+
+                           {% else %}
+                                {{ advert.author }} poop
+
+                               <a href="{% url 'employer-detail' advert.author.employer.id advert.author.username %}">{{ advert.author }}</a>
+
+                           {% endif %}
+
+
+
 
                            </div>
                        </div>
                        <hr>
-                   <div class="row justify-content-between">
+                   <div class="row">
                        <div class="col-md-6  col-sm-12">
                                <a  class="float-left btn btn-light disabled btn-sm  "><i class="fas fa-map-pin mr-2"></i> {{ advert.location}}</a >
                            </div>

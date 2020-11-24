@@ -98,6 +98,19 @@ def employers(request):
     return render(request, 'pages/employers.html', context)
 
 
+def employer_detail(request, pk, username):
+    employer = Employer.objects.get(id=pk, user__username=username)
+    adverts = Advert.objects.filter(is_posting=False).filter(author=employer.user)
+    postings = Advert.objects.filter(is_posting=True).filter(author=employer.user)
+
+    context = {
+        'employer':employer,
+        'adverts': adverts,
+        'postings': postings
+    }
+    return render(request, 'pages/employer_detail.html', context)
+
+
 
 def search_employer(request):
 

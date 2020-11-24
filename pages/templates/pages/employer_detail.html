@@ -1,0 +1,304 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <main>
+
+    {% include 'partials/_alerts.html' %}
+
+
+    <section class="section-profile">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md-3 col-sm-12">
+            <div class="pray">
+              <img src="{{ employer.profile_image.url }}" alt="Pray" class="" />
+            </div>
+          </div>
+          <div class="col-md-9 col-sm-12">
+            <div class="panel text-left">
+                <h1 class="triple-striped-heading">
+                    <span class="title">{{ employer.user.first_name | capfirst}} </span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
+
+
+
+                <div class="row">
+                    <div class="col-12">
+                        {% if employer.company_name %}
+                            <i class="fas fa-map-marker-alt"></i>
+                            {{ employer.company_name }}
+                        {% endif %}
+
+                    </div>
+
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <a class="btn  btn-sm btn-info text-white" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i>Message {{ employer.user.first_name | capfirst }}</a>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+            <section class="section-2 container-fluid p-0">
+      <div class="cover">
+        <div class="overlay"></div>
+        <div class="content text-center">
+          <h1>Some Features That Make Us Unique</h1>
+          <p>
+            Dance Made Simple
+          </p>
+        </div>
+      </div>
+      <div class="container-fluid text-center">
+        <div class="numbers d-flex flex-md-row flex-wrap justify-content-center">
+
+
+          <div class="rect">
+            <h1>{{ adverts.count }}</h1>
+            <p>Jobs</p>
+          </div>
+          <div class="rect">
+            <h1>{{ postings.count }}</h1>
+            <p>Postings</p>
+          </div>
+        </div>
+      </div>
+        <div class="container-fluid text-center">
+        <div class="mt-1 numbers d-flex flex-md-row flex-wrap justify-content-center">
+        <div class="rect-2">
+            <a href="{{ employer.profile_image.url }}" data-lightbox="profile-images">
+                <img src="{{ employer.profile_image.url }}" alt="Pray" style="height: 100px; width: 100px" /></a>
+          </div>
+
+
+        </div>
+      </div>
+
+
+         <div class="container text-center">
+        <div class="row">
+          <div class="col-md-12 col-12">
+            <div class="panel text-left mb-3">
+                <h1 class="triple-striped-heading">
+                    <span class="heading">Company Info</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
+                <p>
+                    {{ employer.company_info | linebreaks }}
+                </p>
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+              <div class="container text-center mt-3">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="panel ">
+
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_authenticated %}
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    <a class="btn btn-outline-info float-right custom_button" href="{% url 'create-advert' %}">List Job</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                <h1 class="triple-striped-heading heading-centred">
+                    <span class="title pl-1">
+                        {% if employer.is_company %}
+                            {{ employer.company_name }}
+                        {% else %}
+                            {{ employer.user.first_name }}
+                        {% endif %}
+                        Dance Jobs</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
+
+
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th class="table_h" scope="col">Published</th>
+                          <th class="table_h" scope="col">Title</th>
+                          <th class="table_h" scope="col">City</th>
+                          <th class="table_h" scope="col"> </th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for advert in adverts %}
+
+                          <tr>
+                              <th class="table_p" scope="row">{{ advert.created | date:'d M ' }}</th>
+                                <td class="table_p">{{ advert.title }} </td>
+                                <td class="table_p">{{ advert.location }} </td>
+                                <td class="table_p pt-2">
+                                    <a class="btn btn-outline-info  custom_button my-1 py-1" href="{% url 'advert-detail' advert.id advert.slug %}">View</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+                 <div class="container text-center mt-3">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="panel ">
+
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_employer %}
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    <a class="btn btn-outline-info float-right custom_button" href="{% url 'create-posting' %}">List Posting</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                <h1 class="triple-striped-heading heading-centred">
+                    <span class="title pl-1">
+                        {% if employer.is_company %}
+                        {{ employer.company_name }}
+                        {% else %}
+                            {{ employer.user.first_name }}
+                        {% endif %} Postings</span>
+                    <span class="outer-stripes">
+                        <span class="inner-stripe"></span>
+                    </span>
+                </h1>
+
+
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th class="table_h" scope="col">Title</th>
+                          <th class="table_h" scope="col">City</th>
+                          <th class="table_h" scope="col">Posting Date</th>
+                          <th class="table_h" scope="col"> </th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for posting in postings %}
+
+                          <tr>
+                              <th class="table_p" scope="row">{{ posting.title |capfirst }}</th>
+                                <td class="table_p">{{ posting.location }} </td>
+                                <td class="table_p"> {{ posting.date | date:'D d M ' }} </td>
+                                <td class="table_p pt-2">
+                                    <a class="btn btn-outline-info  custom_button py-1" href="{% url 'posting-detail' posting.id posting.slug %}">View</a>
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    </section>
+
+
+
+
+
+
+
+
+    <!-- END INBOX CONTENT -->
+
+					<!-- BEGIN COMPOSE MESSAGE -->
+        <div class="modal fade" id="compose-modal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="inquiryModalLabel">Make An Inquiry</h5>
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="{% url 'mail:new-message' %}" method="POST">
+                      {% csrf_token %}
+                    <div class="form-group">
+                      <label for="property_name" class="col-form-label">Title</label>
+                      <input type="text" name="title" class="form-control" value="" >
+                    </div>
+
+                    <div class="form-group">
+                      <label for="name" class="col-form-label">Sender:</label>
+                      <input type="text" name="name" class="form-control" value="{{ request.user }}" >
+                    </div>
+                    <div class="form-group">
+                      <label for="name" class="col-form-label">Recipient:</label>
+                      <input type="text" name="recipient" class="form-control" value="{{ talent.user.id }}" >
+                    </div>
+
+                    <div class="form-group">
+                      <label for="message" class="col-form-label">Message:</label>
+                      <textarea name="content" class="form-control"></textarea>
+                    </div>
+                    <hr>
+                    <input type="submit" value="Send" class="btn btn-block btn-secondary">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+{#					<!-- END COMPOSE MESSAGE -->#}
+
+
+
+
+
+
+</main>
+
+
+
+{% endblock %}
