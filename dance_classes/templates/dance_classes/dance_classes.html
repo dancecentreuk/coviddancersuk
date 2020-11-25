@@ -290,7 +290,7 @@
                                               <tbody>
                                               {% for course in dance_classes_sunday %}
                                                     <tr>
-                                                      <th class="table_p" scope="row">{{ course.dance_style_choice }}</th>
+                                                        <th class="table_p" scope="row"><a href="{% url 'dance-class-detail' course.id %}" >{{ course.dance_style_choice }}</a></th>
                                                         <td class="table_p">{{ course.level }} </td>
                                                         <td class="table_p">{{ course.age_group }} </td>
                                                       <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
@@ -326,7 +326,7 @@
                                               <tbody>
                                               {% for course in dance_classes_monday %}
                                                     <tr>
-                                                      <th class="table_p" scope="row">{{ course.dance_style_choice }}</th>
+                                                        <th class="table_p" scope="row"><a href="{% url 'dance-class-detail' course.id %}" >{{ course.dance_style_choice }}</a></th>
                                                         <td class="table_p">{{ course.level }} </td>
                                                         <td class="table_p">{{ course.age_group }} </td>
                                                       <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
@@ -362,7 +362,7 @@
                                               <tbody>
                                               {% for course in dance_classes_tuesday %}
                                                     <tr>
-                                                      <th class="table_p" scope="row">{{ course.dance_style_choice }}</th>
+                                                        <th class="table_p" scope="row"><a href="{% url 'dance-class-detail' course.id %}" >{{ course.dance_style_choice }}</a></th>
                                                         <td class="table_p">{{ course.level }} </td>
                                                         <td class="table_p">{{ course.age_group }} </td>
                                                       <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
@@ -398,7 +398,7 @@
                                               <tbody>
                                               {% for course in dance_classes_wednesday %}
                                                     <tr>
-                                                      <th class="table_p" scope="row">{{ course.dance_style_choice }}</th>
+                                                        <th class="table_p" scope="row"><a href="{% url 'dance-class-detail' course.id %}" >{{ course.dance_style_choice }}</a></th>
                                                         <td class="table_p">{{ course.level }} </td>
                                                         <td class="table_p">{{ course.age_group }} </td>
                                                       <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
@@ -434,7 +434,7 @@
                                               <tbody>
                                               {% for course in dance_classes_thursday %}
                                                     <tr>
-                                                      <th class="table_p" scope="row">{{ course.dance_style_choice }}</th>
+                                                        <th class="table_p" scope="row"><a href="{% url 'dance-class-detail' course.id %}" >{{ course.dance_style_choice }}</a></th>
                                                         <td class="table_p">{{ course.level }} </td>
                                                         <td class="table_p">{{ course.age_group }} </td>
                                                       <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
@@ -470,7 +470,7 @@
                                               <tbody>
                                               {% for course in dance_classes_friday %}
                                                     <tr>
-                                                      <th class="table_p" scope="row">{{ course.dance_style_choice }}</th>
+                                                        <th class="table_p" scope="row"><a href="{% url 'dance-class-detail' course.id %}" >{{ course.dance_style_choice }}</a></th>
                                                         <td class="table_p">{{ course.level }} </td>
                                                         <td class="table_p">{{ course.age_group }} </td>
                                                       <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
@@ -506,7 +506,7 @@
                                               <tbody>
                                               {% for course in dance_classes_saturday %}
                                                     <tr>
-                                                      <th class="table_p" scope="row">{{ course.dance_style_choice }}</th>
+                                                        <th class="table_p" scope="row"><a href="{% url 'dance-class-detail' course.id %}" >{{ course.dance_style_choice }}</a></th>
                                                         <td class="table_p">{{ course.level }} </td>
                                                         <td class="table_p">{{ course.age_group }} </td>
                                                       <td class="table_p">{{ course.day }} <br> <span style="font-size: 9px">{{ course.start_time }}</span>  </td>
